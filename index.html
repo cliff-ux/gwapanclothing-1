@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>GWAPAFFECTION-CLOTHING</title>
+    <style>
+        /* --- General Reset & Variables --- */
+        :root {
+            --primary: maroon;
+            --dark: #000;
+            --light: #f4f4f4;
+            --white: #ffffff;
+            --transition: 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            background-color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Responsive Navbar --- */
+        .navbar {
+            background-color: var(--dark);
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--light);
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: red;
+        }
+
+        .nav-search input {
+            padding: 8px 12px;
+            border-radius: 20px;
+            border: none;
+            outline: none;
+            width: 200px;
+        }
+
+        /* --- Hero Header --- */
+        .home-header {
+            url('https://i.ibb.co/xq1GPZ5m/image5-2.png');
+            url('https://i.ibb.co/xq1GPZ5m/image5-2.png');
+            url('https://i.ibb.co/xq1GPZ5m/image5-2.png');
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://i.ibb.co/xq1GPZ5m/image5-2.png');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            padding: 160px 20px 80px;
+            text-align: center;
+        }
+
+        .home-header h1 {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+
+        .shop-now-button {
+            display: inline-block;
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 140x 30px;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            margin-top: 20px;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+
+        .shop-now-button:hover {
+            background-color: #a00000;
+            transform: scale(1.05);
+        }
+
+        /* --- Product Grid --- */
+        .section-title {
+            text-align: center;
+            color: var(--primary);
+            margin: 40px 0 10px;
+            font-size: 2rem;
+        }
+
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 20px 0;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 90%;
+        }
+
+        .product {
+            background: var(--white);
+            border: 1px solid #eee;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .product.hidden {
+            display: none;
+        }
+
+        /* IMAGE FIX: This ensures the full picture is visible without cutting */
+        .img-container {
+            width: 100%;
+            height: 350px;
+            background: #ebebeb;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .product img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 5px;
+        }
+
+        .product-name {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .size-select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+
+        .price-tag {
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .action-area {
+            display: flex;
+            gap: 10px;
+        }
+
+        .quantity-input {
+            width: 60px;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .add-to-cart {
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+            flex: 1;
+            transition: var(--transition);
+        }
+
+        .add-to-cart:hover {
+            background-color: #800000;
+        }
+
+        /* --- Sidebar Cart --- */
+        #cart-sidebar {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 100%;
+            max-width: 400px;
+            height: 100%;
+            background: var(--white);
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2000;
+            padding: 30px;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
+            overflow-y: auto;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 10px;
+        }
+
+        .checkout-form {
+            margin-top: 20px;
+            padding: 20px;
+            background: #fdfdfd;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+
+        .checkout-form input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 50px 20px;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar .container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-search input {
+                width: 100%;
+            }
+
+            .home-header {
+                padding-top: 200px;
+            }
+
+            #cart-sidebar {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="logo">Mavazi</a>
+            <div class="nav-search"><input type="text" id="productSearch" placeholder="Search merchandise..."
+                    onkeyup="filterProducts()"></div>
+            <ul class="nav-links">
+                <li><a onclick="toggleCart()" class="cart-link"><i class="fas fa-shopping-cart"></i> Cart (<span
+                            id="cart-count">0</span>)</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="home-header">
+        <div class="container">
+            <h1>GWAPAFFECTION</h1>
+            <p>HANDCRAFTED TRENDS • PREMIUM QUALITY • UNIQUE STYLE</p>
+            <a href="https://wa.me/254797389370" target="_blank" class="shop-now-button"><i class="fab fa-whatsapp"></i>
+                CHAT ON WHATSAPP</a>
+        </div>
+    </header>
+
+    <main>
+        <h2 class="section-title">MERCHANDISE</h2>
+        <p id="noResults" style="text-align: center; display: none; color: #666;">No products found matching your
+            search.</p>
+
+        <div class="product-list" id="productGrid">
+            <div class="product">
+                <div class="img-container"><img src="https://i.ibb.co/NnmNRYDx/image0-1.jpg" alt="Pants"></div>
+                <h3 class="product-name">GWAPAN-CUSTOM-PANTS</h3>
+                <p class="price-tag">SH. 1800</p>
+                <select class="size-select">
+                    <option value="S">Small (S)</option>
+                    <option value="M" selected>Medium (M)</option>
+                    <option value="L">Large (L)</option>
+                    <option value="XL">Extra Large (XL)</option>
+                </select>
+                <div class="action-area">
+                    <input type="number" min="1" value="1" class="quantity-input">
+                    <button onclick="addToCart('CUSTOM PANTS', 1800, this)" class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="img-container"><img src="https://i.ibb.co/Z1kjh3T0/image0.jpg" alt="Shirt"></div>
+                <h3 class="product-name">GWAPAN-DENIM-SHIRT</h3>
+                <p class="price-tag">SH. 1200</p>
+                <select class="size-select">
+                    <option value="S">Small (S)</option>
+                    <option value="M" selected>Medium (M)</option>
+                    <option value="L">Large (L)</option>
+                    <option value="XL">Extra Large (XL)</option>
+                </select>
+                <div class="action-area">
+                    <input type="number" min="1" value="1" class="quantity-input">
+                    <button onclick="addToCart('DENIM SHIRT', 1200, this)" class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="img-container"><img src="https://i.ibb.co/xS4m4wx4/image3.jpg" alt="Jorts"></div>
+                <h3 class="product-name">GWAPAN-JORTS</h3>
+                <p class="price-tag">SH. 1500</p>
+                <select class="size-select">
+                    <option value="28">28</option>
+                    <option value="30">30</option>
+                    <option value="32" selected>32</option>
+                    <option value="34">34</option>
+                </select>
+                <div class="action-area">
+                    <input type="number" min="1" value="1" class="quantity-input">
+                    <button onclick="addToCart('JORTS', 1500, this)" class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="img-container"><img src="https://i.ibb.co/35Mh4KNW/image0-4.jpg" alt="Pants"></div>
+                <h3 class="product-name">GWAPAN-PANTS</h3>
+                <p class="price-tag">SH. 1850</p>
+                <select class="size-select">
+                    <option value="28">28</option>
+                    <option value="32" selected>32</option>
+                    <option value="36">36</option>
+                </select>
+                <div class="action-area">
+                    <input type="number" min="1" value="1" class="quantity-input">
+                    <button onclick="addToCart('PANTS', 1850, this)" class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <a href="https://ibb.co/99BBF7vL"><img src="https://i.ibb.co/zhCCyz5Y/image1-2.jpg" alt="image1-2"
+                        border="0"></a>
+                <h3 class="product-name">CUSTOM-JACKET</h3>
+                <p class="price-tag">SH. 1500</p>
+                <select class="size-select">
+                    <option value="M" selected>Medium (M)</option>
+                    <option value="L">Large (L)</option>
+                </select>
+                <div class="action-area">
+                    <input type="number" min="1" value="1" class="quantity-input">
+                    <button onclick="addToCart('JACKET', 1500, this)" class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="img-container"><img src="https://i.ibb.co/NXkFmbC/image1.jpg" alt="Suit"></div>
+                <h3 class="product-name">FULL DENIM-KIT</h3>
+                <p class="price-tag">SH. 2650</p>
+                <select class="size-select">
+                    <option value="S">S</option>
+                    <option value="M" selected>M</option>
+                    <option value="L">L</option>
+                </select>
+                <div class="action-area">
+                    <input type="number" min="1" value="1" class="quantity-input">
+                    <button onclick="addToCart('FULL DENIM SUIT', 2650, this)" class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div id="cart-sidebar">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button onclick="toggleCart()"
+                style="cursor:pointer; background:maroon; color:white; border:none; padding:8px 15px; border-radius:5px;">&times;
+                Close</button>
+        </div>
+        <div id="cart-display-area"></div>
+        <div id="checkout-section">
+            <div class="checkout-form">
+                <label style="font-weight: bold; color: maroon;">Full Name:</label>
+                <input type="text" id="customer-name" placeholder="Enter your name" required>
+            </div>
+            <div id="cart-footer"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 GWAPAFFECTION-CLOTHING | Powered by Gaia $ Bizzy</p>
+    </footer>
+
+    <script>
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        window.onload = function () {
+            updateCartCount();
+            renderCartItems();
+        };
+
+        function toggleCart() {
+            const sidebar = document.getElementById('cart-sidebar');
+            sidebar.style.right = (sidebar.style.right === '0px') ? '-400px' : '0px';
+        }
+
+        function filterProducts() {
+            const input = document.getElementById('productSearch').value.toUpperCase();
+            const products = document.getElementsByClassName('product');
+            let visibleCount = 0;
+            Array.from(products).forEach(p => {
+                const name = p.querySelector('.product-name').innerText;
+                if (name.toUpperCase().includes(input)) {
+                    p.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    p.classList.add('hidden');
+                }
+            });
+            document.getElementById('noResults').style.display = visibleCount === 0 ? 'block' : 'none';
+        }
+
+        function addToCart(name, price, button) {
+            const productDiv = button.closest('.product');
+            const qty = parseInt(productDiv.querySelector('.quantity-input').value) || 1;
+            const size = productDiv.querySelector('.size-select').value;
+            const img = productDiv.querySelector('img').src;
+
+            const existing = cart.find(item => item.name === name && item.size === size);
+            if (existing) {
+                existing.quantity += qty;
+                existing.total = existing.quantity * price;
+            } else {
+                cart.push({ name, price, quantity: qty, size: size, total: price * qty, image: img });
+            }
+            saveAndUpdate();
+            document.getElementById('cart-sidebar').style.right = '0px';
+            renderCartItems();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            saveAndUpdate();
+            renderCartItems();
+        }
+
+        function saveAndUpdate() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+        }
+
+        function updateCartCount() {
+            document.getElementById('cart-count').innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
+        }
+
+        function renderCartItems() {
+            const display = document.getElementById('cart-display-area');
+            const footer = document.getElementById('cart-footer');
+            const checkoutSection = document.getElementById('checkout-section');
+            display.innerHTML = '';
+
+            if (cart.length === 0) {
+                display.innerHTML = '<p style="text-align:center; margin-top:20px;">Cart is empty.</p>';
+                checkoutSection.style.display = 'none';
+                return;
+            }
+
+            checkoutSection.style.display = 'block';
+            let grandTotal = 0;
+            cart.forEach((item, index) => {
+                grandTotal += item.total;
+                display.innerHTML += `
+                    <div style="display:flex; align-items:center; margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:10px;">
+                        <img src="${item.image}" style="width:50px; height:50px; object-fit:contain; margin-right:15px; border-radius: 4px; background:#f0f0f0;">
+                        <div style="flex-grow:1;">
+                            <h4 style="font-size:14px; margin:0;">${item.name}</h4>
+                            <p style="font-size:12px; color:gray;">Size: ${item.size} | Qty: ${item.quantity}</p>
+                            <p style="font-size:13px; color:maroon; font-weight:bold;">SH ${item.total}</p>
+                        </div>
+                        <button onclick="removeFromCart(${index})" style="border:none; color:red; cursor:pointer; background:none; font-size:20px;">&times;</button>
+                    </div>`;
+            });
+
+            footer.innerHTML = `
+                <div style="display:flex; justify-content:space-between; margin-top:20px; font-size:1.2rem; font-weight:bold;">
+                    <span>Total:</span> <span>SH ${grandTotal}</span>
+                </div>
+                <button onclick="sendOrderWhatsApp(${grandTotal})" style="width:100%; padding:15px; background:#25D366; color:white; border:none; border-radius:5px; cursor:pointer; font-weight:bold; margin-top:20px; display:flex; align-items:center; justify-content:center; gap:10px;">
+                    <i class="fab fa-whatsapp"></i> SEND VIA WHATSAPP
+                </button>
+            `;
+        }
+
+        function sendOrderWhatsApp(total) {
+            const customerName = document.getElementById('customer-name').value;
+            if (!customerName) {
+                alert("Please enter your name.");
+                return;
+            }
+
+            let message = `👤 *CUSTOMER:* ${customerName.toUpperCase()}\n🛍️ *ORDER FROM GWAPAFFECTION*\n\n`;
+            cart.forEach((item, i) => {
+                message += `${i + 1}. ${item.name} (${item.size}) x${item.quantity} - SH ${item.total}\n`;
+            });
+            message += `\n*TOTAL: SH ${total}*\n\nPlease confirm my order.`;
+            window.open(`https://wa.me/254797389370?text=${encodeURIComponent(message)}`, '_blank');
+        }
+    </script>
+</body>
+
+</html>
