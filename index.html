@@ -29,6 +29,39 @@
             overflow-x: hidden;
         }
 
+        /* --- Shiny Advert Light --- */
+        .promo-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .shiny-advert {
+            background: linear-gradient(90deg, #800000, #ff0000, #800000);
+            background-size: 200% auto;
+            color: white;
+            padding: 15px 30px;
+            font-weight: bold;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 0 15px rgba(128, 0, 0, 0.4);
+            animation: moveShine 3s linear infinite, pulseGlow 1.5s ease-in-out infinite alternate;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        @keyframes moveShine {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        @keyframes pulseGlow {
+            from { transform: scale(1); box-shadow: 0 0 10px rgba(128, 0, 0, 0.4); }
+            to { transform: scale(1.03); box-shadow: 0 0 25px rgba(255, 0, 0, 0.7); }
+        }
+
         /* --- Responsive Navbar --- */
         .navbar {
             background-color: var(--dark);
@@ -89,9 +122,6 @@
 
         /* --- Hero Header --- */
         .home-header {
-            url('https://i.ibb.co/xq1GPZ5m/image5-2.png');
-            url('https://i.ibb.co/xq1GPZ5m/image5-2.png');
-            url('https://i.ibb.co/xq1GPZ5m/image5-2.png');
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://i.ibb.co/xq1GPZ5m/image5-2.png');
             background-size: cover;
             background-position: center;
@@ -110,7 +140,6 @@
             display: inline-block;
             background-color: var(--primary);
             color: var(--white);
-            padding: 140x 30px;
             padding: 12px 30px;
             text-decoration: none;
             border-radius: 30px;
@@ -163,7 +192,7 @@
             display: none;
         }
 
-        /* IMAGE FIX: This ensures the full picture is visible without cutting */
+        /* IMAGE FIX: Unified container for all products */
         .img-container {
             width: 100%;
             height: 350px;
@@ -171,13 +200,15 @@
             border-radius: 8px;
             margin-bottom: 15px;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .product img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            padding: 5px;
+            object-fit: cover; /* Changed to cover for a full, premium look */
         }
 
         .product-name {
@@ -187,6 +218,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            font-weight: bold;
         }
 
         .size-select {
@@ -287,18 +319,12 @@
                 flex-direction: column;
                 gap: 15px;
             }
-
-            .nav-search input {
-                width: 100%;
-            }
-
-            .home-header {
-                padding-top: 200px;
-            }
-
-            #cart-sidebar {
-                max-width: 100%;
-            }
+            .nav-search input { width: 100%; }
+            .home-header { padding-top: 200px; }
+            #cart-sidebar { max-width: 100%; }
+            .img-container { height: 250px; } /* Medium sized for mobile visibility */
+            .product-list { grid-template-columns: repeat(2, 1fr); gap: 10px; width: 95%; }
+            .product-name { font-size: 0.9rem; height: 35px; }
         }
     </style>
 </head>
@@ -326,12 +352,19 @@
         </div>
     </header>
 
+    <div class="promo-container">
+        <div class="shiny-advert">
+            ✨ ALL COLOURS AND SIZES AVAILABLE ✨
+        </div>
+    </div>
+
     <main>
         <h2 class="section-title">MERCHANDISE</h2>
         <p id="noResults" style="text-align: center; display: none; color: #666;">No products found matching your
             search.</p>
 
         <div class="product-list" id="productGrid">
+            
             <div class="product">
                 <div class="img-container"><img src="https://i.ibb.co/NnmNRYDx/image0-1.jpg" alt="Pants"></div>
                 <h3 class="product-name">GWAPAN-CUSTOM-PANTS</h3>
@@ -396,8 +429,9 @@
             </div>
 
             <div class="product">
-                <a href="https://ibb.co/99BBF7vL"><img src="https://i.ibb.co/zhCCyz5Y/image1-2.jpg" alt="image1-2"
-                        border="0"></a>
+                <div class="img-container">
+                    <img src="https://i.ibb.co/zhCCyz5Y/image1-2.jpg" alt="CUSTOM-JACKET">
+                </div>
                 <h3 class="product-name">CUSTOM-JACKET</h3>
                 <p class="price-tag">SH. 1500</p>
                 <select class="size-select">
@@ -424,6 +458,24 @@
                     <button onclick="addToCart('FULL DENIM SUIT', 2650, this)" class="add-to-cart">Add to Cart</button>
                 </div>
             </div>
+
+            <div class="product">
+                <div class="img-container">
+                    <img src="https://i.ibb.co/Y4z1MZ77/IMG-2849.jpg" alt="GWAPAN-GREY-PANTS">
+                </div>
+                <h3 class="product-name">GWAPAN-GREY-PANTS</h3>
+                <p class="price-tag">SH. 1850</p>
+                <select class="size-select">
+                    <option value="28">28</option>
+                    <option value="32" selected>32</option>
+                    <option value="36">36</option>
+                </select>
+                <div class="action-area">
+                    <input type="number" min="1" value="1" class="quantity-input">
+                    <button onclick="addToCart('GWAPAN-GREY-PANTS', 1850, this)" class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
         </div>
     </main>
 
@@ -528,7 +580,7 @@
                 grandTotal += item.total;
                 display.innerHTML += `
                     <div style="display:flex; align-items:center; margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:10px;">
-                        <img src="${item.image}" style="width:50px; height:50px; object-fit:contain; margin-right:15px; border-radius: 4px; background:#f0f0f0;">
+                        <img src="${item.image}" style="width:50px; height:50px; object-fit:cover; margin-right:15px; border-radius: 4px; background:#f0f0f0;">
                         <div style="flex-grow:1;">
                             <h4 style="font-size:14px; margin:0;">${item.name}</h4>
                             <p style="font-size:12px; color:gray;">Size: ${item.size} | Qty: ${item.quantity}</p>
