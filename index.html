@@ -29,7 +29,7 @@
             overflow-x: hidden;
         }
 
-        /* --- Shiny Advert Light --- */
+        /* --- Promo Bar --- */
         .promo-container {
             width: 100%;
             display: flex;
@@ -52,17 +52,10 @@
             font-size: 14px;
         }
 
-        @keyframes moveShine {
-            0% { background-position: 0% center; }
-            100% { background-position: 200% center; }
-        }
+        @keyframes moveShine { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+        @keyframes pulseGlow { from { transform: scale(1); } to { transform: scale(1.03); } }
 
-        @keyframes pulseGlow {
-            from { transform: scale(1); box-shadow: 0 0 10px rgba(128, 0, 0, 0.4); }
-            to { transform: scale(1.03); box-shadow: 0 0 25px rgba(255, 0, 0, 0.7); }
-        }
-
-        /* --- Responsive Navbar --- */
+        /* --- Navbar --- */
         .navbar {
             background-color: var(--dark);
             padding: 15px 0;
@@ -80,251 +73,88 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            flex-wrap: wrap;
         }
 
-        .logo {
-            font-size: 26px;
-            font-weight: bold;
-            color: var(--primary);
-            text-decoration: none;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
+        .logo { font-size: 26px; font-weight: bold; color: var(--primary); text-decoration: none; letter-spacing: 2px; text-transform: uppercase; }
+        .nav-links { list-style: none; display: flex; align-items: center; gap: 20px; }
+        .nav-links a { color: var(--light); text-decoration: none; font-weight: bold; transition: var(--transition); font-size: 16px; cursor: pointer; }
+        .nav-links a:hover { color: red; }
+        .nav-search input { padding: 8px 12px; border-radius: 20px; border: none; outline: none; width: 200px; }
 
-        .nav-links {
-            list-style: none;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .nav-links a {
-            color: var(--light);
-            text-decoration: none;
-            font-weight: bold;
-            transition: var(--transition);
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .nav-links a:hover {
-            color: red;
-        }
-
-        .nav-search input {
-            padding: 8px 12px;
-            border-radius: 20px;
-            border: none;
-            outline: none;
-            width: 200px;
-        }
-
-        /* --- Hero Header --- */
+        /* --- Hero --- */
         .home-header {
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://i.ibb.co/xq1GPZ5m/image5-2.png');
-            background-size: cover;
-            background-position: center;
-            color: var(--white);
-            padding: 160px 20px 80px;
-            text-align: center;
-        }
-
-        .home-header h1 {
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            margin-bottom: 10px;
-            letter-spacing: 3px;
+            background-size: cover; background-position: center;
+            color: var(--white); padding: 160px 20px 80px; text-align: center;
         }
 
         .shop-now-button {
-            display: inline-block;
-            background-color: var(--primary);
-            color: var(--white);
-            padding: 12px 30px;
-            text-decoration: none;
-            border-radius: 30px;
-            margin-top: 20px;
-            font-weight: bold;
-            transition: var(--transition);
-        }
-
-        .shop-now-button:hover {
-            background-color: #a00000;
-            transform: scale(1.05);
+            display: inline-block; background-color: var(--primary); color: var(--white);
+            padding: 12px 30px; text-decoration: none; border-radius: 30px; margin-top: 20px;
+            font-weight: bold; transition: var(--transition);
         }
 
         /* --- Product Grid --- */
-        .section-title {
-            text-align: center;
-            color: var(--primary);
-            margin: 40px 0 10px;
-            font-size: 2rem;
-        }
-
+        .section-title { text-align: center; color: var(--primary); margin: 40px 0 10px; font-size: 2rem; }
+        
         .product-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            padding: 20px 0;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 90%;
+            gap: 30px; padding: 20px 0; max-width: 1200px; margin: 0 auto; width: 90%;
         }
 
         .product {
-            background: var(--white);
-            border: 1px solid #eee;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            text-align: center;
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
+            background: var(--white); border: 1px solid #eee; padding: 15px;
+            border-radius: 12px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center; transition: var(--transition); display: flex; flex-direction: column;
         }
 
-        .product:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
+        .product:hover { transform: translateY(-8px); }
+        .product.hidden { display: none; }
 
-        .product.hidden {
-            display: none;
-        }
-
-        /* IMAGE FIX: Unified container for all products */
+        /* --- Image Styling Fix --- */
         .img-container {
             width: 100%;
-            height: 350px;
-            background: #ebebeb;
+            height: 320px; /* Medium fixed height */
+            background: #f9f9f9;
             border-radius: 8px;
             margin-bottom: 15px;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: block;
         }
 
-        .product img {
+        .img-container img {
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Changed to cover for a full, premium look */
-        }
-
-        .product-name {
-            font-size: 1.1rem;
-            margin-bottom: 10px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-
-        .size-select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            cursor: pointer;
-        }
-
-        .price-tag {
-            font-weight: bold;
-            color: var(--primary);
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-        }
-
-        .action-area {
-            display: flex;
-            gap: 10px;
-        }
-
-        .quantity-input {
-            width: 60px;
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        .add-to-cart {
-            background-color: var(--primary);
-            color: var(--white);
-            border: none;
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-weight: bold;
-            flex: 1;
+            object-fit: cover; /* Ensures image fills container perfectly */
+            display: block;
             transition: var(--transition);
         }
 
-        .add-to-cart:hover {
-            background-color: #800000;
-        }
+        .product-name { font-size: 1.1rem; margin-bottom: 5px; font-weight: bold; }
+        .price-tag { font-weight: bold; color: var(--primary); font-size: 1.2rem; margin-bottom: 10px; }
+        .size-select { width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc; cursor: pointer; }
+
+        .action-area { display: flex; gap: 10px; }
+        .quantity-input { width: 60px; padding: 10px; border-radius: 5px; border: 1px solid #ccc; }
+        .add-to-cart { background-color: var(--primary); color: var(--white); border: none; padding: 10px; cursor: pointer; border-radius: 5px; font-weight: bold; flex: 1; }
 
         /* --- Sidebar Cart --- */
         #cart-sidebar {
-            position: fixed;
-            right: -400px;
-            top: 0;
-            width: 100%;
-            max-width: 400px;
-            height: 100%;
-            background: var(--white);
-            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 2000;
-            padding: 30px;
-            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2);
-            overflow-y: auto;
+            position: fixed; right: -400px; top: 0; width: 100%; max-width: 400px;
+            height: 100%; background: var(--white); transition: 0.4s ease;
+            z-index: 2000; padding: 30px; box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2); overflow-y: auto;
         }
 
-        .cart-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            border-bottom: 2px solid var(--primary);
-            padding-bottom: 10px;
-        }
+        .checkout-form input { width: 100%; padding: 12px; margin: 10px 0 20px; border: 1px solid #ccc; border-radius: 5px; }
 
-        .checkout-form {
-            margin-top: 20px;
-            padding: 20px;
-            background: #fdfdfd;
-            border-radius: 8px;
-            border: 1px solid #eee;
-        }
-
-        .checkout-form input {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 50px 20px;
-            text-align: center;
-            margin-top: 60px;
-        }
+        footer { background-color: var(--dark); color: var(--white); padding: 50px 20px; text-align: center; margin-top: 60px; }
 
         @media (max-width: 768px) {
-            .navbar .container {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .nav-search input { width: 100%; }
-            .home-header { padding-top: 200px; }
-            #cart-sidebar { max-width: 100%; }
-            .img-container { height: 250px; } /* Medium sized for mobile visibility */
+            .navbar .container { flex-direction: column; gap: 10px; }
             .product-list { grid-template-columns: repeat(2, 1fr); gap: 10px; width: 95%; }
-            .product-name { font-size: 0.9rem; height: 35px; }
+            .img-container { height: 220px; } /* Medium height for mobile */
+            .product-name { font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -334,11 +164,9 @@
     <nav class="navbar">
         <div class="container">
             <a href="#" class="logo">Mavazi</a>
-            <div class="nav-search"><input type="text" id="productSearch" placeholder="Search merchandise..."
-                    onkeyup="filterProducts()"></div>
+            <div class="nav-search"><input type="text" id="productSearch" placeholder="Search merchandise..." onkeyup="filterProducts()"></div>
             <ul class="nav-links">
-                <li><a onclick="toggleCart()" class="cart-link"><i class="fas fa-shopping-cart"></i> Cart (<span
-                            id="cart-count">0</span>)</a></li>
+                <li><a onclick="toggleCart()" class="cart-link"><i class="fas fa-shopping-cart"></i> Cart (<span id="cart-count">0</span>)</a></li>
             </ul>
         </div>
     </nav>
@@ -347,21 +175,17 @@
         <div class="container">
             <h1>GWAPAFFECTION</h1>
             <p>HANDCRAFTED TRENDS • PREMIUM QUALITY • UNIQUE STYLE</p>
-            <a href="https://wa.me/254797389370" target="_blank" class="shop-now-button"><i class="fab fa-whatsapp"></i>
-                CHAT ON WHATSAPP</a>
+            <a href="https://wa.me/254797389370" target="_blank" class="shop-now-button"><i class="fab fa-whatsapp"></i> CHAT ON WHATSAPP</a>
         </div>
     </header>
 
     <div class="promo-container">
-        <div class="shiny-advert">
-            ✨ ALL COLOURS AND SIZES AVAILABLE ✨
-        </div>
+        <div class="shiny-advert">✨ ALL COLOURS AND SIZES AVAILABLE ✨</div>
     </div>
 
     <main>
         <h2 class="section-title">MERCHANDISE</h2>
-        <p id="noResults" style="text-align: center; display: none; color: #666;">No products found matching your
-            search.</p>
+        <p id="noResults" style="text-align: center; display: none; color: #666;">No products found matching your search.</p>
 
         <div class="product-list" id="productGrid">
             
@@ -374,6 +198,7 @@
                     <option value="M" selected>Medium (M)</option>
                     <option value="L">Large (L)</option>
                     <option value="XL">Extra Large (XL)</option>
+                    <option value="Custom Length">Custom Length</option>
                 </select>
                 <div class="action-area">
                     <input type="number" min="1" value="1" class="quantity-input">
@@ -406,6 +231,7 @@
                     <option value="30">30</option>
                     <option value="32" selected>32</option>
                     <option value="34">34</option>
+                    <option value="Custom Length">Custom Length</option>
                 </select>
                 <div class="action-area">
                     <input type="number" min="1" value="1" class="quantity-input">
@@ -421,6 +247,7 @@
                     <option value="28">28</option>
                     <option value="32" selected>32</option>
                     <option value="36">36</option>
+                    <option value="Custom Length">Custom Length</option>
                 </select>
                 <div class="action-area">
                     <input type="number" min="1" value="1" class="quantity-input">
@@ -429,9 +256,7 @@
             </div>
 
             <div class="product">
-                <div class="img-container">
-                    <img src="https://i.ibb.co/zhCCyz5Y/image1-2.jpg" alt="CUSTOM-JACKET">
-                </div>
+                <div class="img-container"><img src="https://i.ibb.co/zhCCyz5Y/image1-2.jpg" alt="CUSTOM-JACKET"></div>
                 <h3 class="product-name">CUSTOM-JACKET</h3>
                 <p class="price-tag">SH. 1500</p>
                 <select class="size-select">
@@ -460,19 +285,36 @@
             </div>
 
             <div class="product">
-                <div class="img-container">
-                    <img src="https://i.ibb.co/Y4z1MZ77/IMG-2849.jpg" alt="GWAPAN-GREY-PANTS">
-                </div>
+                <div class="img-container"><img src="https://i.ibb.co/Y4z1MZ77/IMG-2849.jpg" alt="GWAPAN-GREY-PANTS"></div>
                 <h3 class="product-name">GWAPAN-GREY-PANTS</h3>
                 <p class="price-tag">SH. 1850</p>
                 <select class="size-select">
                     <option value="28">28</option>
                     <option value="32" selected>32</option>
                     <option value="36">36</option>
+                    <option value="Custom Length">Custom Length</option>
                 </select>
                 <div class="action-area">
                     <input type="number" min="1" value="1" class="quantity-input">
                     <button onclick="addToCart('GWAPAN-GREY-PANTS', 1850, this)" class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="img-container">
+                    <img src="https://i.ibb.co/VYQymxY1/IMG-2434-2.jpg" alt="GWAPAN-BLACK-PANTS">
+                </div>
+                <h3 class="product-name">GWAPAN-BLACK-PANTS</h3>
+                <p class="price-tag">SH. 1850</p>
+                <select class="size-select">
+                    <option value="28">28</option>
+                    <option value="32" selected>32</option>
+                    <option value="36">36</option>
+                    <option value="Custom Length">Custom Length</option>
+                </select>
+                <div class="action-area">
+                    <input type="number" min="1" value="1" class="quantity-input">
+                    <button onclick="addToCart('GWAPAN-BLACK-PANTS', 1850, this)" class="add-to-cart">Add to Cart</button>
                 </div>
             </div>
 
@@ -482,9 +324,7 @@
     <div id="cart-sidebar">
         <div class="cart-header">
             <h2>Your Cart</h2>
-            <button onclick="toggleCart()"
-                style="cursor:pointer; background:maroon; color:white; border:none; padding:8px 15px; border-radius:5px;">&times;
-                Close</button>
+            <button onclick="toggleCart()" style="cursor:pointer; background:maroon; color:white; border:none; padding:8px 15px; border-radius:5px;">&times; Close</button>
         </div>
         <div id="cart-display-area"></div>
         <div id="checkout-section">
@@ -616,5 +456,4 @@
         }
     </script>
 </body>
-
 </html>
