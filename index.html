@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+X<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -13,10 +13,14 @@
             --dark: #000;
             --light: #f4f4f4;
             --white: #ffffff;
-            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition: 0.3s ease;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
         body {
             font-family: 'Times New Roman', Times, serif;
@@ -26,29 +30,51 @@
         }
 
         /* --- Promo Bar --- */
-        .promo-container { width: 100%; display: flex; justify-content: center; margin: 20px 0; }
+        .promo-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
         .shiny-advert {
             background: linear-gradient(90deg, #800000, #ff0000, #800000);
             background-size: 200% auto;
-            color: white; padding: 15px 30px; font-weight: bold;
-            border-radius: 50px; text-transform: uppercase; letter-spacing: 2px;
+            color: white;
+            padding: 15px 30px;
+            font-weight: bold;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
             box-shadow: 0 0 15px rgba(128, 0, 0, 0.4);
             animation: moveShine 3s linear infinite, pulseGlow 1.5s ease-in-out infinite alternate;
-            text-align: center; font-size: 14px;
+            text-align: center;
+            font-size: 14px;
         }
+
         @keyframes moveShine { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
         @keyframes pulseGlow { from { transform: scale(1); } to { transform: scale(1.03); } }
 
         /* --- Navbar --- */
         .navbar {
-            background-color: var(--dark); padding: 15px 0;
-            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background-color: var(--dark);
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
+
         .navbar .container {
-            width: 90%; max-width: 1200px; margin: 0 auto;
-            display: flex; justify-content: space-between; align-items: center;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+
         .logo { font-size: 26px; font-weight: bold; color: var(--primary); text-decoration: none; letter-spacing: 2px; text-transform: uppercase; }
         .nav-links { list-style: none; display: flex; align-items: center; gap: 20px; }
         .nav-links a { color: var(--light); text-decoration: none; font-weight: bold; transition: var(--transition); font-size: 16px; cursor: pointer; }
@@ -61,6 +87,7 @@
             background-size: cover; background-position: center;
             color: var(--white); padding: 160px 20px 80px; text-align: center;
         }
+
         .shop-now-button {
             display: inline-block; background-color: var(--primary); color: var(--white);
             padding: 12px 30px; text-decoration: none; border-radius: 30px; margin-top: 20px;
@@ -69,21 +96,25 @@
 
         /* --- Product Grid --- */
         .section-title { text-align: center; color: var(--primary); margin: 40px 0 10px; font-size: 2rem; }
+        
         .product-list {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px; padding: 20px 0; max-width: 1200px; margin: 0 auto; width: 90%;
         }
+
         .product {
             background: var(--white); border: 1px solid #eee; padding: 15px;
             border-radius: 12px; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             text-align: center; transition: var(--transition); display: flex; flex-direction: column;
         }
-        .product:hover { transform: translateY(-8px); box-shadow: 0 12px 25px rgba(0,0,0,0.1); }
 
-        /* --- FIXED IMAGE CONTAINER --- */
+        .product:hover { transform: translateY(-8px); }
+        .product.hidden { display: none; }
+
         .img-container {
             width: 100%;
-            height: 420px; /* Slightly taller for full outfits */
+            height: 400px; /* Consistent height */
             background: #ffffff;
             border-radius: 8px;
             margin-bottom: 15px;
@@ -91,52 +122,39 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: zoom-in;
-            border: 1px solid #f0f0f0;
+            padding: 5px; /* Adds space so images don't hit the border */
         }
 
         .img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain; /* Shows full image without crop */
-            transition: transform 0.5s ease;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain; /* Prevents cropping or squeezing */
+            display: block;
         }
-
-        .product:hover .img-container img {
-            transform: scale(1.05); /* Subtle zoom when looking at product */
-        }
-
-        /* --- Lightbox Overlay --- */
-        #lightbox {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.95); display: none;
-            justify-content: center; align-items: center; z-index: 3000;
-        }
-        #lightbox img {
-            max-width: 95%; max-height: 95%;
-            object-fit: contain;
-            animation: zoomIn 0.3s ease;
-        }
-        @keyframes zoomIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .close-lightbox { position: absolute; top: 20px; right: 30px; color: white; font-size: 40px; cursor: pointer; }
 
         .product-name { font-size: 1.1rem; margin-bottom: 5px; font-weight: bold; }
         .price-tag { font-weight: bold; color: var(--primary); font-size: 1.2rem; margin-bottom: 10px; }
-        .size-select { width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc; }
-        .add-to-cart { background-color: var(--primary); color: var(--white); border: none; padding: 12px; cursor: pointer; border-radius: 5px; font-weight: bold; }
+        .size-select { width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc; cursor: pointer; }
 
-        /* --- Cart Sidebar --- */
+        .action-area { display: flex; gap: 10px; }
+        .quantity-input { width: 60px; padding: 10px; border-radius: 5px; border: 1px solid #ccc; }
+        .add-to-cart { background-color: var(--primary); color: var(--white); border: none; padding: 10px; cursor: pointer; border-radius: 5px; font-weight: bold; flex: 1; }
+
+        /* --- Sidebar Cart --- */
         #cart-sidebar {
             position: fixed; right: -400px; top: 0; width: 100%; max-width: 400px;
             height: 100%; background: var(--white); transition: 0.4s ease;
             z-index: 2000; padding: 30px; box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2); overflow-y: auto;
         }
 
+        .checkout-form input { width: 100%; padding: 12px; margin: 10px 0 20px; border: 1px solid #ccc; border-radius: 5px; }
+
         footer { background-color: var(--dark); color: var(--white); padding: 50px 20px; text-align: center; margin-top: 60px; }
 
         @media (max-width: 768px) {
+            .navbar .container { flex-direction: column; gap: 10px; }
             .product-list { grid-template-columns: repeat(2, 1fr); gap: 10px; width: 95%; }
-            .img-container { height: 280px; }
+            .img-container { height: 300px; } 
             .product-name { font-size: 0.85rem; }
         }
     </style>
@@ -144,17 +162,12 @@
 
 <body>
 
-    <div id="lightbox" onclick="closeLightbox()">
-        <span class="close-lightbox">&times;</span>
-        <img id="lightbox-img" src="">
-    </div>
-
     <nav class="navbar">
         <div class="container">
             <a href="#" class="logo">Mavazi</a>
-            <div class="nav-search"><input type="text" id="productSearch" placeholder="Search..." onkeyup="filterProducts()"></div>
+            <div class="nav-search"><input type="text" id="productSearch" placeholder="Search merchandise..." onkeyup="filterProducts()"></div>
             <ul class="nav-links">
-                <li><a onclick="toggleCart()"><i class="fas fa-shopping-cart"></i> Cart (<span id="cart-count">0</span>)</a></li>
+                <li><a onclick="toggleCart()" class="cart-link"><i class="fas fa-shopping-cart"></i> Cart (<span id="cart-count">0</span>)</a></li>
             </ul>
         </div>
     </nav>
@@ -162,112 +175,312 @@
     <header class="home-header">
         <div class="container">
             <h1>GWAPAFFECTION</h1>
-            <p>PREMIUM HANDCRAFTED STREETWEAR</p>
-            <a href="https://wa.me/254797389370" target="_blank" class="shop-now-button">CHAT ON WHATSAPP</a>
+            <p>HANDCRAFTED TRENDS • PREMIUM QUALITY • UNIQUE STYLE</p>
+            <a href="https://wa.me/254797389370" target="_blank" class="shop-now-button"><i class="fab fa-whatsapp"></i> CHAT ON WHATSAPP</a>
         </div>
     </header>
 
+    <div class="promo-container">
+        <div class="shiny-advert">✨ ALL COLOURS AND SIZES AVAILABLE ✨</div>
+    </div>
+
     <main>
-        <h2 class="section-title">COLLECTION</h2>
+        <h2 class="section-title">MERCHANDISE</h2>
+        <p id="noResults" style="text-align: center; display: none; color: #666;">No products found matching your search.</p>
+
         <div class="product-list" id="productGrid">
             
             <div class="product">
-                <div class="img-container" onclick="openLightbox('https://i.ibb.co/NnmNRYDx/image0-1.jpg')">
-                    <img src="https://i.ibb.co/NnmNRYDx/image0-1.jpg" alt="Pants">
-                </div>
+                <div class="img-container"><img src="https://i.ibb.co/NnmNRYDx/image0-1.jpg" alt="Pants"></div>
                 <h3 class="product-name">GWAPAN-CUSTOM-PANTS</h3>
                 <p class="price-tag">SH. 1800</p>
-                <select class="size-select"><option>M</option><option>L</option></select>
-                <button onclick="addToCart('CUSTOM PANTS', 1800, this)" class="add-to-cart">Add to Cart</button>
+                <select class="size-select"><option value="S">S</option><option value="M" selected>M</option><option value="L">L</option><option value="XL">XL</option></select>
+                <div class="action-area">
+                    <input type="number" min="1" value="1" class="quantity-input">
+                    <button onclick="addToCart('CUSTOM PANTS', 1800, this)" class="add-to-cart">Add to Cart</button>
+                </div>
             </div>
 
             <div class="product">
-                <div class="img-container" onclick="openLightbox('https://i.ibb.co/r2gd57GN/image0-6.jpg')">
-                    <img src="https://i.ibb.co/r2gd57GN/image0-6.jpg" alt="Blue Pants">
+                <div class="img-container"><img src="https://i.ibb.co/Z1kjh3T0/image0.jpg" alt="Shirt"></div>
+                <h3 class="product-name">GWAPAN-DENIM-SHIRT</h3>
+                <p class="price-tag">SH. 1200</p>
+                <select class="size-select"><option value="M" selected>M</option><option value="L">L</option></select>
+                <div class="action-area">
+                    <input type="number" min="1" value="1" class="quantity-input">
+                    <button onclick="addToCart('DENIM SHIRT', 1200, this)" class="add-to-cart">Add to Cart</button>
                 </div>
-                <h3 class="product-name">GWAPAN-BLUE-PANTS</h3>
+            </div>
+
+            <div class="product">
+                <div class="img-container"><img src="https://i.ibb.co/xS4m4wx4/image3.jpg" alt="Jorts"></div>
+                <h3 class="product-name">GWAPAN-JORTS</h3>
+                <p class="price-tag">SH. 1500</p>
+                <select class="size-select"><option value="32" selected>32</option><option value="34">34</option></select>
+                <div class="action-area">
+                    <input type="number" min="1" value="1" class="quantity-input">
+                    <button onclick="addToCart('JORTS', 1500, this)" class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="img-container"><img src="https://i.ibb.co/35Mh4KNW/image0-4.jpg" alt="Pants"></div>
+                <h3 class="product-name">GWAPAN-PANTS</h3>
                 <p class="price-tag">SH. 1850</p>
-                <select class="size-select"><option>32</option><option>34</option></select>
-                <button onclick="addToCart('BLUE PANTS', 1850, this)" class="add-to-cart">Add to Cart</button>
+                <select class="size-select"><option value="32" selected>32</option><option value="36">36</option></select>
+                <div class="action-area">
+                    <input type="number" min="1" value="1" class="quantity-input">
+                    <button onclick="addToCart('PANTS', 1850, this)" class="add-to-cart">Add to Cart</button>
+                </div>
             </div>
 
             <div class="product">
-                <div class="img-container" onclick="openLightbox('https://i.ibb.co/NXkFmbC/image1.jpg')">
-                    <img src="https://i.ibb.co/NXkFmbC/image1.jpg" alt="Suit">
+                <div class="img-container"><img src="https://i.ibb.co/zhCCyz5Y/image1-2.jpg" alt="CUSTOM-JACKET"></div>
+                <h3 class="product-name">CUSTOM-JACKET</h3>
+                <p class="price-tag">SH. 1500</p>
+                <select class="size-select"><option value="M" selected>M</option><option value="L">L</option></select>
+                <div class="action-area">
+                    <input type="number" min="1" value="1" class="quantity-input">
+                    <button onclick="addToCart('JACKET', 1500, this)" class="add-to-cart">Add to Cart</button>
                 </div>
+            </div>
+
+            <div class="product">
+                <div class="img-container"><img src="https://i.ibb.co/NXkFmbC/image1.jpg" alt="Suit"></div>
                 <h3 class="product-name">FULL DENIM-KIT</h3>
                 <p class="price-tag">SH. 2650</p>
-                <select class="size-select"><option>M</option><option>L</option></select>
-                <button onclick="addToCart('FULL KIT', 2650, this)" class="add-to-cart">Add to Cart</button>
+                <select class="size-select"><option value="M" selected>M</option><option value="L">L</option></select>
+                <div class="action-area">
+                    <input type="number" min="1" value="1" class="quantity-input">
+                    <button onclick="addToCart('FULL DENIM SUIT', 2650, this)" class="add-to-cart">Add to Cart</button>
+                </div>
             </div>
 
+            <div class="product">
+                <div class="img-container"><img src="https://i.ibb.co/Y4z1MZ77/IMG-2849.jpg" alt="GWAPAN-GREY-PANTS"></div>
+                <h3 class="product-name">GWAPAN-GREY-PANTS</h3>
+                <p class="price-tag">SH. 1850</p>
+                <select class="size-select"><option value="32" selected>32</option></select>
+                <div class="action-area">
+                    <input type="number" min="1" value="1" class="quantity-input">
+                    <button onclick="addToCart('GWAPAN-GREY-PANTS', 1850, this)" class="add-to-cart">Add to Cart</button>
+                </div>
             </div>
+
+            <div class="product">
+                <div class="img-container"><img src="https://i.ibb.co/VYQymxY1/IMG-2434-2.jpg" alt="GWAPAN-BLACK-PANTS"></div>
+                <h3 class="product-name">GWAPAN-BLACK-PANTS</h3>
+                <p class="price-tag">SH. 1850</p>
+                <select class="size-select"><option value="32" selected>32</option></select>
+                <div class="action-area">
+                    <input type="number" min="1" value="1" class="quantity-input">
+                    <button onclick="addToCart('GWAPAN-BLACK-PANTS', 1850, this)" class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="img-container"><img src="https://i.ibb.co/r2gd57GN/image0-6.jpg" alt="GWAPAN-BLUE-PANTS"></div>
+                <h3 class="product-name">GWAPAN-BLUE-PANTS</h3>
+                <p class="price-tag">SH. 1850</p>
+                <select class="size-select"><option value="32" selected>32</option></select>
+                <div class="action-area">
+                    <input type="number" min="1" value="1" class="quantity-input">
+                    <button onclick="addToCart('GWAPAN-BLUE-PANTS', 1850, this)" class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="img-container"><img src="https://i.ibb.co/KcZw88gM/image1-3.jpg" alt="CUSTOM-DENIM-VEST"></div>
+                <h3 class="product-name">CUSTOM-DENIM-VEST</h3>
+                <p class="price-tag">SH. 1000</p>
+                <select class="size-select"><option value="M" selected>M</option></select>
+                <div class="action-area">
+                    <input type="number" min="1" value="1" class="quantity-input">
+                    <button onclick="addToCart('VEST', 1000, this)" class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="img-container"><img src="https://i.ibb.co/G3G2v4Rh/image2-2.jpg" alt="BLUE-DENIM-VEST"></div>
+                <h3 class="product-name">BLUE-DENIM-VEST</h3>
+                <p class="price-tag">SH. 1000</p>
+                <select class="size-select"><option value="M" selected>M</option></select>
+                <div class="action-area">
+                    <input type="number" min="1" value="1" class="quantity-input">
+                    <button onclick="addToCart('VEST', 1000, this)" class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="img-container"><img src="https://i.ibb.co/cSm3X9fQ/image0-5.jpg" alt="BLUE-DENIM-SHIRT"></div>
+                <h3 class="product-name">BLUE-DENIM-SHIRT</h3>
+                <p class="price-tag">SH. 1200</p>
+                <select class="size-select"><option value="M" selected>M</option></select>
+                <div class="action-area">
+                    <input type="number" min="1" value="1" class="quantity-input">
+                    <button onclick="addToCart('BLUE-DENIM-SHIRT', 1200, this)" class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="product">
+                <div class="img-container"><img src="https://i.ibb.co/MyWK2J4Z/image1-4.jpg" alt="CUSTOM-BLACK-PANTS"></div>
+                <h3 class="product-name">CUSTOM-BLACK-PANTS</h3>
+                <p class="price-tag">SH. 1850</p>
+                <select class="size-select"><option value="32" selected>32</option></select>
+                <div class="action-area">
+                    <input type="number" min="1" value="1" class="quantity-input">
+                    <button onclick="addToCart('CUSTOM-BLACK-PANTS', 1850, this)" class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+
+        </div>
     </main>
 
     <div id="cart-sidebar">
-        <h2>Your Cart</h2>
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button onclick="toggleCart()" style="cursor:pointer; background:maroon; color:white; border:none; padding:8px 15px; border-radius:5px;">&times; Close</button>
+        </div>
         <div id="cart-display-area"></div>
         <div id="checkout-section">
-            <input type="text" id="customer-name" placeholder="Your Name" style="width:100%; padding:10px; margin:10px 0;">
+            <div class="checkout-form">
+                <label style="font-weight: bold; color: maroon;">Full Name:</label>
+                <input type="text" id="customer-name" placeholder="Enter your name" required>
+            </div>
             <div id="cart-footer"></div>
         </div>
-        <button onclick="toggleCart()" style="margin-top:20px; width:100%; padding:10px;">Close</button>
     </div>
 
     <footer>
-        <p>© 2026 GWAPAFFECTION-CLOTHING</p>
+        <p>© 2026 GWAPAFFECTION-CLOTHING | Powered by Gaia $ Bizzy.G</p>
+        <p>All rights reserved</p>
     </footer>
 
     <script>
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-        function openLightbox(src) {
-            document.getElementById('lightbox-img').src = src;
-            document.getElementById('lightbox').style.display = 'flex';
-        }
-        function closeLightbox() { document.getElementById('lightbox').style.display = 'none'; }
+        window.onload = function () {
+            updateCartCount();
+            renderCartItems();
+        };
 
         function toggleCart() {
-            const s = document.getElementById('cart-sidebar');
-            s.style.right = s.style.right === '0px' ? '-400px' : '0px';
+            const sidebar = document.getElementById('cart-sidebar');
+            sidebar.style.right = (sidebar.style.right === '0px') ? '-400px' : '0px';
         }
 
-        function addToCart(name, price, btn) {
-            const p = btn.closest('.product');
-            const img = p.querySelector('img').src;
-            const size = p.querySelector('.size-select').value;
-            cart.push({ name, price, size, image: img, quantity: 1, total: price });
-            localStorage.setItem('cart', JSON.stringify(cart));
-            renderCart();
-            toggleCart();
-        }
-
-        function renderCart() {
-            const area = document.getElementById('cart-display-area');
-            const count = document.getElementById('cart-count');
-            area.innerHTML = '';
-            let total = 0;
-            cart.forEach((item, i) => {
-                total += item.price;
-                area.innerHTML += `<div style="display:flex; gap:10px; margin-bottom:10px;">
-                    <img src="${item.image}" style="width:50px; height:60px; object-fit:contain;">
-                    <div>${item.name} (${item.size})<br>SH ${item.price}</div>
-                </div>`;
+        function filterProducts() {
+            const input = document.getElementById('productSearch').value.toUpperCase();
+            const products = document.getElementsByClassName('product');
+            let visibleCount = 0;
+            Array.from(products).forEach(p => {
+                const name = p.querySelector('.product-name').innerText;
+                if (name.toUpperCase().includes(input)) {
+                    p.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    p.classList.add('hidden');
+                }
             });
-            count.innerText = cart.length;
-            document.getElementById('cart-footer').innerHTML = `<h3>Total: SH ${total}</h3>
-            <button onclick="sendOrder(${total})" style="background:#25D366; color:white; width:100%; padding:15px; border:none; cursor:pointer;">WHATSAPP ORDER</button>`;
+            document.getElementById('noResults').style.display = visibleCount === 0 ? 'block' : 'none';
         }
 
-        function sendOrder(total) {
-            const name = document.getElementById('customer-name').value || "Customer";
-            let msg = `Order from ${name}:\n`;
-            cart.forEach(item => msg += `- ${item.name} (${item.size})\n`);
-            msg += `Total: SH ${total}`;
-            window.open(`https://wa.me/254797389370?text=${encodeURIComponent(msg)}`);
+        function addToCart(name, price, button) {
+            const productDiv = button.closest('.product');
+            const qty = parseInt(productDiv.querySelector('.quantity-input').value) || 1;
+            const size = productDiv.querySelector('.size-select').value;
+            const img = productDiv.querySelector('img').src;
+
+            const existing = cart.find(item => item.name === name && item.size === size);
+            if (existing) {
+                existing.quantity += qty;
+                existing.total = existing.quantity * price;
+            } else {
+                cart.push({ name, price, quantity: qty, size: size, total: price * qty, image: img });
+            }
+            saveAndUpdate();
+            document.getElementById('cart-sidebar').style.right = '0px';
+            renderCartItems();
         }
 
-        window.onload = renderCart;
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            saveAndUpdate();
+            renderCartItems();
+        }
+
+        function saveAndUpdate() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+        }
+
+        function updateCartCount() {
+            document.getElementById('cart-count').innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
+        }
+
+        function renderCartItems() {
+            const display = document.getElementById('cart-display-area');
+            const footer = document.getElementById('cart-footer');
+            const checkoutSection = document.getElementById('checkout-section');
+            display.innerHTML = '';
+
+            if (cart.length === 0) {
+                display.innerHTML = '<p style="text-align:center; margin-top:20px;">Cart is empty.</p>';
+                checkoutSection.style.display = 'none';
+                return;
+            }
+
+            checkoutSection.style.display = 'block';
+            let grandTotal = 0;
+            cart.forEach((item, index) => {
+                grandTotal += item.total;
+                display.innerHTML += `
+                    <div style="display:flex; align-items:center; margin-bottom:15px; border-bottom:1px solid #eee; padding-bottom:10px;">
+                        <img src="${item.image}" style="width:50px; height:50px; object-fit:contain; margin-right:15px; border-radius: 4px; background:#f0f0f0;">
+                        <div style="flex-grow:1;">
+                            <h4 style="font-size:14px; margin:0;">${item.name}</h4>
+                            <p style="font-size:12px; color:gray;">Size: ${item.size} | Qty: ${item.quantity}</p>
+                            <p style="font-size:13px; color:maroon; font-weight:bold;">SH ${item.total}</p>
+                        </div>
+                        <button onclick="removeFromCart(${index})" style="border:none; color:red; cursor:pointer; background:none; font-size:20px;">&times;</button>
+                    </div>`;
+            });
+
+            footer.innerHTML = `
+                <div style="display:flex; justify-content:space-between; margin-top:20px; font-size:1.2rem; font-weight:bold;">
+                    <span>Total:</span> <span>SH ${grandTotal}</span>
+                </div>
+                <button onclick="sendOrderWhatsApp(${grandTotal})" style="width:100%; padding:15px; background:#25D366; color:white; border:none; border-radius:5px; cursor:pointer; font-weight:bold; margin-top:20px; display:flex; align-items:center; justify-content:center; gap:10px;">
+                    <i class="fab fa-whatsapp"></i> SEND VIA WHATSAPP
+                    <p>
+                        (You'll be redirected to WhatsApp to confirm your order)
+                    </p>    
+                    <p>
+                        *Please ensure you have WhatsApp installed on your device*
+                        *Clicking the button will open a pre-filled message with your order details for easy confirmation*
+                                 *THANK YOU FOR SHOPPING WITH GWAPAFFECTION!*
+                    </p>
+                    
+
+                
+                </button>
+            `;
+        }
+
+        function sendOrderWhatsApp(total) {
+            const customerName = document.getElementById('customer-name').value;
+            if (!customerName) {
+                alert("Please enter your name.");
+                return;
+            }
+
+            let message = `👤 *CUSTOMER:* ${customerName.toUpperCase()}\n🛍️ *ORDER FROM GWAPAFFECTION*\n\n`;
+            cart.forEach((item, i) => {
+                message += `${i + 1}. ${item.name} (${item.size}) x${item.quantity} - SH ${item.total}\n`;
+            });
+            message += `\n*TOTAL: SH ${total}*\n\nPlease confirm my order.`;
+            window.open(`https://wa.me/254797389370?text=${encodeURIComponent(message)}`, '_blank');
+        }
     </script>
 </body>
 </html>
