@@ -7,147 +7,85 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>GWAPAFFECTION-CLOTHING</title>
     <style>
-        /* --- General Reset & Variables --- */
         :root {
             --primary: #800000;
             --dark: #000;
             --light: #f4f4f4;
             --white: #ffffff;
-            --transition: 0.3s ease;
+            --accent: #d4af37;
+            --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Times New Roman', Times, serif; background-color: var(--light); line-height: 1.6; overflow-x: hidden; }
 
-        body {
-            font-family: 'Times New Roman', Times, serif;
-            background-color: var(--light);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+        /* --- Navbar --- */
+        .navbar { background-color: var(--dark); padding: 15px 0; position: fixed; top: 0; width: 100%; z-index: 1000; }
+        .navbar .container { width: 90%; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: bold; color: var(--primary); text-decoration: none; letter-spacing: 2px; text-transform: uppercase; }
+        .nav-search input { padding: 8px 15px; border-radius: 20px; border: none; outline: none; width: 180px; background: #222; color: #fff; }
+        .nav-links a { color: var(--light); text-decoration: none; font-weight: bold; cursor: pointer; }
 
-        /* --- Promo Bar --- */
-        .promo-container {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-            margin-top: 100px;
-        }
-
-        .shiny-advert {
-            background: linear-gradient(90deg, #800000, #ff0000, #800000);
-            background-size: 200% auto;
-            color: white;
-            padding: 12px 25px;
-            font-weight: bold;
-            border-radius: 50px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 0 15px rgba(128, 0, 0, 0.4);
-            animation: moveShine 3s linear infinite;
-            text-align: center;
-            font-size: 13px;
+        /* --- Animated Delivery Note & Promo --- */
+        .promo-container { width: 100%; display: flex; flex-direction: column; align-items: center; margin-top: 100px; gap: 10px; }
+        .shiny-advert { background: linear-gradient(90deg, #800000, #ff0000, #800000); background-size: 200% auto; color: white; padding: 10px 25px; font-weight: bold; border-radius: 50px; animation: moveShine 3s linear infinite; font-size: 13px; }
+        
+        .delivery-note { 
+            color: var(--primary); font-weight: bold; font-size: 0.9rem;
+            padding: 5px 15px; border: 1px solid var(--primary); border-radius: 4px;
+            animation: pulseGlow 2s infinite ease-in-out;
         }
 
         @keyframes moveShine { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
+        @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 5px rgba(128,0,0,0.2); transform: scale(1); } 50% { box-shadow: 0 0 15px rgba(128,0,0,0.5); transform: scale(1.02); } }
 
-        /* --- Navbar --- */
-        .navbar {
-            background-color: var(--dark);
-            padding: 15px 0;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .navbar .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo { font-size: 24px; font-weight: bold; color: var(--primary); text-decoration: none; letter-spacing: 2px; text-transform: uppercase; }
-        .nav-links { list-style: none; display: flex; align-items: center; gap: 20px; }
-        .nav-links a { color: var(--light); text-decoration: none; font-weight: bold; transition: var(--transition); cursor: pointer; }
-        
-        .nav-search input { padding: 8px 15px; border-radius: 20px; border: none; outline: none; width: 180px; background: #222; color: #fff; }
-
-        /* --- Hero --- */
-        .home-header {
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://i.ibb.co/xq1GPZ5m/image5-2.png');
-            background-size: cover; background-position: center;
-            color: var(--white); padding: 120px 20px 60px; text-align: center;
-        }
-
-        .shop-now-button {
-            display: inline-block; background-color: var(--primary); color: var(--white);
-            padding: 12px 30px; text-decoration: none; border-radius: 30px; margin-top: 15px;
-            font-weight: bold; transition: var(--transition);
-        }
+        .home-header { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i.ibb.co/xq1GPZ5m/image5-2.png'); background-size: cover; background-position: center; color: var(--white); padding: 80px 20px 40px; text-align: center; }
 
         /* --- Product Grid --- */
         .section-title { text-align: center; color: var(--primary); margin: 40px 0 10px; font-size: 2rem; letter-spacing: 3px; }
+        .product-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; padding: 20px 0; max-width: 1200px; margin: 0 auto; width: 90%; }
+
+        .product { background: var(--white); border-radius: 12px; box-shadow: var(--shadow); position: relative; overflow: hidden; display: flex; flex-direction: column; padding: 15px; }
         
-        .product-list {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px; padding: 20px 0; max-width: 1200px; margin: 0 auto; width: 90%;
-        }
-
-        .product {
-            background: var(--white); border: 1px solid #eee; padding: 15px;
-            border-radius: 12px; box-shadow: var(--shadow);
-            text-align: center; transition: var(--transition); display: flex; flex-direction: column;
-        }
-
-        .product:hover { transform: translateY(-5px); }
-
-        .img-container {
-            width: 100%; height: 350px; background: #fff; border-radius: 8px;
-            margin-bottom: 15px; overflow: hidden; display: flex; align-items: center; justify-content: center;
-        }
-
+        .img-container { width: 100%; height: 350px; background: #fff; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; }
         .img-container img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
-        .product-name { font-size: 1rem; margin-bottom: 5px; font-weight: bold; text-transform: uppercase; color: #333; }
-        .price-tag { font-weight: bold; color: var(--primary); font-size: 1.1rem; margin-bottom: 10px; }
-        .size-select { width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 5px; border: 1px solid #ccc; }
+        /* --- The Hidden Custom Panel --- */
+        .bespoke-panel {
+            position: absolute; bottom: -100%; left: 0; width: 100%; height: 85%;
+            background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(5px);
+            transition: var(--transition); padding: 15px; display: flex; flex-direction: column;
+            border-top: 3px solid var(--primary); z-index: 5;
+        }
+        .product:hover .bespoke-panel { bottom: 0; }
 
-        .add-to-cart { background-color: var(--dark); color: var(--white); border: none; padding: 12px; cursor: pointer; border-radius: 5px; font-weight: bold; width: 100%; transition: var(--transition); }
+        .panel-title { font-size: 12px; font-weight: bold; color: var(--primary); text-transform: uppercase; margin-bottom: 10px; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
+        .panel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .panel-grid label { font-size: 10px; font-weight: bold; color: #555; }
+        .panel-grid select, .panel-grid input, .panel-grid textarea { width: 100%; padding: 5px; font-size: 11px; border: 1px solid #ccc; border-radius: 3px; margin-top: 2px; }
+        .full-row { grid-column: span 2; }
+        
+        .product-info { padding: 15px 0 0; text-align: center; }
+        .product-name { font-size: 0.9rem; font-weight: bold; text-transform: uppercase; color: #333; margin-bottom: 5px; height: 40px; }
+        .price-tag { color: var(--primary); font-weight: bold; font-size: 1.1rem; }
+
+        .add-to-cart { background-color: var(--dark); color: var(--white); border: none; padding: 12px; cursor: pointer; border-radius: 5px; font-weight: bold; width: 100%; transition: var(--transition); margin-top: 10px; }
         .add-to-cart:hover { background: var(--primary); }
 
-        /* --- Payment Card Section --- */
-        .payment-info-card {
-            background: #fffafa; border: 1px dashed #d4af37; padding: 15px; border-radius: 10px; margin: 20px 0;
-        }
-        .payment-info-card h4 { color: #856404; font-size: 13px; margin-bottom: 10px; text-align: center; text-transform: uppercase; }
-        .pay-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; background: #fff; padding: 8px; border-radius: 5px; border: 1px solid #eee; }
-        .pay-row span { font-size: 12px; font-weight: bold; }
-        .pay-row b { font-family: monospace; font-size: 15px; }
-        .copy-icon { cursor: pointer; color: var(--primary); padding: 5px; }
+        /* --- Sidebar & UI --- */
+        #cart-sidebar { position: fixed; right: -450px; top: 0; width: 100%; max-width: 400px; height: 100%; background: var(--white); transition: 0.4s ease; z-index: 2000; padding: 25px; box-shadow: -10px 0 30px rgba(0,0,0,0.2); overflow-y: auto; }
+        .payment-info-card { background: #fffafa; border: 1px dashed var(--accent); padding: 15px; border-radius: 10px; margin: 15px 0; }
+        .pay-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 13px; }
+        
+        .clear-cart-btn { background: #eee; border: none; padding: 5px 10px; border-radius: 4px; font-size: 11px; cursor: pointer; color: #666; }
+        .clear-cart-btn:hover { background: #ffcccc; color: red; }
 
-        /* --- Sidebar Cart --- */
-        #cart-sidebar {
-            position: fixed; right: -450px; top: 0; width: 100%; max-width: 400px;
-            height: 100%; background: var(--white); transition: 0.4s ease;
-            z-index: 2000; padding: 25px; box-shadow: -10px 0 30px rgba(0, 0, 0, 0.2); overflow-y: auto;
-        }
-
-        .hidden { display: none; }
         footer { background-color: var(--dark); color: var(--white); padding: 40px 20px; text-align: center; margin-top: 60px; }
+        .hidden { display: none; }
 
         @media (max-width: 992px) { .product-list { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 600px) { .product-list { grid-template-columns: 1fr; } .img-container { height: 300px; } }
+        @media (max-width: 600px) { .product-list { grid-template-columns: 1fr; } }
     </style>
 </head>
 
@@ -158,249 +96,115 @@
             <a href="#" class="logo">Mavazi</a>
             <div class="nav-search"><input type="text" id="productSearch" placeholder="Search..." onkeyup="filterProducts()"></div>
             <ul class="nav-links">
-                <li><a onclick="toggleCart()" class="cart-link"><i class="fas fa-shopping-bag"></i> BAG (<span id="cart-count">0</span>)</a></li>
+                <li><a onclick="toggleCart()"><i class="fas fa-shopping-bag"></i> BAG (<span id="cart-count">0</span>)</a></li>
             </ul>
         </div>
     </nav>
 
     <div class="promo-container">
-        <div class="shiny-advert">✨ ALL COLOURS AND SIZES AVAILABLE ✨</div>
+        <div class="shiny-advert">✨ GWAPAN CUSTOMIZATION ACTIVE ✨</div>
+        <div class="delivery-note">Available 1 day after placing your order</div>
     </div>
 
     <header class="home-header">
-        <div class="container">
-            <h1>GWAPAFFECTION</h1>
-            <p>HANDCRAFTED TRENDS • PREMIUM QUALITY</p>
-            <a href="https://wa.me/254797389370" target="_blank" class="shop-now-button"><i class="fab fa-whatsapp"></i> ORDER VIA WHATSAPP</a>
-        </div>
+        <h1>GWAPAFFECTION</h1>
+        <p>PREMIUM HANDCRAFTED DENIM.</p>
     </header>
 
     <main>
-        <h2 class="section-title">CUSTOM-DENIM COLLECTION</h2>
+        <h2 class="section-title">DENIM COLLECTION</h2>
         <div class="product-list" id="productGrid">
             
-            <div class="product">
-                <div class="img-container"><img src="https://i.ibb.co/NnmNRYDx/image0-1.jpg" alt="Pants"></div>
-                <h3 class="product-name">GWAPAN CUSTOM PANTS</h3>
-                <p class="price-tag">SH. 1800</p>
-                <select class="size-select"><option>S</option><option selected>M</option><option>L</option></select>
-                <button onclick="addToCart('CUSTOM PANTS', 1800, this)" class="add-to-cart">Add to Bag</button>
             </div>
-
-            <div class="product">
-                <div class="img-container"><img src="https://i.ibb.co/Z1kjh3T0/image0.jpg" alt="Shirt"></div>
-                <h3 class="product-name">GWAPAN DENIM SHIRT</h3>
-                <p class="price-tag">SH. 1200</p>
-                <select class="size-select"><option selected>M</option><option>L</option></select>
-                <button onclick="addToCart('DENIM SHIRT', 1200, this)" class="add-to-cart">Add to Bag</button>
-            </div>
-
-            <div class="product">
-                <div class="img-container"><img src="https://i.ibb.co/35Mh4KNW/image0-4.jpg" alt="Pants"></div>
-                <h3 class="product-name">GWAPAN PANTS</h3>
-                <p class="price-tag">SH. 1850</p>
-                <select class="size-select"><option selected>32</option><option>36</option></select>
-                <button onclick="addToCart('PANTS', 1850, this)" class="add-to-cart">Add to Bag</button>
-            </div>
-
-            <div class="product">
-                <div class="img-container"><img src="https://i.ibb.co/zhCCyz5Y/image1-2.jpg" alt="CUSTOM-JACKET"></div>
-                <h3 class="product-name">CUSTOM JACKET</h3>
-                <p class="price-tag">SH. 1500</p>
-                <select class="size-select"><option selected>M</option><option>L</option></select>
-                <button onclick="addToCart('JACKET', 1500, this)" class="add-to-cart">Add to Bag</button>
-            </div>
-
-            <div class="product">
-                <div class="img-container"><img src="https://i.ibb.co/NXkFmbC/image1.jpg" alt="Suit"></div>
-                <h3 class="product-name">FULL DENIM KIT</h3>
-                <p class="price-tag">SH. 2650</p>
-                <select class="size-select"><option selected>M</option></select>
-                <button onclick="addToCart('FULL DENIM KIT', 2650, this)" class="add-to-cart">Add to Bag</button>
-            </div>
-
-            <div class="product">
-                <div class="img-container"><img src="https://i.ibb.co/Y4z1MZ77/IMG-2849.jpg" alt="Pants"></div>
-                <h3 class="product-name">GWAPAN GREY PANTS</h3>
-                <p class="price-tag">SH. 1850</p>
-                <select class="size-select"><option selected>32</option></select>
-                <button onclick="addToCart('GREY PANTS', 1850, this)" class="add-to-cart">Add to Bag</button>
-            </div>
-
-            <div class="product">
-                <div class="img-container"><img src="https://i.ibb.co/VYQymxY1/IMG-2434-2.jpg" alt="Pants"></div>
-                <h3 class="product-name">GWAPAN BLACK PANTS</h3>
-                <p class="price-tag">SH. 1850</p>
-                <select class="size-select"><option selected>32</option></select>
-                <button onclick="addToCart('BLACK PANTS', 1850, this)" class="add-to-cart">Add to Bag</button>
-            </div>
-
-            <div class="product">
-                <div class="img-container"><img src="https://i.ibb.co/KcZw88gM/image1-3.jpg" alt="Vest"></div>
-                <h3 class="product-name">CUSTOM DENIM VEST</h3>
-                <p class="price-tag">SH. 1000</p>
-                <select class="size-select"><option selected>M</option></select>
-                <button onclick="addToCart('DENIM VEST', 1000, this)" class="add-to-cart">Add to Bag</button>
-            </div>
-
-            <div class="product">
-                <div class="img-container"><img src="https://i.ibb.co/G3G2v4Rh/image2-2.jpg" alt="Vest"></div>
-                <h3 class="product-name">BLUE DENIM VEST</h3>
-                <p class="price-tag">SH. 1000</p>
-                <select class="size-select"><option selected>M</option></select>
-                <button onclick="addToCart('BLUE VEST', 1000, this)" class="add-to-cart">Add to Bag</button>
-            </div>
-
-            <div class="product">
-                <div class="img-container"><img src="https://i.ibb.co/cSm3X9fQ/image0-5.jpg" alt="Shirt"></div>
-                <h3 class="product-name">BLUE DENIM SHIRT</h3>
-                <p class="price-tag">SH. 1200</p>
-                <select class="size-select"><option selected>M</option></select>
-                <button onclick="addToCart('BLUE SHIRT', 1200, this)" class="add-to-cart">Add to Bag</button>
-            </div>
-
-            <div class="product">
-                <div class="img-container"><img src="https://i.ibb.co/MyWK2J4Z/image1-4.jpg" alt="Pants"></div>
-                <h3 class="product-name">CUSTOM BLACK PANTS</h3>
-                <p class="price-tag">SH. 1850</p>
-                <select class="size-select"><option selected>32</option></select>
-                <button onclick="addToCart('CUSTOM BLACK PANTS', 1850, this)" class="add-to-cart">Add to Bag</button>
-            </div>
-
-            <div class="product">
-                <div class="img-container"><img src="https://i.ibb.co/TxkXWTs2/image1-6.jpg" alt="Pants"></div>
-                <h3 class="product-name">CUSTOM MILITIA PANTS</h3>
-                <p class="price-tag">SH. 1950</p>
-                <select class="size-select"><option selected>32</option></select>
-                <button onclick="addToCart('MILITIA PANTS', 1950, this)" class="add-to-cart">Add to Bag</button>
-            </div>
-
-            <div class="product">
-                <div class="img-container"><img src="https://i.ibb.co/PGt7MN8y/image0-8.jpg" alt="Jorts"></div>
-                <h3 class="product-name">GWAPAN MILITIA JORTS</h3>
-                <p class="price-tag">SH. 1650</p>
-                <select class="size-select"><option selected>32</option></select>
-                <button onclick="addToCart('MILITIA JORTS', 1650, this)" class="add-to-cart">Add to Bag</button>
-            </div>
-
-            <div class="product">
-                <div class="img-container"><img src="https://i.ibb.co/Xk2Z5BNB/IMG-4967.jpg" alt="Jeans"></div>
-                <h3 class="product-name">CUSTOM JEANS</h3>
-                <p class="price-tag">SH. 1850</p>
-                <select class="size-select"><option selected>32</option></select>
-                <button onclick="addToCart('CUSTOM JEANS', 1850, this)" class="add-to-cart">Add to Bag</button>
-            </div>
-
-            <div class="product">
-                <div class="img-container"><img src="https://i.ibb.co/GQQHPPtk/IMG-4964.jpg" alt="Jeans"></div>
-                <h3 class="product-name">DOUBLE POCKET JEANS</h3>
-                <p class="price-tag">SH. 1850</p>
-                <select class="size-select"><option selected>32</option></select>
-                <button onclick="addToCart('POCKET JEANS', 1850, this)" class="add-to-cart">Add to Bag</button>
-            </div>
-
-            <div class="product">
-                <div class="img-container"><img src="https://i.ibb.co/DHBSQQnC/IMG-4984.jpg" alt="Jeans"></div>
-                <h3 class="product-name">WIDE LEG JEANS</h3>
-                <p class="price-tag">SH. 1950</p>
-                <select class="size-select"><option selected>32</option></select>
-                <button onclick="addToCart('WIDE LEG JEANS', 1950, this)" class="add-to-cart">Add to Bag</button>
-            </div>
-
-            <div class="product">
-                <div class="img-container"><img src="https://i.ibb.co/ympZ0SmP/IMG-4990.jpg" alt="Denim"></div>
-                <h3 class="product-name">LADIES DENIM KIT</h3>
-                <p class="price-tag">SH. 2850</p>
-                <select class="size-select"><option selected>32</option></select>
-                <button onclick="addToCart('LADIES DENIM KIT', 2850, this)" class="add-to-cart">Add to Bag</button>
-            </div>
-
-            <div class="product">
-                <div class="img-container"><img src="https://i.ibb.co/CRHt14j/IMG-4993.jpg" alt="Jacket"></div>
-                <h3 class="product-name">CROPPED JACKET</h3>
-                <p class="price-tag">SH. 1450</p>
-                <select class="size-select"><option selected>32</option></select>
-                <button onclick="addToCart('CROPPED JACKET', 1450, this)" class="add-to-cart">Add to Bag</button>
-            </div>
-
-            <div class="product">
-                <div class="img-container"><img src="https://i.ibb.co/0RCSHX3G/IMG-4977.jpg" alt="Jeans"></div>
-                <h3 class="product-name">HIGH WAIST DENIM</h3>
-                <p class="price-tag">SH. 1850</p>
-                <select class="size-select"><option selected>32</option></select>
-                <button onclick="addToCart('HIGH WAIST DENIM', 1850, this)" class="add-to-cart">Add to Bag</button>
-            </div>
-
-            <div class="product">
-                <div class="img-container"><img src="https://i.ibb.co/XQMN972/IMG-4983.jpg" alt="Jeans"></div>
-                <h3 class="product-name">CUSTOM LADIES JEANS</h3>
-                <p class="price-tag">SH. 1850</p>
-                <select class="size-select"><option selected>32</option></select>
-                <button onclick="addToCart('LADIES JEANS', 1850, this)" class="add-to-cart">Add to Bag</button>
-            </div>
-
-            <div class="product">
-                <div class="img-container"><img src="https://i.ibb.co/GvrKcRs5/IMG-4978.jpg" alt="Denim"></div>
-                <h3 class="product-name">CUSTOM HIGH WAIST</h3>
-                <p class="price-tag">SH. 1950</p>
-                <select class="size-select"><option selected>32</option></select>
-                <button onclick="addToCart('CUSTOM HIGH WAIST', 1950, this)" class="add-to-cart">Add to Bag</button>
-            </div>
-
-            <div class="product">
-                <div class="img-container"><img src="https://i.ibb.co/XBJhYKQ/IMG-4979.jpg" alt="Jeans"></div>
-                <h3 class="product-name">CUSTOM FOLDED JEANS</h3>
-                <p class="price-tag">SH. 1950</p>
-                <select class="size-select"><option selected>32</option></select>
-                <button onclick="addToCart('FOLDED JEANS', 1950, this)" class="add-to-cart">Add to Bag</button>
-            </div>
-
-            <div class="product">
-                <div class="img-container"><img src="https://i.ibb.co/gZGhYSqZ/IMG-4971.jpg" alt="Top"></div>
-                <h3 class="product-name">DENIM TOP</h3>
-                <p class="price-tag">SH. 1550</p>
-                <select class="size-select"><option selected>M</option></select>
-                <button onclick="addToCart('DENIM TOP', 1550, this)" class="add-to-cart">Add to Bag</button>
-            </div>
-
-        </div>
     </main>
 
     <div id="cart-sidebar">
-        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #eee; padding-bottom:15px;">
-            <h2 style="font-size:1.2rem;">YOUR BAG</h2>
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+            <h2>YOUR BAG</h2>
+            <button class="clear-cart-btn" onclick="clearCart()">CLEAR ALL</button>
             <button onclick="toggleCart()" style="background:none; border:none; font-size:24px; cursor:pointer;">&times;</button>
         </div>
-        
         <div id="cart-display-area" style="margin-top:20px;"></div>
-
         <div id="checkout-section">
             <div class="payment-info-card">
-                <h4><i class="fas fa-university"></i> Payment Details</h4>
-                <div class="pay-row">
-                    <span>Paybill:</span> <b>400200</b>
-                    <i class="far fa-copy copy-icon" onclick="copyValue('400200')"></i>
-                </div>
-                <div class="pay-row">
-                    <span>Account:</span> <b>1033884</b>
-                    <i class="far fa-copy copy-icon" onclick="copyValue('1033884')"></i>
-                </div>
+                <div class="pay-row"><span>Paybill:</span> <b>400200</b></div>
+                <div class="pay-row"><span>Acc:</span> <b>1033884</b></div>
             </div>
-
-            <div class="checkout-form">
-                <label style="font-weight: bold; font-size: 12px;">NAME FOR DELIVERY:</label>
-                <input type="text" id="customer-name" placeholder="Full Name" style="width:100%; padding:12px; margin:8px 0; border:1px solid #ddd; border-radius:5px;">
-            </div>
+            <input type="text" id="customer-name" placeholder="Enter Your Full Name" style="width:100%; padding:12px; margin-bottom:10px; border:1px solid #ddd; border-radius:5px;">
             <div id="cart-footer"></div>
         </div>
     </div>
 
     <footer>
         <p>© 2026 GWAPAFFECTION-CLOTHING-LINE</p>
-        <p style="font-size: 12px; color: #555;">Quality Handcrafted Trends</p>
     </footer>
 
     <script>
+        // Full Product Database - All 23 products preserved
+        const products = [
+            { id: 1, name: "GWAPAN CUSTOM PANTS", price: 1800, img: "https://i.ibb.co/NnmNRYDx/image0-1.jpg", type: "pants" },
+            { id: 2, name: "GWAPAN DENIM SHIRT", price: 1200, img: "https://i.ibb.co/Z1kjh3T0/image0.jpg", type: "shirt" },
+            { id: 3, name: "GWAPAN PANTS", price: 1850, img: "https://i.ibb.co/35Mh4KNW/image0-4.jpg", type: "pants" },
+            { id: 4, name: "CUSTOM JACKET", price: 1500, img: "https://i.ibb.co/zhCCyz5Y/image1-2.jpg", type: "jacket" },
+            { id: 5, name: "FULL DENIM KIT", price: 2650, img: "https://i.ibb.co/NXkFmbC/image1.jpg", type: "pants" },
+            { id: 6, name: "GWAPAN GREY PANTS", price: 1850, img: "https://i.ibb.co/Y4z1MZ77/IMG-2849.jpg", type: "pants" },
+            { id: 7, name: "GWAPAN BLACK PANTS", price: 1850, img: "https://i.ibb.co/VYQymxY1/IMG-2434-2.jpg", type: "pants" },
+            { id: 8, name: "CUSTOM DENIM VEST", price: 1000, img: "https://i.ibb.co/KcZw88gM/image1-3.jpg", type: "shirt" },
+            { id: 9, name: "BLUE DENIM VEST", price: 1000, img: "https://i.ibb.co/G3G2v4Rh/image2-2.jpg", type: "shirt" },
+            { id: 10, name: "BLUE DENIM SHIRT", price: 1200, img: "https://i.ibb.co/cSm3X9fQ/image0-5.jpg", type: "shirt" },
+            { id: 11, name: "CUSTOM BLACK PANTS", price: 1850, img: "https://i.ibb.co/MyWK2J4Z/image1-4.jpg", type: "pants" },
+            { id: 12, name: "CUSTOM MILITIA PANTS", price: 1950, img: "https://i.ibb.co/TxkXWTs2/image1-6.jpg", type: "pants" },
+            { id: 13, name: "GWAPAN MILITIA JORTS", price: 1650, img: "https://i.ibb.co/PGt7MN8y/image0-8.jpg", type: "pants" },
+            { id: 14, name: "CUSTOM JEANS", price: 1850, img: "https://i.ibb.co/Xk2Z5BNB/IMG-4967.jpg", type: "pants" },
+            { id: 15, name: "DOUBLE POCKET JEANS", price: 1850, img: "https://i.ibb.co/GQQHPPtk/IMG-4964.jpg", type: "pants" },
+            { id: 16, name: "WIDE LEG JEANS", price: 1950, img: "https://i.ibb.co/DHBSQQnC/IMG-4984.jpg", type: "pants" },
+            { id: 17, name: "LADIES DENIM KIT", price: 2850, img: "https://i.ibb.co/ympZ0SmP/IMG-4990.jpg", type: "pants" },
+            { id: 18, name: "CROPPED JACKET", price: 1450, img: "https://i.ibb.co/CRHt14j/IMG-4993.jpg", type: "jacket" },
+            { id: 19, name: "HIGH WAIST DENIM", price: 1850, img: "https://i.ibb.co/0RCSHX3G/IMG-4977.jpg", type: "pants" },
+            { id: 20, name: "CUSTOM LADIES JEANS", price: 1850, img: "https://i.ibb.co/XQMN972/IMG-4983.jpg", type: "pants" },
+            { id: 21, name: "CUSTOM HIGH WAIST", price: 1950, img: "https://i.ibb.co/GvrKcRs5/IMG-4978.jpg", type: "pants" },
+            { id: 22, name: "CUSTOM FOLDED JEANS", price: 1950, img: "https://i.ibb.co/XBJhYKQ/IMG-4979.jpg", type: "pants" },
+            { id: 23, name: "DENIM TOP", price: 1550, img: "https://i.ibb.co/gZGhYSqZ/IMG-4971.jpg", type: "shirt" }
+        ];
+
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            products.forEach(p => {
+                const isPants = p.type === 'pants';
+                grid.innerHTML += `
+                    <div class="product" data-type="${p.type}">
+                        <div class="img-container">
+                            <img src="${p.img}" alt="${p.name}">
+                            <div class="bespoke-panel">
+                                <p class="panel-title">Bespoke Customization</p>
+                                <div class="panel-grid">
+                                    ${isPants ? `
+                                        <div><label>Waist</label><select class="waist-sel">${genRange(27,37)}</select></div>
+                                        <div><label>Length</label><select class="len-sel">${genRange(30,45)}</select></div>
+                                        <div><label>Leg Opening</label><select class="leg-sel">${genRange(10,15)}</select></div>
+                                        <div><label>Threading</label><input type="text" class="thread-in" placeholder="Color"></div>
+                                    ` : `
+                                        <div class="full-row"><label>Size</label><select class="std-size"><option>S</option><option selected>M</option><option>L</option><option>XL</option></select></div>
+                                    `}
+                                    <div class="full-row"><label>Special Instructions</label><textarea class="note-in" placeholder="Add distress, high-rise, etc."></textarea></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-name">${p.name}</h3>
+                            <p class="price-tag">SH ${p.price}</p>
+                            <button onclick="addToCart(this, '${p.name}', ${p.price})" class="add-to-cart">Add to Bag</button>
+                        </div>
+                    </div>`;
+            });
+        }
+
+        function genRange(start, end) {
+            let res = '';
+            for(let i=start; i<=end; i++) res += `<option>${i}</option>`;
+            return res;
+        }
+
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
 
         function toggleCart() {
@@ -408,96 +212,92 @@
             sidebar.style.right = (sidebar.style.right === '0px') ? '-450px' : '0px';
         }
 
-        function copyValue(val) {
-            navigator.clipboard.writeText(val);
-            alert("Copied: " + val);
-        }
+        function addToCart(btn, name, price) {
+            const p = btn.closest('.product');
+            const img = p.querySelector('img').src;
+            const note = p.querySelector('.note-in').value || "None";
+            let details = "";
 
-        function addToCart(name, price, button) {
-            const productDiv = button.closest('.product');
-            const size = productDiv.querySelector('.size-select').value;
-            const img = productDiv.querySelector('img').src;
-            const existing = cart.find(item => item.name === name && item.size === size);
-            if (existing) {
-                existing.quantity += 1;
-                existing.total = existing.quantity * price;
+            if(p.dataset.type === 'pants') {
+                const w = p.querySelector('.waist-sel').value;
+                const l = p.querySelector('.len-sel').value;
+                const leg = p.querySelector('.leg-sel').value;
+                const thread = p.querySelector('.thread-in').value || "Standard";
+                details = `W:${w} L:${l} Leg:${leg}" Thread:${thread} | Notes: ${note}`;
             } else {
-                cart.push({ name, price, quantity: 1, size: size, total: price, image: img });
+                const sz = p.querySelector('.std-size').value;
+                details = `Size: ${sz} | Notes: ${note}`;
             }
+
+            cart.push({ name, price, details, image: img });
             saveAndUpdate();
             toggleCart();
             renderCartItems();
         }
 
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            saveAndUpdate();
-            renderCartItems();
-        }
-
         function saveAndUpdate() {
             localStorage.setItem('cart', JSON.stringify(cart));
-            document.getElementById('cart-count').innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
+            document.getElementById('cart-count').innerText = cart.length;
+        }
+
+        function clearCart() {
+            if(confirm("Empty your bag?")) {
+                cart = [];
+                saveAndUpdate();
+                renderCartItems();
+            }
         }
 
         function renderCartItems() {
             const display = document.getElementById('cart-display-area');
             const footer = document.getElementById('cart-footer');
-            const checkout = document.getElementById('checkout-section');
             display.innerHTML = '';
-
-            if (cart.length === 0) {
-                display.innerHTML = '<p style="text-align:center; margin-top:40px; color:#999;">Your bag is empty.</p>';
-                checkout.style.display = 'none';
-                return;
-            }
-
-            checkout.style.display = 'block';
             let grandTotal = 0;
+
             cart.forEach((item, index) => {
-                grandTotal += item.total;
+                grandTotal += item.price;
                 display.innerHTML += `
-                    <div style="display:flex; align-items:center; margin-bottom:15px; border-bottom:1px solid #f9f9f9; padding-bottom:10px;">
-                        <img src="${item.image}" style="width:60px; height:60px; object-fit:cover; margin-right:15px; border-radius:5px;">
+                    <div style="display:flex; align-items:center; margin-bottom:15px; font-size:11px; border-bottom:1px solid #eee; padding-bottom:10px;">
+                        <img src="${item.image}" style="width:50px; height:50px; border-radius:5px; margin-right:10px; object-fit:cover;">
                         <div style="flex-grow:1;">
-                            <h4 style="font-size:12px; margin:0;">${item.name}</h4>
-                            <p style="font-size:11px; color:gray;">Size: ${item.size} | Qty: ${item.quantity}</p>
-                            <p style="font-size:13px; color:maroon; font-weight:bold;">SH ${item.total}</p>
+                            <b style="text-transform:uppercase;">${item.name}</b><br>
+                            <span style="color:#666;">${item.details}</span><br>
+                            <span style="color:var(--primary); font-weight:bold;">SH ${item.price}</span>
                         </div>
-                        <button onclick="removeFromCart(${index})" style="border:none; color:#ccc; cursor:pointer; background:none; font-size:20px;">&times;</button>
+                        <button onclick="removeFromCart(${index})" style="border:none; background:none; font-size:18px; cursor:pointer;">&times;</button>
                     </div>`;
             });
 
             footer.innerHTML = `
-                <div style="display:flex; justify-content:space-between; margin-top:20px; font-size:1.2rem; font-weight:bold;">
+                <div style="display:flex; justify-content:space-between; font-weight:bold; margin:15px 0; color:var(--dark);">
                     <span>TOTAL:</span> <span>SH ${grandTotal}</span>
                 </div>
-                <button onclick="sendOrderWhatsApp(${grandTotal})" style="width:100%; padding:15px; background:#25D366; color:white; border:none; border-radius:5px; cursor:pointer; font-weight:bold; margin-top:20px;">
-                    <i class="fab fa-whatsapp"></i> COMPLETE ORDER ON WHATSAPP
-                </button>
-                <p>THANK YOU FOR SHOPPING WITH GWAPAFFECTION! .</p>
-            `;
+                <button onclick="sendOrderWhatsApp(${grandTotal})" style="width:100%; padding:15px; background:#25D366; color:white; border:none; border-radius:5px; font-weight:bold; cursor:pointer;">
+                    COMPLETE ORDER ON WHATSAPP
+                </button>`;
         }
+
+        function removeFromCart(i) { cart.splice(i, 1); saveAndUpdate(); renderCartItems(); }
 
         function sendOrderWhatsApp(total) {
             const name = document.getElementById('customer-name').value;
             if (!name) { alert("Please enter your name."); return; }
-            let msg = `👤 *CUSTOMER:* ${name.toUpperCase()}\n\n`;
-            cart.forEach((item, i) => { msg += `• ${item.name} (${item.size}) x${item.quantity}\n`; });
-            msg += `\n💰 *TOTAL: SH ${total}*\n💳 *PAYMENT:* Paybill 400200 | Acc 1033884`;
+            let msg = `👤 *CUSTOMER:* ${name.toUpperCase()}\n`;
+            msg += `🕒 _Ready in 24 hours_\n\n`;
+            cart.forEach(item => { msg += `✅ *${item.name}*\n   └ ${item.details}\n\n`; });
+            msg += `💰 *TOTAL: SH ${total}*\n💳 Paybill: 400200 | Acc: 1033884`;
             window.open(`https://wa.me/254797389370?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
         function filterProducts() {
-            const input = document.getElementById('productSearch').value.toUpperCase();
-            const products = document.getElementsByClassName('product');
-            Array.from(products).forEach(p => {
+            const val = document.getElementById('productSearch').value.toUpperCase();
+            document.querySelectorAll('.product').forEach(p => {
                 const name = p.querySelector('.product-name').innerText;
-                p.classList.toggle('hidden', !name.toUpperCase().includes(input));
+                p.style.display = name.toUpperCase().includes(val) ? "flex" : "none";
             });
         }
-        
-        window.onload = function() { saveAndUpdate(); renderCartItems(); };
+
+        window.onload = () => { renderProducts(); saveAndUpdate(); renderCartItems(); };
     </script>
 </body>
 </html>
