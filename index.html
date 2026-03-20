@@ -102,20 +102,20 @@
     </nav>
 
     <div class="promo-container">
-        <div class="shiny-advert">✨ GWAPAN CUSTOMIZATION ACTIVE ✨</div>
-        <div class="delivery-note">Available 1 day after placing your order</div>
+        <div class="shiny-advert">✨ GWAPAN CUSTOMIZATION  ✨</div>
+        <div class="delivery-note">Products Available 1 day after placing your order</div>
     </div>
 
     <header class="home-header">
         <h1>GWAPAFFECTION</h1>
-        <p>PREMIUM HANDCRAFTED DENIM.</p>
+        <p>PREMIUM .HANDCRAFTED. DENIM.</p>
     </header>
 
     <main>
         <h2 class="section-title">DENIM COLLECTION</h2>
         <div class="product-list" id="productGrid">
             
-            </div>
+        </div>
     </main>
 
     <div id="cart-sidebar">
@@ -140,7 +140,7 @@
     </footer>
 
     <script>
-        // Full Product Database - All 23 products preserved
+        // Full Product Database - Including the new GWAPAN JORTS
         const products = [
             { id: 1, name: "GWAPAN CUSTOM PANTS", price: 1800, img: "https://i.ibb.co/NnmNRYDx/image0-1.jpg", type: "pants" },
             { id: 2, name: "GWAPAN DENIM SHIRT", price: 1200, img: "https://i.ibb.co/Z1kjh3T0/image0.jpg", type: "shirt" },
@@ -164,11 +164,13 @@
             { id: 20, name: "CUSTOM LADIES JEANS", price: 1850, img: "https://i.ibb.co/XQMN972/IMG-4983.jpg", type: "pants" },
             { id: 21, name: "CUSTOM HIGH WAIST", price: 1950, img: "https://i.ibb.co/GvrKcRs5/IMG-4978.jpg", type: "pants" },
             { id: 22, name: "CUSTOM FOLDED JEANS", price: 1950, img: "https://i.ibb.co/XBJhYKQ/IMG-4979.jpg", type: "pants" },
-            { id: 23, name: "DENIM TOP", price: 1550, img: "https://i.ibb.co/gZGhYSqZ/IMG-4971.jpg", type: "shirt" }
+            { id: 23, name: "DENIM TOP", price: 1550, img: "https://i.ibb.co/gZGhYSqZ/IMG-4971.jpg", type: "shirt" },
+            { id: 24, name: "GWAPAN JORTS", price: 1750, img: "https://i.ibb.co/Nb0W0D8/Photoroom-20260319-205050.jpg", type: "pants" }
         ];
 
         function renderProducts() {
             const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
             products.forEach(p => {
                 const isPants = p.type === 'pants';
                 grid.innerHTML += `
@@ -180,7 +182,7 @@
                                 <div class="panel-grid">
                                     ${isPants ? `
                                         <div><label>Waist</label><select class="waist-sel">${genRange(27,37)}</select></div>
-                                        <div><label>Length</label><select class="len-sel">${genRange(30,45)}</select></div>
+                                        <div><label>Length</label><select class="len-sel">${genRange(10,45)}</select></div>
                                         <div><label>Leg Opening</label><select class="leg-sel">${genRange(10,15)}</select></div>
                                         <div><label>Threading</label><input type="text" class="thread-in" placeholder="Color"></div>
                                     ` : `
