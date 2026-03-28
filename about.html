@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>THE BRAND | GWAPAFFECTION</title>
+    <style>
+        :root {
+            --primary: #800000;
+            --dark: #000;
+            --light: #f4f4f4;
+            --white: #ffffff;
+            --accent: #d4af37;
+            --transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Times New Roman', Times, serif; background-color: var(--light); color: #333; overflow-x: hidden; }
+
+        /* Navbar (Matches Index) */
+        .navbar { background-color: var(--dark); padding: 15px 0; position: fixed; top: 0; width: 100%; z-index: 1000; border-bottom: 2px solid var(--primary); }
+        .navbar .container { width: 90%; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: bold; color: var(--primary); text-decoration: none; letter-spacing: 2px; text-transform: uppercase; }
+        .nav-links { list-style: none; display: flex; gap: 20px; }
+        .nav-links a { color: var(--light); text-decoration: none; font-weight: bold; font-size: 14px; text-transform: uppercase; cursor: pointer; }
+
+        /* BRAND HERO SECTION (With New Background) */
+        .brand-hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            /* USE THE NEW IMAGE HERE (Image 9) */
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url('https://i.ibb.co/Jbznkqy/Photoroom-20260328-140014.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 60px;
+            border-bottom: 5px solid var(--primary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        /* The Huge Heading */
+        .brand-heading-group h1 {
+            font-size: clamp(4rem, 15vw, 10rem);
+            letter-spacing: 20px;
+            text-transform: uppercase;
+            margin-bottom: -15px; /* Blend the next line */
+            font-weight: 900;
+            color: var(--white);
+            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+        
+        .brand-heading-group h2 {
+            font-size: 1.2rem;
+            letter-spacing: 6px;
+            color: var(--accent);
+            text-transform: uppercase;
+            font-weight: normal;
+        }
+
+        /* Story Manifesto Grid (Layered over new BG) */
+        .manifesto-block {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 900px;
+            background: var(--dark);
+            padding: 40px 60px;
+            border-top: 4px solid var(--primary);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.4);
+            border-radius: 4px;
+            color: #ddd;
+            text-align: center;
+            z-index: 5;
+        }
+        
+        .manifesto-block p {
+            font-style: italic;
+            font-size: 1.15rem;
+            margin-bottom: 25px;
+        }
+
+        .nai-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 8px 15px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 50px;
+        }
+
+        /* --- Story Details Section --- */
+        .details-section { padding: 150px 20px 100px; } /* Space for manifesto */
+        .container { width: 90%; max-width: 1100px; margin: 0 auto; }
+        
+        .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .text-box h3 { color: var(--primary); font-size: 2.2rem; margin-bottom: 25px; letter-spacing: 3px; text-transform: uppercase; border-left: 4px solid var(--primary); padding-left: 20px; }
+        .text-box p { font-size: 1.1rem; line-height: 1.9; color: #444; margin-bottom: 20px; }
+
+        .image-stack { position: relative; }
+        .main-img { width: 100%; border-radius: 2px; box-shadow: 25px 25px 0px var(--primary); }
+        .sub-img { position: absolute; width: 65%; bottom: -50px; left: -50px; border: 8px solid var(--white); border-radius: 2px; box-shadow: var(--shadow); }
+
+        /* The Visual Archive */
+        .archive-section { background: var(--white); border-top: 1px solid #eee; border-bottom: 1px solid #eee; padding: 100px 20px; }
+        .archive-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-top: 60px; }
+        .archive-item { position: relative; overflow: hidden; height: 350px; cursor: crosshair; border-radius: 3px; }
+        .archive-item img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+        .archive-item:hover img { transform: scale(1.1); filter: contrast(120%); }
+        .archive-tag { position: absolute; bottom: 20px; left: 20px; background: rgba(0,0,0,0.8); color: var(--accent); padding: 5px 12px; font-size: 9px; font-weight: bold; letter-spacing: 1px; }
+
+        /* Final CTA */
+        .cta-banner { background: var(--dark); color: white; padding: 100px 20px; text-align: center; border-top: 5px solid var(--primary); }
+        .cta-btn { background: var(--primary); color: white; padding: 20px 50px; border: none; font-weight: bold; letter-spacing: 3px; cursor: pointer; transition: 0.3s; text-transform: uppercase; border-radius: 2px; font-size: 14px; }
+        .cta-btn:hover { background: var(--white); color: var(--dark); transform: scale(1.05); }
+
+        footer { background: var(--dark); color: #666; padding: 50px 20px; text-align: center; font-size: 12px; border-top: 1px solid #222; }
+        footer a { color: var(--accent); text-decoration: none; }
+
+        @media (max-width: 992px) {
+            .split-grid, .archive-grid { grid-template-columns: 1fr; }
+            .brand-heading-group h1 { font-size: 6rem; letter-spacing: 10px; }
+            .sub-img { display: none; }
+            .manifesto-block { width: 95%; padding: 30px; }
+            .archive-item { height: 450px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">Mavazi</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Collection</a></li>
+                <li><a href="#" style="color: var(--accent);">About Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="brand-hero">
+        <div class="container">
+            <div class="brand-heading-group">
+                <h1>GWAPAFFECTION</h1>
+                <h2>Architectural Denim • Nairobi Artisan</h2>
+            </div>
+        </div>
+        
+        <div class="manifesto-block">
+            <p>“We don't create fashion. We engineer confidence through handcrafted denim architecture, designed to blend raw grit with premium luxury.”</p>
+            <div class="nai-badge"><i class="fas fa-map-marker-alt"></i> MADE IN NAIROBI</div>
+        </div>
+    </div>
+
+    <main class="details-section">
+        <div class="container split-grid">
+            <div class="image-stack">
+                <img src="https://i.ibb.co/CppRvn11/Photoroom-20260325-222904.jpg" class="main-img" alt="Gwapan Custom Camo">
+                <img src="https://i.ibb.co/vvPRHgGc/IMG-6091.jpg" class="sub-img" alt="Khaki Set Details">
+            </div>
+            <div class="text-box">
+                <h3>THE ORIGIN STORY</h3>
+                <p>Born in the vibrant, creative pulse of Nairobi, GWAPAFFECTION is where street grit meets artisan precision. We don't believe in "fast fashion." Every garment we create is a required exercise in slow, deliberate craft, manual distressing, and architectural paneling.</p>
+                <p>Every gold stitch, every rip, and every unique panel is executed by local Nairobi artisans who understand that "custom" means a required commitment to one-of-one artistry. When you wear Gwapan, you are wearing an authentic story of Kenyan identity and impeccable craft.</p>
+            </div>
+        </div>
+    </main>
+    
+    <section class="archive-section">
+        <div class="container">
+            <h2 style="text-align: center; text-transform: uppercase; letter-spacing: 6px; margin-bottom: 50px; font-size: 1.5rem; color: #222;">Visual Archive</h2>
+            <div class="archive-grid">
+                <div class="archive-item">
+                    <img src="https://i.ibb.co/nsfmJFMb/Photoroom-20260325-212157.jpg" alt="Camo Pants">
+                    <div class="archive-tag">01 RAW TEXTURE</div>
+                </div>
+                <div class="archive-item">
+                    <img src="https://i.ibb.co/YwYQxs5/Photoroom-20260325-212304.jpg" alt="Camo V2">
+                    <div class="archive-tag">02 BESPOKE CUT</div>
+                </div>
+                <div class="archive-item">
+                    <img src="https://i.ibb.co/yF8RqB09/Photoroom-20260323-205926.jpg" alt="Camo Jorts">
+                    <div class="archive-tag">03 HAND FINISHED</div>
+                </div>
+                <div class="archive-item">
+                    <img src="https://i.ibb.co/Lh1S2fRK/Photoroom-20260323-205427.jpg" alt="Khaki Set">
+                    <div class="archive-tag">04 NAIROBI MADE</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-banner">
+        <div class="container">
+            <h3 style="font-size: 2.5rem; margin-bottom: 15px; letter-spacing: 3px; text-transform: uppercase;">Build Your Fit</h3>
+            <p style="margin-bottom: 40px; color: #777; text-transform: uppercase; letter-spacing: 2px;">Handcrafted & Delivered in 24 Hours</p>
+            <button class="cta-btn" onclick="window.location.href='index.html'">Shop the Collection</button>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 GWAPAFFECTION-CLOTHING-LINE | NAIROBI, KENYA</p>
+        <p>Follow the movement: <a href="https://www.instagram.com/gwapaffection/" target="_blank">@gwapaffection</a></p>
+    </footer>
+
+</body>
+</html>

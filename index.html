@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>GWAPAFFECTION-CLOTHING</title>
+    <title>GWAPAFFECTION-CLOTHING | PREMIUM DENIM</title>
     <style>
         :root {
             --primary: #800000;
+            --whatsapp: #25D366;
             --dark: #000;
             --light: #f4f4f4;
             --white: #ffffff;
@@ -20,72 +20,56 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Times New Roman', Times, serif; background-color: var(--light); line-height: 1.6; overflow-x: hidden; }
 
-        /* --- Navbar --- */
-        .navbar { background-color: var(--dark); padding: 15px 0; position: fixed; top: 0; width: 100%; z-index: 1000; }
+        .navbar { background-color: var(--dark); padding: 15px 0; position: fixed; top: 0; width: 100%; z-index: 1000; border-bottom: 2px solid var(--primary); }
         .navbar .container { width: 90%; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 24px; font-weight: bold; color: var(--primary); text-decoration: none; letter-spacing: 2px; text-transform: uppercase; }
-        .nav-search input { padding: 8px 15px; border-radius: 20px; border: none; outline: none; width: 180px; background: #222; color: #fff; }
-        .nav-links a { color: var(--light); text-decoration: none; font-weight: bold; cursor: pointer; }
+        .nav-search input { padding: 8px 15px; border-radius: 20px; border: none; outline: none; width: 180px; background: #222; color: #fff; border: 1px solid #444; }
+        .nav-links a { color: var(--light); text-decoration: none; font-weight: bold; cursor: pointer; font-size: 14px; }
 
-        /* --- Animated Delivery Note & Promo --- */
+        .filter-container { width: 90%; max-width: 1200px; margin: 20px auto; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .filter-btn { padding: 10px 20px; border: 1px solid #ddd; background: white; color: #333; cursor: pointer; font-weight: bold; border-radius: 5px; transition: var(--transition); font-size: 12px; text-transform: uppercase; }
+        .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
         .promo-container { width: 100%; display: flex; flex-direction: column; align-items: center; margin-top: 100px; gap: 10px; }
-        .shiny-advert { background: linear-gradient(90deg, #800000, #ff0000, #800000); background-size: 200% auto; color: white; padding: 10px 25px; font-weight: bold; border-radius: 50px; animation: moveShine 3s linear infinite; font-size: 13px; }
-        
-        .delivery-note { 
-            color: var(--primary); font-weight: bold; font-size: 0.9rem;
-            padding: 5px 15px; border: 1px solid var(--primary); border-radius: 4px;
-            animation: pulseGlow 2s infinite ease-in-out;
-        }
+        .shiny-advert { background: linear-gradient(90deg, #800000, #ff0000, #800000); background-size: 200% auto; color: white; padding: 10px 25px; font-weight: bold; border-radius: 50px; animation: moveShine 3s linear infinite; font-size: 12px; }
+        .delivery-note { color: var(--primary); font-weight: bold; font-size: 0.85rem; padding: 5px 15px; border: 1px solid var(--primary); border-radius: 4px; animation: pulseGlow 2s infinite ease-in-out; background: #fff; }
 
         @keyframes moveShine { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
-        @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 5px rgba(128,0,0,0.2); transform: scale(1); } 50% { box-shadow: 0 0 15px rgba(128,0,0,0.5); transform: scale(1.02); } }
+        @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 5px rgba(128,0,0,0.1); transform: scale(1); } 50% { box-shadow: 0 0 15px rgba(128,0,0,0.3); transform: scale(1.02); } }
 
-        .home-header { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i.ibb.co/xq1GPZ5m/image5-2.png'); background-size: cover; background-position: center; color: var(--white); padding: 80px 20px 40px; text-align: center; }
+        .home-header { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i.ibb.co/xq1GPZ5m/image5-2.png'); background-size: cover; background-position: center; color: var(--white); padding: 70px 20px; text-align: center; }
 
-        /* --- Product Grid --- */
-        .section-title { text-align: center; color: var(--primary); margin: 40px 0 10px; font-size: 2rem; letter-spacing: 3px; }
-        .product-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; padding: 20px 0; max-width: 1200px; margin: 0 auto; width: 90%; }
-
-        .product { background: var(--white); border-radius: 12px; box-shadow: var(--shadow); position: relative; overflow: hidden; display: flex; flex-direction: column; padding: 15px; }
+        .section-title { text-align: center; color: var(--primary); margin: 30px 0 10px; font-size: 1.8rem; letter-spacing: 4px; text-transform: uppercase; }
+        .product-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; padding: 20px 0; max-width: 1200px; margin: 0 auto; width: 95%; }
         
-        .img-container { width: 100%; height: 350px; background: #fff; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; }
-        .img-container img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .product { background: var(--white); border-radius: 8px; box-shadow: var(--shadow); position: relative; overflow: hidden; display: flex; flex-direction: column; padding: 12px; border: 1px solid #eee; }
+        .img-container { width: 100%; height: 320px; background: #fff; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; }
+        .img-container img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.5s; }
+        .product:hover img { transform: scale(1.05); }
 
-        /* --- The Hidden Custom Panel --- */
-        .bespoke-panel {
-            position: absolute; bottom: -100%; left: 0; width: 100%; height: 85%;
-            background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(5px);
-            transition: var(--transition); padding: 15px; display: flex; flex-direction: column;
-            border-top: 3px solid var(--primary); z-index: 5;
-        }
+        .bespoke-panel { position: absolute; bottom: -100%; left: 0; width: 100%; height: 85%; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(5px); transition: var(--transition); padding: 15px; display: flex; flex-direction: column; border-top: 3px solid var(--primary); z-index: 5; }
         .product:hover .bespoke-panel { bottom: 0; }
-
-        .panel-title { font-size: 12px; font-weight: bold; color: var(--primary); text-transform: uppercase; margin-bottom: 10px; border-bottom: 1px solid #ddd; padding-bottom: 5px; }
-        .panel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        .panel-grid label { font-size: 10px; font-weight: bold; color: #555; }
-        .panel-grid select, .panel-grid input, .panel-grid textarea { width: 100%; padding: 5px; font-size: 11px; border: 1px solid #ccc; border-radius: 3px; margin-top: 2px; }
+        .panel-title { font-size: 11px; font-weight: bold; color: var(--primary); text-transform: uppercase; margin-bottom: 8px; border-bottom: 1px solid #eee; padding-bottom: 4px; }
+        .panel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .panel-grid label { font-size: 10px; font-weight: bold; color: #666; }
+        .panel-grid select, .panel-grid input, .panel-grid textarea { width: 100%; padding: 4px; font-size: 11px; border: 1px solid #ddd; border-radius: 3px; }
         .full-row { grid-column: span 2; }
         
-        .product-info { padding: 15px 0 0; text-align: center; }
-        .product-name { font-size: 0.9rem; font-weight: bold; text-transform: uppercase; color: #333; margin-bottom: 5px; height: 40px; }
-        .price-tag { color: var(--primary); font-weight: bold; font-size: 1.1rem; }
-
-        .add-to-cart { background-color: var(--dark); color: var(--white); border: none; padding: 12px; cursor: pointer; border-radius: 5px; font-weight: bold; width: 100%; transition: var(--transition); margin-top: 10px; }
+        .product-info { padding: 12px 0 0; text-align: center; }
+        .product-name { font-size: 0.85rem; font-weight: bold; text-transform: uppercase; color: #222; height: 35px; overflow: hidden; }
+        .price-tag { color: var(--primary); font-weight: bold; font-size: 1.1rem; margin: 5px 0; }
+        .add-to-cart { background-color: var(--dark); color: var(--white); border: none; padding: 10px; cursor: pointer; border-radius: 4px; font-weight: bold; width: 100%; transition: var(--transition); font-size: 12px; }
         .add-to-cart:hover { background: var(--primary); }
 
-        /* --- Sidebar & UI --- */
-        #cart-sidebar { position: fixed; right: -450px; top: 0; width: 100%; max-width: 400px; height: 100%; background: var(--white); transition: 0.4s ease; z-index: 2000; padding: 25px; box-shadow: -10px 0 30px rgba(0,0,0,0.2); overflow-y: auto; }
-        .payment-info-card { background: #fffafa; border: 1px dashed var(--accent); padding: 15px; border-radius: 10px; margin: 15px 0; }
-        .pay-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-size: 13px; }
-        
-        .clear-cart-btn { background: #eee; border: none; padding: 5px 10px; border-radius: 4px; font-size: 11px; cursor: pointer; color: #666; }
-        .clear-cart-btn:hover { background: #ffcccc; color: red; }
+        #cart-sidebar { position: fixed; right: -450px; top: 0; width: 100%; max-width: 400px; height: 100%; background: var(--white); transition: 0.4s ease; z-index: 2000; padding: 25px; box-shadow: -10px 0 30px rgba(0,0,0,0.15); overflow-y: auto; }
+        .whatsapp-btn { background: var(--whatsapp); color: white; width: 100%; padding: 15px; border: none; border-radius: 6px; font-weight: bold; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; margin-top: 10px; }
+        .whatsapp-btn:hover { background: #128C7E; transform: translateY(-2px); }
+        .confirm-reminder { background: #fff5f5; color: var(--primary); font-size: 11px; font-weight: bold; padding: 8px; border-radius: 4px; text-align: center; margin-bottom: 15px; border: 1px solid #ffeded; }
 
-        footer { background-color: var(--dark); color: var(--white); padding: 40px 20px; text-align: center; margin-top: 60px; }
-        .hidden { display: none; }
+        footer { background-color: var(--dark); color: var(--white); padding: 40px 20px; text-align: center; margin-top: 60px; font-size: 12px; border-top: 3px solid var(--primary); }
 
         @media (max-width: 992px) { .product-list { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 600px) { .product-list { grid-template-columns: 1fr; } }
+        @media (max-width: 600px) { .product-list { grid-template-columns: 1fr; } #cart-sidebar { max-width: 100%; } }
     </style>
 </head>
 
@@ -94,7 +78,7 @@
     <nav class="navbar">
         <div class="container">
             <a href="#" class="logo">Mavazi</a>
-            <div class="nav-search"><input type="text" id="productSearch" placeholder="Search..." onkeyup="filterProducts()"></div>
+            <div class="nav-search"><input type="text" id="productSearch" placeholder="Search Denim..." onkeyup="filterProducts()"></div>
             <ul class="nav-links">
                 <li><a onclick="toggleCart()"><i class="fas fa-shopping-bag"></i> BAG (<span id="cart-count">0</span>)</a></li>
             </ul>
@@ -102,51 +86,64 @@
     </nav>
 
     <div class="promo-container">
-        <div class="shiny-advert">✨ GWAPAN CUSTOMIZATION  ✨</div>
-        <div class="delivery-note">Products Available 1 day after placing your order</div>
+        <div class="shiny-advert">✨ PREMIUM HANDCRAFTED CUSTOMS ✨</div>
+        <div class="delivery-note">Handmade & Ready in 24 Hours</div>
     </div>
 
     <header class="home-header">
         <h1>GWAPAFFECTION</h1>
-        <p>PREMIUM .HANDCRAFTED. DENIM.</p>
+           <h2>MADE IN NAIROBI</h2>
+        <p>THE ART OF DENIM CUSTOMIZATION</p>
     </header>
 
     <main>
-        <h2 class="section-title">DENIM COLLECTION</h2>
-        <div class="product-list" id="productGrid">
-            
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="applyFilter('all', this)">ALL ITEMS</button>
+            <button class="filter-btn" onclick="applyFilter('pants', this)">PANTS & JORTS</button>
+            <button class="filter-btn" onclick="applyFilter('shirt', this)">SHIRTS & TOPS</button>
+            <button class="filter-btn" onclick="applyFilter('jacket', this)">JACKETS</button>
         </div>
+
+        <h2 class="section-title" id="cat-label">GWAPAN-COLLECTION</h2>
+        <div class="product-list" id="productGrid"></div>
     </main>
 
     <div id="cart-sidebar">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-            <h2>YOUR BAG</h2>
-            <button class="clear-cart-btn" onclick="clearCart()">CLEAR ALL</button>
-            <button onclick="toggleCart()" style="background:none; border:none; font-size:24px; cursor:pointer;">&times;</button>
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 2px solid var(--light); padding-bottom: 10px;">
+            <h2 style="font-size: 18px;">YOUR SELECTION</h2>
+            <button onclick="toggleCart()" style="background:none; border:none; font-size:28px; cursor:pointer;">&times;</button>
         </div>
+        
         <div id="cart-display-area" style="margin-top:20px;"></div>
-        <div id="checkout-section">
-            <div class="payment-info-card">
-                <div class="pay-row"><span>Paybill:</span> <b>400200</b></div>
-                <div class="pay-row"><span>Acc:</span> <b>1033884</b></div>
-            </div>
-            <input type="text" id="customer-name" placeholder="Enter Your Full Name" style="width:100%; padding:12px; margin-bottom:10px; border:1px solid #ddd; border-radius:5px;">
+        
+        <div id="checkout-section" style="display:none;">
+            <div class="confirm-reminder">⚠️ Please enter your details before finishing on WhatsApp</div>
+            
+            <label style="font-size: 11px; font-weight: bold; color: #444;">DELIVERY NAME</label>
+            <input type="text" id="customer-name" placeholder="Enter Full Name" style="width:100%; padding:12px; margin: 5px 0 10px; border:1px solid #ddd; border-radius:5px;">
+            
+            <label style="font-size: 11px; font-weight: bold; color: #444;">DELIVERY LOCATION</label>
+            <input type="text" id="delivery-location" placeholder="e.g. Nairobi CBD, Estate Name" style="width:100%; padding:12px; margin: 5px 0 15px; border:1px solid #ddd; border-radius:5px;">
+            
             <div id="cart-footer"></div>
         </div>
     </div>
 
     <footer>
-        <p>© 2026 GWAPAFFECTION-CLOTHING-LINE</p>
+        <p>© 2026 GWAPAFFECTION-CLOTHING-LINE | NAIROBI, KENYA</p>
+            <p>Handcrafted Denim Customs | Follow us on <a href="https://www.instagram.com/gwapaffection/" target="_blank" style="color: var(--accent); text-decoration: none;">Instagram</a></p>
+            <p>Contact: <a href="tel:254737610804" style="color: var(--accent); text-decoration: none;">0737610804</a> | <a href="https://wa.me/254737610804" style="color: var(--accent); text-decoration: none;">WhatsApp</a></p>
     </footer>
 
     <script>
-        // Full Product Database - Including the new GWAPAN JORTS
         const products = [
+            { id: 31, name: "GWAPAN FULL DENIM SET", price: 3200, img: "https://i.ibb.co/tGqXtGf/IMG-6172.jpg", type: "pants" },
+            { id: 25, name: "CAMO VEST", price: 1200, img: "https://i.ibb.co/CppRvn11/Photoroom-20260325-222904.jpg", type: "shirt" },
+            { id: 26, name: "GWAPAN CAMO PANTS", price: 1850, img: "https://i.ibb.co/nsfmJFMb/Photoroom-20260325-212157.jpg", type: "pants" },
+            { id: 28, name: "KHAKI SET", price: 2850, img: "https://i.ibb.co/vvPRHgGc/IMG-6091.jpg", type: "jacket" },
+            { id: 30, name: "CAMO PANTS V2", price: 1950, img: "https://i.ibb.co/YwYQxs5/Photoroom-20260325-212304.jpg", type: "pants" },
             { id: 1, name: "GWAPAN CUSTOM PANTS", price: 1800, img: "https://i.ibb.co/NnmNRYDx/image0-1.jpg", type: "pants" },
-            { id: 2, name: "GWAPAN DENIM SHIRT", price: 1200, img: "https://i.ibb.co/Z1kjh3T0/image0.jpg", type: "shirt" },
-            { id: 3, name: "GWAPAN PANTS", price: 1850, img: "https://i.ibb.co/35Mh4KNW/image0-4.jpg", type: "pants" },
             { id: 4, name: "CUSTOM JACKET", price: 1500, img: "https://i.ibb.co/zhCCyz5Y/image1-2.jpg", type: "jacket" },
-            { id: 5, name: "FULL DENIM KIT", price: 2650, img: "https://i.ibb.co/NXkFmbC/image1.jpg", type: "pants" },
             { id: 6, name: "GWAPAN GREY PANTS", price: 1850, img: "https://i.ibb.co/Y4z1MZ77/IMG-2849.jpg", type: "pants" },
             { id: 7, name: "GWAPAN BLACK PANTS", price: 1850, img: "https://i.ibb.co/VYQymxY1/IMG-2434-2.jpg", type: "pants" },
             { id: 8, name: "CUSTOM DENIM VEST", price: 1000, img: "https://i.ibb.co/KcZw88gM/image1-3.jpg", type: "shirt" },
@@ -168,46 +165,50 @@
             { id: 24, name: "GWAPAN JORTS", price: 1750, img: "https://i.ibb.co/Nb0W0D8/Photoroom-20260319-205050.jpg", type: "pants" }
         ];
 
-        function renderProducts() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        function renderProducts(cat = 'all') {
             const grid = document.getElementById('productGrid');
             grid.innerHTML = '';
-            products.forEach(p => {
+            const list = cat === 'all' ? products : products.filter(p => p.type === cat);
+            list.forEach(p => {
                 const isPants = p.type === 'pants';
                 grid.innerHTML += `
                     <div class="product" data-type="${p.type}">
                         <div class="img-container">
                             <img src="${p.img}" alt="${p.name}">
                             <div class="bespoke-panel">
-                                <p class="panel-title">Bespoke Customization</p>
+                                <p class="panel-title">Bespoke Options</p>
                                 <div class="panel-grid">
                                     ${isPants ? `
-                                        <div><label>Waist</label><select class="waist-sel">${genRange(27,37)}</select></div>
-                                        <div><label>Length</label><select class="len-sel">${genRange(10,45)}</select></div>
-                                        <div><label>Leg Opening</label><select class="leg-sel">${genRange(10,15)}</select></div>
-                                        <div><label>Threading</label><input type="text" class="thread-in" placeholder="Color"></div>
+                                        <div><label>Waist</label><select class="waist-sel">${range(27,37)}</select></div>
+                                        <div><label>Length</label><select class="len-sel">${range(10,45)}</select></div>
+                                        <div><label>Leg</label><select class="leg-sel">${range(10,15)}</select></div>
+                                        <div><label>Thread</label><input type="text" class="thread-in" placeholder="Color"></div>
                                     ` : `
                                         <div class="full-row"><label>Size</label><select class="std-size"><option>S</option><option selected>M</option><option>L</option><option>XL</option></select></div>
                                     `}
-                                    <div class="full-row"><label>Special Instructions</label><textarea class="note-in" placeholder="Add distress, high-rise, etc."></textarea></div>
+                                    <div class="full-row"><label>Notes</label><textarea class="note-in" placeholder="Distressing, etc."></textarea></div>
                                 </div>
                             </div>
                         </div>
                         <div class="product-info">
                             <h3 class="product-name">${p.name}</h3>
                             <p class="price-tag">SH ${p.price}</p>
-                            <button onclick="addToCart(this, '${p.name}', ${p.price})" class="add-to-cart">Add to Bag</button>
+                            <button onclick="addToCart(this, '${p.name}', ${p.price})" class="add-to-cart">ADD TO BAG</button>
                         </div>
                     </div>`;
             });
         }
 
-        function genRange(start, end) {
-            let res = '';
-            for(let i=start; i<=end; i++) res += `<option>${i}</option>`;
-            return res;
-        }
+        function range(s, e) { let r = ''; for(let i=s; i<=e; i++) r += `<option>${i}</option>`; return r; }
 
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        function applyFilter(cat, btn) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('cat-label').innerText = cat === 'all' ? "DENIM COLLECTION" : cat.toUpperCase() + "S";
+            renderProducts(cat);
+        }
 
         function toggleCart() {
             const sidebar = document.getElementById('cart-sidebar');
@@ -219,22 +220,13 @@
             const img = p.querySelector('img').src;
             const note = p.querySelector('.note-in').value || "None";
             let details = "";
-
             if(p.dataset.type === 'pants') {
-                const w = p.querySelector('.waist-sel').value;
-                const l = p.querySelector('.len-sel').value;
-                const leg = p.querySelector('.leg-sel').value;
-                const thread = p.querySelector('.thread-in').value || "Standard";
-                details = `W:${w} L:${l} Leg:${leg}" Thread:${thread} | Notes: ${note}`;
+                details = `W:${p.querySelector('.waist-sel').value} L:${p.querySelector('.len-sel').value} Leg:${p.querySelector('.leg-sel').value}`;
             } else {
-                const sz = p.querySelector('.std-size').value;
-                details = `Size: ${sz} | Notes: ${note}`;
+                details = `Size: ${p.querySelector('.std-size').value}`;
             }
-
-            cart.push({ name, price, details, image: img });
-            saveAndUpdate();
-            toggleCart();
-            renderCartItems();
+            cart.push({ name, price, details: `${details} | Notes: ${note}`, image: img });
+            saveAndUpdate(); toggleCart(); renderCartItems();
         }
 
         function saveAndUpdate() {
@@ -242,60 +234,49 @@
             document.getElementById('cart-count').innerText = cart.length;
         }
 
-        function clearCart() {
-            if(confirm("Empty your bag?")) {
-                cart = [];
-                saveAndUpdate();
-                renderCartItems();
-            }
-        }
-
         function renderCartItems() {
             const display = document.getElementById('cart-display-area');
             const footer = document.getElementById('cart-footer');
+            const checkout = document.getElementById('checkout-section');
             display.innerHTML = '';
-            let grandTotal = 0;
-
+            let total = 0;
+            if(cart.length === 0) { display.innerHTML = '<p style="text-align:center; color:#999; margin-top:50px;">Empty Bag.</p>'; checkout.style.display = 'none'; return; }
+            checkout.style.display = 'block';
             cart.forEach((item, index) => {
-                grandTotal += item.price;
-                display.innerHTML += `
-                    <div style="display:flex; align-items:center; margin-bottom:15px; font-size:11px; border-bottom:1px solid #eee; padding-bottom:10px;">
-                        <img src="${item.image}" style="width:50px; height:50px; border-radius:5px; margin-right:10px; object-fit:cover;">
-                        <div style="flex-grow:1;">
-                            <b style="text-transform:uppercase;">${item.name}</b><br>
-                            <span style="color:#666;">${item.details}</span><br>
-                            <span style="color:var(--primary); font-weight:bold;">SH ${item.price}</span>
-                        </div>
-                        <button onclick="removeFromCart(${index})" style="border:none; background:none; font-size:18px; cursor:pointer;">&times;</button>
-                    </div>`;
+                total += item.price;
+                display.innerHTML += `<div style="display:flex; align-items:center; margin-bottom:12px; font-size:11px; border-bottom:1px solid #eee; padding-bottom:10px;">
+                    <img src="${item.image}" style="width:45px; height:45px; border-radius:4px; margin-right:10px; object-fit:cover;">
+                    <div style="flex-grow:1;"><b>${item.name}</b><br><span style="color:#777;">${item.details}</span></div>
+                    <button onclick="remove(${index})" style="border:none; background:none; color:red; font-size:18px; cursor:pointer;">&times;</button>
+                </div>`;
             });
-
-            footer.innerHTML = `
-                <div style="display:flex; justify-content:space-between; font-weight:bold; margin:15px 0; color:var(--dark);">
-                    <span>TOTAL:</span> <span>SH ${grandTotal}</span>
-                </div>
-                <button onclick="sendOrderWhatsApp(${grandTotal})" style="width:100%; padding:15px; background:#25D366; color:white; border:none; border-radius:5px; font-weight:bold; cursor:pointer;">
-                    COMPLETE ORDER ON WHATSAPP
-                </button>`;
+            footer.innerHTML = `<div style="display:flex; justify-content:space-between; font-weight:bold; margin:15px 0;"><span>TOTAL:</span> <span>SH ${total}</span></div>
+                <button onclick="checkoutOnWhatsApp(${total})" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> COMPLETE ORDER ON WHATSAPP</button>`;
         }
 
-        function removeFromCart(i) { cart.splice(i, 1); saveAndUpdate(); renderCartItems(); }
+        function remove(i) { cart.splice(i, 1); saveAndUpdate(); renderCartItems(); }
 
-        function sendOrderWhatsApp(total) {
+        function checkoutOnWhatsApp(total) {
             const name = document.getElementById('customer-name').value;
-            if (!name) { alert("Please enter your name."); return; }
-            let msg = `👤 *CUSTOMER:* ${name.toUpperCase()}\n`;
-            msg += `🕒 _Ready in 24 hours_\n\n`;
-            cart.forEach(item => { msg += `✅ *${item.name}*\n   └ ${item.details}\n\n`; });
-            msg += `💰 *TOTAL: SH ${total}*\n💳 Paybill: 400200 | Acc: 1033884`;
-            window.open(`https://wa.me/254797389370?text=${encodeURIComponent(msg)}`, '_blank');
+            const location = document.getElementById('delivery-location').value;
+            
+            if (!name || !location) { 
+                alert("Please enter both your name and delivery location."); 
+                return; 
+            }
+            
+            let msg = `🛍️ *NEW GWAPAFFECTION ORDER*\n👤 CUSTOMER: ${name.toUpperCase()}\n📍 LOCATION: ${location.toUpperCase()}\n💰 TOTAL: SH ${total}\n────────────────────\n`;
+            cart.forEach((item, i) => { msg += `${i+1}. *${item.name}*\n   └ ${item.details}\n\n`; });
+            
+            window.open(`https://wa.me/254737610804?text=${encodeURIComponent(msg)}`, '_blank');
+            cart = []; saveAndUpdate(); toggleCart();
         }
 
         function filterProducts() {
             const val = document.getElementById('productSearch').value.toUpperCase();
             document.querySelectorAll('.product').forEach(p => {
-                const name = p.querySelector('.product-name').innerText;
-                p.style.display = name.toUpperCase().includes(val) ? "flex" : "none";
+                const name = p.querySelector('.product-name').innerText.toUpperCase();
+                p.style.display = name.includes(val) ? "flex" : "none";
             });
         }
 
