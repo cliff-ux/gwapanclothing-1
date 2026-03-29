@@ -24,8 +24,20 @@
         .navbar .container { width: 90%; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 24px; font-weight: bold; color: var(--primary); text-decoration: none; letter-spacing: 2px; text-transform: uppercase; }
         .nav-search input { padding: 8px 15px; border-radius: 20px; border: none; outline: none; width: 180px; background: #222; color: #fff; border: 1px solid #444; }
-        .nav-links a { color: var(--light); text-decoration: none; font-weight: bold; cursor: pointer; font-size: 14px; }
-
+.nav-links li a {
+        padding: 10px 15px; /* Bigger area for fingers to tap */
+        display: block;
+        transition: 0.3s;
+    }
+    
+    @media (max-width: 600px) {
+        .nav-links {
+            gap: 10px; /* Tighter gap for small screens */
+        }
+        .logo {
+            font-size: 18px; /* Prevents text wrap on small phones */
+        }
+    }
         .filter-container { width: 90%; max-width: 1200px; margin: 20px auto; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
         .filter-btn { padding: 10px 20px; border: 1px solid #ddd; background: white; color: #333; cursor: pointer; font-weight: bold; border-radius: 5px; transition: var(--transition); font-size: 12px; text-transform: uppercase; }
         .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
@@ -74,17 +86,15 @@
 </head>
 
 <body>
-
-    <nav class="navbar">
-        <div class="container">
-            <a href="#" class="logo">Mavazi</a>
-            <div class="nav-search"><input type="text" id="productSearch" placeholder="Search Denim..." onkeyup="filterProducts()"></div>
-            <ul class="nav-links">
-                <li><a onclick="toggleCart()"><i class="fas fa-shopping-bag"></i> BAG (<span id="cart-count">0</span>)</a></li>
-            </ul>
-        </div>
-    </nav>
-
+<nav class="navbar">
+    <div class="container">
+        <a href="index.html" class="logo">GWAPAFFECTION</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Collection</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+    </div>
+</nav>
     <div class="promo-container">
         <div class="shiny-advert">✨ PREMIUM HANDCRAFTED CUSTOMS ✨</div>
         <div class="delivery-note">Handmade & Ready in 24 Hours</div>
