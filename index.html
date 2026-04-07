@@ -111,21 +111,35 @@
 
     <div id="cart-sidebar">
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 2px solid var(--light); padding-bottom: 10px;">
-            <h2 style="font-size: 18px;">YOUR SELECTION</h2>
+            <h2 style="font-size: 18px; letter-spacing: 2px;">YOUR SELECTION</h2>
             <button onclick="toggleCart()" style="background:none; border:none; font-size:28px; cursor:pointer;">&times;</button>
         </div>
         
         <div id="cart-display-area" style="margin-top:20px;"></div>
         
         <div id="checkout-section" style="display:none;">
-            <div class="confirm-reminder">⚠️ Please enter your details before finishing on WhatsApp</div>
-            
-            <label style="font-size: 11px; font-weight: bold; color: #444;">DELIVERY NAME</label>
-            <input type="text" id="customer-name" placeholder="Enter Full Name" style="width:100%; padding:12px; margin: 5px 0 10px; border:1px solid #ddd; border-radius:5px;">
-            
-            <label style="font-size: 11px; font-weight: bold; color: #444;">DELIVERY LOCATION</label>
-            <input type="text" id="delivery-location" placeholder="e.g. Nairobi CBD, Estate Name" style="width:100%; padding:12px; margin: 5px 0 15px; border:1px solid #ddd; border-radius:5px;">
-            
+            <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #eee; margin-top: 20px;">
+                <p style="font-size: 11px; font-weight: bold; color: var(--primary); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;">
+                    <i class="fas fa-truck"></i> Delivery & Payment Details
+                </p>
+                
+                <div style="margin-bottom: 12px;">
+                    <label style="font-size: 10px; font-weight: bold; color: #666; text-transform: uppercase;">Full Name</label>
+                    <input type="text" id="customer-name" placeholder="Name for delivery" style="width:100%; padding:10px; margin-top:4px; border:1px solid #ddd; border-radius:4px; font-size: 13px;">
+                </div>
+                
+                <div style="margin-bottom: 12px;">
+                    <label style="font-size: 10px; font-weight: bold; color: #666; text-transform: uppercase;">Delivery Location</label>
+                    <input type="text" id="delivery-location" placeholder="e.g. Nairobi CBD, Estate" style="width:100%; padding:10px; margin-top:4px; border:1px solid #ddd; border-radius:4px; font-size: 13px;">
+                </div>
+
+                <div style="background: #fff; padding: 12px; border: 1px dashed var(--primary); border-radius: 4px; margin-top: 5px;">
+                    <p style="font-size: 10px; font-weight: bold; color: #333; margin-bottom: 5px;">M-PESA / PAYBILL INFO:</p>
+                    <p style="font-size: 13px; color: var(--primary); font-weight: 900; margin: 2px 0;">PAYBILL: 400200</p>
+                    <p style="font-size: 13px; color: var(--primary); font-weight: 900;">ACC: 1033884</p>
+                </div>
+            </div>
+
             <div id="cart-footer"></div>
         </div>
     </div>
@@ -138,13 +152,13 @@
 
     <script>
         const products = [
+            { id: 34, name: "GWAPAN-GREY-SET", price: 3450, img: "https://i.ibb.co/gFhfL7Ch/Photoroom-20260407-004656.jpg", type: "jacket" },
             { id: 32, name: "XL CAMO JORT", price: 1750, img: "https://i.ibb.co/Jwz6LRTq/Photoroom-20260404-193612.jpg", type: "pants" },
             { id: 33, name: "GREY-GWAPAN-PANTS", price: 1850, img: "https://i.ibb.co/qFyQcQYJ/Photoroom-20260404-231225.jpg", type: "pants" },
             { id: 31, name: "GWAPAN FULL DENIM SET", price: 3200, img: "https://i.ibb.co/tGqXtGf/IMG-6172.jpg", type: "pants" },
             { id: 25, name: "CAMO VEST", price: 1200, img: "https://i.ibb.co/CppRvn11/Photoroom-20260325-222904.jpg", type: "shirt" },
             { id: 26, name: "GWAPAN CAMO PANTS", price: 1850, img: "https://i.ibb.co/nsfmJFMb/Photoroom-20260325-212157.jpg", type: "pants" },
             { id: 28, name: "KHAKI SET", price: 2850, img: "https://i.ibb.co/vvPRHgGc/IMG-6091.jpg", type: "jacket" },
-            { id: 30, name: "CAMO PANTS V2", price: 1950, img: "https://i.ibb.co/YwYQxs5/Photoroom-20260325-212304.jpg", type: "pants" },
             { id: 1, name: "GWAPAN CUSTOM PANTS", price: 1800, img: "https://i.ibb.co/NnmNRYDx/image0-1.jpg", type: "pants" },
             { id: 4, name: "CUSTOM JACKET", price: 1500, img: "https://i.ibb.co/zhCCyz5Y/image1-2.jpg", type: "jacket" },
             { id: 6, name: "GWAPAN GREY PANTS", price: 1850, img: "https://i.ibb.co/Y4z1MZ77/IMG-2849.jpg", type: "pants" },
@@ -252,7 +266,7 @@
                     <button onclick="remove(${index})" style="border:none; background:none; color:red; font-size:18px; cursor:pointer;">&times;</button>
                 </div>`;
             });
-            footer.innerHTML = `<div style="display:flex; justify-content:space-between; font-weight:bold; margin:15px 0;"><span>TOTAL:</span> <span>SH ${total}</span></div>
+            footer.innerHTML = `<div style="display:flex; justify-content:space-between; font-weight:bold; margin:15px 0; border-top: 1px solid #eee; padding-top: 10px;"><span>TOTAL:</span> <span>SH ${total}</span></div>
                 <button onclick="checkoutOnWhatsApp(${total})" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> COMPLETE ORDER ON WHATSAPP</button>`;
         }
 
@@ -263,15 +277,34 @@
             const location = document.getElementById('delivery-location').value;
             
             if (!name || !location) { 
-                alert("Please enter both your name and delivery location."); 
+                alert("Please enter your name and delivery location."); 
                 return; 
             }
             
-            let msg = `🛍️ *NEW GWAPAFFECTION ORDER*\n👤 CUSTOMER: ${name.toUpperCase()}\n📍 LOCATION: ${location.toUpperCase()}\n💰 TOTAL: SH ${total}\n────────────────────\n`;
-            cart.forEach((item, i) => { msg += `${i+1}. *${item.name}*\n   └ ${item.details}\n\n`; });
+            let msg = `🛍️ *NEW GWAPAFFECTION ORDER*\n`;
+            msg += `────────────────────\n`;
+            msg += `👤 *CUSTOMER:* ${name.toUpperCase()}\n`;
+            msg += `📍 *LOCATION:* ${location.toUpperCase()}\n`;
+            msg += `💰 *TOTAL:* SH ${total}\n`;
+            msg += `────────────────────\n\n`;
+            
+            msg += `*ITEMS:* \n`;
+            cart.forEach((item, i) => { 
+                msg += `${i+1}. ${item.name}\n   └ ${item.details}\n\n`; 
+            });
+
+            msg += `────────────────────\n`;
+            msg += `💳 *PLEASE MAKE PAYMENT*\n`;
+            msg += `*PAYBILL:* 400200\n`;
+            msg += `*ACCOUNT:* 1033884\n`;
+            msg += `────────────────────\n`;
+            msg += `_Please send the M-Pesa confirmation message here after paying._`;
             
             window.open(`https://wa.me/254797389370?text=${encodeURIComponent(msg)}`, '_blank');
-            cart = []; saveAndUpdate(); toggleCart();
+            cart = []; 
+            saveAndUpdate(); 
+            renderCartItems();
+            toggleCart();
         }
 
         window.onload = () => { renderProducts(); saveAndUpdate(); renderCartItems(); };
