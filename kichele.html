@@ -1,0 +1,602 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kichele Collection | Gwapaffection</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Oswald:wght@700&display=swap');
+
+:root {
+--gwapa-espresso: #4B3621;
+--gwapa-oxblood: #4A0E0E;
+--gwapa-dark: #0A0A0A;
+--gwapa-light: #FDFDFD;
+--gwapa-accent: #DAA520;
+--neon-green: #39FF14;
+}
+
+body {
+font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+margin: 0;
+padding: 0;
+background-color: var(--gwapa-dark);
+color: var(--gwapa-light);
+display: flex;
+flex-direction: column;
+}
+a { text-decoration: none; color: inherit; }
+
+/* --- HEADER --- */
+header {
+padding: 20px;
+text-align: center;
+background: #111;
+border-bottom: 1px solid #333;
+}
+header a {
+color: var(--gwapa-light);
+text-decoration: none;
+font-weight: bold;
+font-size: 1.2rem;
+}
+
+/* --- HERO --- */
+.collection-hero {
+padding: 80px 20px;
+text-align: center;
+background: linear-gradient(135deg, rgba(75,54,33,0.3) 0%, rgba(74,14,14,0.3) 100%), var(--gwapa-dark);
+}
+.collection-hero h1 {
+font-family: 'Abril Fatface', cursive;
+font-size: 4rem;
+margin: 0;
+text-transform: uppercase;
+color: var(--gwapa-light);
+text-shadow: 3px 3px 0px var(--gwapa-oxblood);
+letter-spacing: 3px;
+}
+
+/* --- PRODUCT GRID --- */
+.product-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 40px;
+max-width: 1200px;
+margin: 60px auto;
+padding: 0 20px;
+width: 100%;
+box-sizing: border-box;
+}
+
+/* --- FLIP CARD STYLES --- */
+.flip-card {
+background-color: transparent;
+width: 100%;
+height: 550px;
+perspective: 1000px;
+cursor: pointer;
+margin-bottom: 20px;
+}
+.flip-card-inner {
+position: relative;
+width: 100%;
+height: 100%;
+text-align: center;
+transition: transform 0.8s;
+transform-style: preserve-3d;
+}
+.flip-card.flipped .flip-card-inner { transform: rotateY(180deg); }
+.flip-card-front, .flip-card-back {
+position: absolute;
+width: 100%;
+height: 100%;
+-webkit-backface-visibility: hidden;
+backface-visibility: hidden;
+display: flex;
+flex-direction: column;
+align-items: center;
+background-color: #1a1a1a;
+border-radius: 4px;
+padding: 20px;
+box-sizing: border-box;
+border: 1px solid #333;
+}
+.flip-card-back { transform: rotateY(180deg); }
+
+.product-image {
+width: 100%;
+height: 320px;
+object-fit: contain;
+margin-bottom: 15px;
+background-color: #151515;
+border-radius: 2px;
+}
+.product-name {
+font-size: 1.1rem;
+margin: 0;
+font-weight: 700;
+text-transform: uppercase;
+min-height: 2.4rem;
+}
+.product-price {
+font-size: 1.4rem;
+margin: 10px 0;
+color: var(--gwapa-light);
+font-weight: 300;
+}
+
+.card-buttons {
+margin-top: auto;
+display: flex;
+flex-direction: column;
+gap: 10px;
+width: 100%;
+}
+.view-btn, .add-btn {
+width: 100%;
+padding: 12px;
+text-transform: uppercase;
+letter-spacing: 2px;
+font-weight: bold;
+transition: all 0.3s ease;
+border: 2px solid white;
+}
+.view-btn { background-color: transparent; color: white; }
+.view-btn:hover { background-color: white; color: var(--gwapa-dark); }
+.add-btn { background-color: var(--gwapa-oxblood); color: white; border: 2px solid var(--gwapa-oxblood); }
+.add-btn:hover { background-color: transparent; color: var(--gwapa-oxblood); }
+
+/* --- FLOATING CART --- */
+#cart-float {
+position: fixed;
+bottom: 30px;
+right: 30px;
+background-color: var(--gwapa-oxblood);
+color: white;
+width: 60px;
+height: 60px;
+border-radius: 50%;
+display: flex;
+justify-content: center;
+align-items: center;
+box-shadow: 0 0 15px rgba(255,0,0,0.6);
+z-index: 1000;
+cursor: pointer;
+border: 2px solid white;
+font-size: 24px;
+}
+#cart-count {
+position: absolute;
+top: -5px;
+right: -5px;
+background-color: var(--neon-green);
+color: black;
+font-size: 12px;
+font-weight: bold;
+width: 20px;
+height: 20px;
+border-radius: 50%;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+/* --- NEW STYLISH GALLERY --- */
+.gallery-container {
+padding: 80px 20px;
+background: var(--gwapa-dark);
+}
+.gallery-header {
+text-align: center;
+margin-bottom: 80px;
+}
+.gallery-header h2 {
+font-family: 'Abril Fatface', cursive;
+font-size: 3rem;
+color: var(--gwapa-light);
+text-transform: uppercase;
+letter-spacing: 5px;
+margin-bottom: 10px;
+}
+.gallery-header p {
+color: #888;
+font-size: 1.1rem;
+letter-spacing: 2px;
+}
+
+.gallery-row {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 60px;
+margin-bottom: 120px;
+flex-wrap: wrap;
+}
+.gallery-row:nth-child(even) {
+flex-direction: row-reverse;
+}
+
+.gallery-image-wrapper {
+width: 45%;
+min-width: 350px;
+height: 500px;
+overflow: hidden;
+position: relative;
+cursor: pointer;
+border: 2px solid var(--gwapa-oxblood);
+}
+.gallery-image-wrapper img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+transition: transform 0.6s ease;
+filter: grayscale(20%);
+}
+.gallery-image-wrapper:hover img {
+transform: scale(1.1);
+filter: grayscale(0%);
+}
+.gallery-image-wrapper::after {
+content: '';
+position: absolute;
+top: 0; left: 0; right: 0; bottom: 0;
+background: linear-gradient(to top, rgba(74,14,14,0.3), transparent);
+opacity: 0;
+transition: 0.3s;
+}
+.gallery-image-wrapper:hover::after {
+opacity: 1;
+}
+
+.gallery-text {
+width: 40%;
+min-width: 300px;
+}
+.gallery-text h3 {
+font-family: 'Oswald', sans-serif;
+font-size: 3.5rem;
+text-transform: uppercase;
+line-height: 1;
+color: var(--gwapa-light);
+margin: 0 0 20px 0;
+}
+.gallery-text p {
+font-size: 1rem;
+color: #aaa;
+line-height: 1.6;
+border-left: 3px solid var(--gwapa-oxblood);
+padding-left: 20px;
+}
+
+/* --- MODAL --- */
+.modal {
+display: none;
+position: fixed;
+z-index: 2000;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0,0,0,0.85);
+justify-content: center;
+align-items: center;
+}
+.modal-content {
+background-color: var(--gwapa-dark);
+border: 4px solid var(--neon-green);
+padding: 30px;
+width: 90%;
+max-width: 500px;
+position: relative;
+}
+.close-modal {
+position: absolute;
+top: 10px;
+right: 20px;
+color: white;
+font-size: 30px;
+cursor: pointer;
+}
+.modal h2 {
+color: white;
+text-transform: uppercase;
+font-size: 2rem;
+border-bottom: 2px solid var(--neon-green);
+padding-bottom: 10px;
+margin-bottom: 20px;
+}
+.cart-item {
+display: flex;
+justify-content: space-between;
+padding: 10px 0;
+border-bottom: 1px solid #333;
+color: #ccc;
+}
+.total-section {
+margin-top: 20px;
+font-size: 1.5rem;
+color: var(--neon-green);
+font-weight: bold;
+text-align: right;
+}
+.checkout-submit-btn {
+width: 100%;
+padding: 15px;
+margin-top: 20px;
+background-color: var(--neon-green);
+color: black;
+font-weight: 900;
+text-transform: uppercase;
+border: none;
+font-size: 1.2rem;
+}
+footer {
+padding: 40px 20px;
+text-align: center;
+background: #111;
+border-top: 1px solid #333;
+margin-top: auto;
+}
+</style>
+</head>
+<body>
+
+<header>
+<a href="shop.html">&lt; BACK TO SHOP</a>
+</header>
+
+<section class="collection-hero">
+<h1>Kichele Collection</h1>
+</section>
+<main class="product-grid">
+
+<!-- Product 1: Jort (NEW) -->
+<div class="flip-card" onclick="flipProductCard(this)">
+<div class="flip-card-inner">
+<div class="flip-card-front">
+<img src="https://i.ibb.co/qM7TXG7D/image0-1.png" class="product-image">
+<h2 class="product-name">Gwap Oxblood Jort</h2>
+<p class="product-price">KES 1950</p>
+<div class="card-buttons"><button class="view-btn">VIEW</button><button class="add-btn" onclick="addToCart('Kichele Jort', 1850, event)">ADD TO CART</button></div>
+</div>
+<div class="flip-card-back">
+<img src="https://i.ibb.co/qM7TXG7D/image0-1.png" class="product-image">
+<h2 class="product-name">BACK VIEW</h2>
+<p class="product-price">KES 1950</p>
+<button class="view-btn">FRONT</button>
+</div>
+</div>
+</div>
+
+<!-- Product 2: Leather Pants -->
+<div class="flip-card" onclick="flipProductCard(this)">
+<div class="flip-card-inner">
+<div class="flip-card-front">
+<img src="https://i.ibb.co/DPQ2JbYk/image3-1.jpg" class="product-image">
+<h2 class="product-name">Gwap Oxblood Pants</h2>
+<p class="product-price">KES 2500</p>
+<div class="card-buttons"><button class="view-btn">VIEW</button><button class="add-btn" onclick="addToCart('Leathered Custom Pants', 2500, event)">ADD TO CART</button></div>
+</div>
+<div class="flip-card-back">
+<img src="https://i.ibb.co/zHQVsb0C/image2-6.jpg" class="product-image">
+<h2 class="product-name">BACK VIEW</h2>
+<p class="product-price">KES 2500</p>
+<button class="view-btn">FRONT</button>
+</div>
+</div>
+</div>
+
+<!-- Product 3: Leather Shirt -->
+<div class="flip-card" onclick="flipProductCard(this)">
+<div class="flip-card-inner">
+<div class="flip-card-front">
+<img src="https://i.ibb.co/q3rQFCC9/image0-10.jpg" class="product-image">
+<h2 class="product-name">Gwap Boxed Shirt</h2>
+<p class="product-price">KES 2000</p>
+<div class="card-buttons"><button class="view-btn">VIEW</button><button class="add-btn" onclick="addToCart('Leather Boxed Shirt', 2000, event)">ADD TO CART</button></div>
+</div>
+<div class="flip-card-back">
+<img src="https://i.ibb.co/TM1MP5tb/image1-8.jpg" class="product-image">
+<h2 class="product-name">BACK VIEW</h2>
+<p class="product-price">KES 2000</p>
+<button class="view-btn">FRONT</button>
+</div>
+</div>
+</div>
+
+<!-- Product 4: Leather Jacket -->
+<div class="flip-card" onclick="flipProductCard(this)">
+<div class="flip-card-inner">
+<div class="flip-card-front">
+<img src="https://i.ibb.co/gZRVmp2t/image6-1.jpg" class="product-image">
+<h2 class="product-name">Gwap Oxblood Jacket</h2>
+<p class="product-price">KES 2200</p>
+<div class="card-buttons"><button class="view-btn">VIEW</button><button class="add-btn" onclick="addToCart('Leather Jacket', 2200, event)">ADD TO CART</button></div>
+</div>
+<div class="flip-card-back">
+<img src="https://i.ibb.co/sdh5DxP0/image5-3.jpg" class="product-image">
+<h2 class="product-name">BACK VIEW</h2>
+<p class="product-price">KES 2200</p>
+<button class="view-btn">FRONT</button>
+</div>
+</div>
+</div>
+
+</main>
+
+
+<!-- STYLISH GALLERY SECTION -->
+<section class="gallery-container">
+
+<div class="gallery-header">
+<h2>The Lookbook</h2>
+<p>STREET WEAR | DENIM | PREMIUM</p>
+</div>
+
+<!-- Image 1 -->
+<div class="gallery-row">
+<div class="gallery-image-wrapper">
+<img src="https://i.ibb.co/ccV0KCyy/image5-4.jpg" alt="Model 1">
+</div>
+<div class="gallery-text">
+<h3>Street<br>Dominance</h3>
+<p>Command the streets with the Kichele Oxblood edition. Handcrafted leather tailored for those who aren't afraid to stand out. Premium quality meets raw Nairobi craftsmanship.</p>
+</div>
+</div>
+
+<!-- Image 2 -->
+<div class="gallery-row">
+<div class="gallery-image-wrapper">
+<img src="https://i.ibb.co/WpyPTv6p/image0-11.jpg" alt="Model 2">
+</div>
+<div class="gallery-text">
+<h3>Denim<br>Soul</h3>
+<p>Every stitch tells a story. Ourcustomized denim isn't just fabric—it's a lifestyle. Designed in Nairobi, worn by the bold.</p>
+</div>
+</div>
+
+<!-- Image 3 -->
+<div class="gallery-row">
+<div class="gallery-image-wrapper">
+<img src="https://i.ibb.co/4wxsxXSV/image3-2.jpg" alt="Model 3">
+</div>
+<div class="gallery-text">
+<h3>Urban<br>Edge</h3>
+<p>From the backstreets to the runway. The Kichele collection brings a new wave of fashion to Kenya's capital.</p>
+</div>
+</div>
+
+<!-- Image 4 -->
+<div class="gallery-row">
+<div class="gallery-image-wrapper">
+<img src="https://i.ibb.co/4RG0yDCt/image2-7.jpg" alt="Model 4">
+</div>
+<div class="gallery-text">
+<h3>Bold<br>Moves</h3>
+<p>Tailored fits for the dynamic lifestyle. Comfort meets style in every thread. This is what Gwapaaffection is all about.</p>
+</div>
+</div>
+
+<!-- Image 5 -->
+<div class="gallery-row">
+<div class="gallery-image-wrapper">
+<img src="https://i.ibb.co/gFjg8VGT/image1-9.jpg" alt="Model 5">
+</div>
+<div class="gallery-text">
+<h3>Raw<br>Power</h3>
+<p>Leather Jackets. Oxblood Shades. The Kichele collection redefines what it means to be dressed for success in Nairobi.</p>
+</div>
+</div>
+
+<!-- Image 6 -->
+<div class="gallery-row">
+<div class="gallery-image-wrapper">
+<img src="https://i.ibb.co/nsQb6WRr/image6-2.jpg" alt="Model 6">
+</div>
+<div class="gallery-text">
+<h3>Custom<br>Vibes</h3>
+<p>No mass production. Every piece is handcrafted to perfection. Experience the difference of true bespoke fashion.</p>
+</div>
+</div>
+
+<!-- Image 7 -->
+<div class="gallery-row">
+<div class="gallery-image-wrapper">
+<img src="https://i.ibb.co/Qj1QQX5S/image4-1.jpg" alt="Model 7">
+</div>
+<div class="gallery-text">
+<h3>Legacy<br>Wear</h3>
+<p>Created for those who want to leave a mark. The Kichele collection isn't just clothes—it's a statement.</p>
+</div>
+</div>
+
+</section>
+
+<!-- CART FLOAT -->
+<div id="cart-float" onclick="openCheckout()">
+<i class="fas fa-shopping-bag"></i>
+<span id="cart-count">0</span>
+</div>
+
+<!-- CHECKOUT MODAL -->
+<div id="checkout-modal" class="modal">
+<div class="modal-content">
+<span class="close-modal" onclick="closeCheckout()">&times;</span>
+<h2>Checkout</h2>
+<div id="cart-items-display"></div>
+<div class="total-section" id="cart-total">TOTAL: KES 0</div>
+<button class="checkout-submit-btn" onclick="finishOrder()">CONFIRM ON WHATSAPP</button>
+</div>
+</div>
+
+<footer>
+<p>&copy; 2026 Gwapaffection. All Rights Reserved.</p>
+</footer>
+
+<script>
+function flipProductCard(cardElement) {
+cardElement.classList.toggle('flipped');
+}
+
+let cart = JSON.parse(localStorage.getItem('gwapa_cart')) || [];
+
+function addToCart(name, price, event) {
+if(event) event.stopPropagation();
+const img = event.target.closest('.flip-card').querySelector('img').src;
+cart.push({ name, price, image: img });
+saveCart();
+alert(name + ' added to cart!');
+}
+
+function saveCart() {
+localStorage.setItem('gwapa_cart', JSON.stringify(cart));
+document.getElementById('cart-count').innerText = cart.length;
+}
+
+function openCheckout() {
+const modal = document.getElementById('checkout-modal');
+const display = document.getElementById('cart-items-display');
+const totalEl = document.getElementById('cart-total');
+display.innerHTML = '';
+let total = 0;
+
+if(cart.length === 0) {
+display.innerHTML = '<p style="text-align:center; margin-top:20px;">Your cart is empty.</p>';
+} else {
+cart.forEach((item, index) => {
+total += item.price;
+display.innerHTML += `<div class="cart-item">
+<span>${item.name}</span>
+<span>KES ${item.price}</span>
+</div>`;
+});
+}
+totalEl.innerText = 'TOTAL: KES ' + total;
+modal.style.display = 'flex';
+}
+
+function closeCheckout() {
+document.getElementById('checkout-modal').style.display = 'none';
+}
+
+function finishOrder() {
+let total = cart.reduce((sum, item) => sum + item.price, 0);
+if(total === 0) return alert('Cart is empty!');
+
+let msg = "🛍️ *NEW KICHELE ORDER*\n\n";
+cart.forEach((item, i) => { msg += `${i+1}. ${item.name} - KES ${item.price}\n`; });
+msg += `\n💰 TOTAL: KES ${total}\n\nSend receipt to confirm.`;
+
+window.open(`https://wa.me/254797389379?text=${encodeURIComponent(msg)}`, '_blank');
+cart = [];
+saveCart();
+closeCheckout();
+}
+
+window.onload = saveCart;
+</script>
+
+</body>
+</html>
