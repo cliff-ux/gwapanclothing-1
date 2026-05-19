@@ -590,7 +590,7 @@ let msg = "🛍️ *NEW KICHELE ORDER*\n\n";
 cart.forEach((item, i) => { msg += `${i+1}. ${item.name} - KES ${item.price}\n`; });
 msg += `\n💰 TOTAL: KES ${total}\n\nSend receipt to confirm.`;
 
-window.open(`https://wa.me/254797389379?text=${encodeURIComponent(msg)}`, '_blank');
+window.open(`https://wa.me/254797389370?text=${encodeURIComponent(msg)}`, '_blank');
 cart = [];
 saveCart();
 closeCheckout();
