@@ -19,7 +19,20 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Times New Roman', Times, serif; background-color: var(--light); line-height: 1.6; overflow-x: hidden; }
+       .new-drop-btn {
+         display: inline-block;
+          padding: 12px 24px;
+         background-color: #000000; /* Change to your brand's primary color */
+          color: #ffffff;
+         text-decoration: none;
+          font-weight: bold;
+          border-radius: 4px; /* Optional: adjust for rounded or sharp corners */
+          transition: background 0.3s ease;
+          }
 
+         .new-drop-btn:hover {
+          background-color: #333333; /* Darkens slightly when hovered */
+         }
         .navbar { background-color: var(--dark); padding: 15px 0; position: fixed; top: 0; width: 100%; z-index: 1000; border-bottom: 2px solid var(--primary); }
         .navbar .container { width: 90%; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 24px; font-weight: bold; color: var(--primary); text-decoration: none; letter-spacing: 2px; text-transform: uppercase; }
@@ -83,6 +96,8 @@
             <ul class="nav-links">
                 <li><a href="shop.html" style="color: var(--accent);">SHOP</a></li>
                 <li><a href="index.html">OUR MEMOIRS</a></li>
+                <!-- Add this to your shop.html where you want the button to appear -->
+                <li><a href="kichele.html" class="new-drop-btn">New Drop</a></li>
             </ul>
         </div>
     </nav>
