@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>SHOP | GWAPAFFECTION PREMIUM DENIM</title>
+    <title>SHOP | GWAPAFFECTION PREMIUM DENIM CUSTOMS</title>
     <style>
         :root {
             --primary: #800000;
@@ -19,31 +19,30 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Times New Roman', Times, serif; background-color: var(--light); line-height: 1.6; overflow-x: hidden; }
-       .new-drop-btn {
-         display: inline-block;
-          padding: 12px 24px;
-         background-color: #000000; /* Change to your brand's primary color */
-          color: #ffffff;
-         text-decoration: none;
-          font-weight: bold;
-          border-radius: 4px; /* Optional: adjust for rounded or sharp corners */
-          transition: background 0.3s ease;
-          }
-
-         .new-drop-btn:hover {
-          background-color: #333333; /* Darkens slightly when hovered */
-         }
+        
+        /* ==========================================================================
+           Navigation & Header
+           ========================================================================== */
         .navbar { background-color: var(--dark); padding: 15px 0; position: fixed; top: 0; width: 100%; z-index: 1000; border-bottom: 2px solid var(--primary); }
         .navbar .container { width: 90%; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 24px; font-weight: bold; color: var(--primary); text-decoration: none; letter-spacing: 2px; text-transform: uppercase; }
         
-        .nav-links { list-style: none; display: flex; gap: 20px; }
+        .nav-links { list-style: none; display: flex; gap: 20px; align-items: center; }
         .nav-links li a { color: var(--light); text-decoration: none; font-weight: bold; font-size: 14px; text-transform: uppercase; padding: 10px 15px; display: block; transition: 0.3s; }
         .nav-links li a:hover { color: var(--accent); }
-
-        .filter-container { width: 90%; max-width: 1200px; margin: 20px auto; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-        .filter-btn { padding: 10px 20px; border: 1px solid #ddd; background: white; color: #333; cursor: pointer; font-weight: bold; border-radius: 5px; transition: var(--transition); font-size: 12px; text-transform: uppercase; }
-        .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+        
+        .new-drop-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #000000;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+            border: 1px solid var(--accent);
+        }
+        .new-drop-btn:hover { background-color: #333333; }
 
         .promo-container { width: 100%; display: flex; flex-direction: column; align-items: center; margin-top: 100px; gap: 10px; }
         .shiny-advert { background: linear-gradient(90deg, #800000, #ff0000, #800000); background-size: 200% auto; color: white; padding: 10px 25px; font-weight: bold; border-radius: 50px; animation: moveShine 3s linear infinite; font-size: 12px; }
@@ -54,28 +53,73 @@
 
         .home-header { background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://i.ibb.co/xq1GPZ5m/image5-2.png'); background-size: cover; background-position: center; color: var(--white); padding: 70px 20px; text-align: center; }
 
+        /* ==========================================================================
+           Product Catalog Grid
+           ========================================================================== */
+        .filter-container { width: 90%; max-width: 1200px; margin: 20px auto; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .filter-btn { padding: 10px 20px; border: 1px solid #ddd; background: white; color: #333; cursor: pointer; font-weight: bold; border-radius: 5px; transition: var(--transition); font-size: 12px; text-transform: uppercase; }
+        .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+
         .section-title { text-align: center; color: var(--primary); margin: 30px 0 10px; font-size: 1.8rem; letter-spacing: 4px; text-transform: uppercase; }
         .product-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; padding: 20px 0; max-width: 1200px; margin: 0 auto; width: 95%; }
         
-        .product { background: var(--white); border-radius: 8px; box-shadow: var(--shadow); position: relative; overflow: hidden; display: flex; flex-direction: column; padding: 12px; border: 1px solid #eee; }
+        .product { background: var(--white); border-radius: 8px; box-shadow: var(--shadow); position: relative; overflow: hidden; display: flex; flex-direction: column; padding: 12px; border: 1px solid #eee; cursor: pointer; }
         .img-container { width: 100%; height: 320px; background: #fff; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; }
         .img-container img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.5s; }
         .product:hover img { transform: scale(1.05); }
-
-        .bespoke-panel { position: absolute; bottom: -100%; left: 0; width: 100%; height: 85%; background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(5px); transition: var(--transition); padding: 15px; display: flex; flex-direction: column; border-top: 3px solid var(--primary); z-index: 5; }
-        .product:hover .bespoke-panel { bottom: 0; }
-        .panel-title { font-size: 11px; font-weight: bold; color: var(--primary); text-transform: uppercase; margin-bottom: 8px; border-bottom: 1px solid #eee; padding-bottom: 4px; }
-        .panel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-        .panel-grid label { font-size: 10px; font-weight: bold; color: #666; }
-        .panel-grid select, .panel-grid input, .panel-grid textarea { width: 100%; padding: 4px; font-size: 11px; border: 1px solid #ddd; border-radius: 3px; }
-        .full-row { grid-column: span 2; }
         
         .product-info { padding: 12px 0 0; text-align: center; }
         .product-name { font-size: 0.85rem; font-weight: bold; text-transform: uppercase; color: #222; height: 35px; overflow: hidden; }
         .price-tag { color: var(--primary); font-weight: bold; font-size: 1.1rem; margin: 5px 0; }
-        .add-to-cart { background-color: var(--dark); color: var(--white); border: none; padding: 10px; cursor: pointer; border-radius: 4px; font-weight: bold; width: 100%; transition: var(--transition); font-size: 12px; }
-        .add-to-cart:hover { background: var(--primary); }
 
+        /* ==========================================================================
+           Featured Limited Drops Row
+           ========================================================================== */
+        #limitedDropsSection { margin: 40px auto; max-width: 1200px; padding: 0 15px; }
+        .limited-section-header { font-size: 14px; font-weight: 800; letter-spacing: 3px; color: #111; margin-bottom: 20px; text-transform: uppercase; border-left: 4px solid #1a2a3a; padding-left: 10px; }
+        .limited-flex-grid { display: flex; flex-direction: column; gap: 20px; }
+        @media (min-width: 600px) { .limited-flex-grid { flex-direction: row; } }
+        
+        .limited-card { flex: 1; position: relative; background: #ffffff; cursor: pointer; overflow: hidden; border: 1px solid #f0f0f0; transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .limited-card:hover { transform: translateY(-4px); }
+        .limited-card img { width: 100%; height: 420px; object-fit: cover; display: block; }
+        .limited-badge { position: absolute; top: 15px; left: 15px; background: #bf2626; color: #fff; font-size: 10px; font-weight: 800; padding: 5px 10px; letter-spacing: 1px; text-transform: uppercase; z-index: 10; }
+        .limited-card-meta { padding: 15px; background: #fff; display: flex; justify-content: space-between; align-items: center; }
+        .limited-card-meta h3 { margin: 0; font-size: 14px; font-weight: 700; color: #111; letter-spacing: 0.5px; }
+        .limited-card-meta p { margin: 0; font-size: 14px; font-weight: 600; color: #3b5998; }
+
+        /* ==========================================================================
+           Product Detail Overlay System
+           ========================================================================== */
+        .inner-page-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #ffffff; z-index: 1500; overflow-y: auto; padding: 24px; box-sizing: border-box; }
+        .back-arrow { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; cursor: pointer; margin-bottom: 25px; color: #111111; text-transform: uppercase; transition: opacity 0.2s ease; margin-top: 80px; }
+        .back-arrow:hover { opacity: 0.7; }
+        
+        .inner-layout { display: flex; flex-direction: column; gap: 32px; max-width: 960px; margin: 0 auto; }
+        @media (min-width: 768px) {
+            .inner-layout { flex-direction: row; align-items: flex-start; }
+            .inner-img-wrapper { flex: 1.1; }
+            .inner-details-wrapper { flex: 0.9; position: sticky; top: 20px; padding-left: 15px; }
+        }
+        .inner-img-wrapper img { width: 100%; height: auto; max-height: 550px; object-fit: cover; border-radius: 4px; display: block; }
+        .inner-title { font-size: 26px; font-weight: 800; letter-spacing: 0.5px; margin: 0 0 8px 0; color: #111111; text-transform: uppercase; }
+        .inner-price { font-size: 20px; font-weight: 600; color: #3b5998; margin: 0 0 20px 0; }
+        .inner-desc { font-size: 14px; color: #555555; line-height: 1.6; margin-bottom: 28px; }
+        
+        .size-section { margin-bottom: 32px; }
+        .size-label { display: block; font-size: 11px; font-weight: 700; color: #888888; margin-bottom: 12px; letter-spacing: 1.2px; }
+        .size-boxes-container { display: flex; gap: 12px; margin-bottom: 14px; }
+        .size-box { width: 50px; height: 50px; border: 1px solid #dddddd; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; cursor: pointer; background: #ffffff; border-radius: 2px; transition: all 0.15s linear; color: #222222; }
+        .size-box:hover { border-color: #3b5998; }
+        .size-box.active { background: #1a2a3a; color: #ffffff; border-color: #1a2a3a; }
+        .see-guide-link { font-size: 12px; font-weight: 600; color: #3b5998; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; display: inline-block; }
+        
+        .inner-add-btn { width: 100%; background: #111111; color: #ffffff; border: none; padding: 16px; font-size: 14px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; border-radius: 2px; transition: background-color 0.2s ease; }
+        .inner-add-btn:hover { background-color: #3b5998; }
+
+        /* ==========================================================================
+           Cart Sidebar
+           ========================================================================== */
         #cart-sidebar { position: fixed; right: -450px; top: 0; width: 100%; max-width: 400px; height: 100%; background: var(--white); transition: 0.4s ease; z-index: 2000; padding: 25px; box-shadow: -10px 0 30px rgba(0,0,0,0.15); overflow-y: auto; }
         .whatsapp-btn { background: var(--whatsapp); color: white; width: 100%; padding: 15px; border: none; border-radius: 6px; font-weight: bold; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; margin-top: 10px; }
         .whatsapp-btn:hover { background: #128C7E; transform: translateY(-2px); }
@@ -90,21 +134,19 @@
 <body>
     <nav class="navbar">
         <div class="container">
-            <a href="index.html" class="logo">GWAPAFFECTION..
-                (MAVAZI)
-            </a>
+            <a href="index.html" class="logo">GWAPAFFECTION</a>
             <ul class="nav-links">
                 <li><a href="shop.html" style="color: var(--accent);">SHOP</a></li>
-                <!-- Add this to your shop.html where you want the button to appear -->
                 <li><a href="kichele.html" class="new-drop-btn">New Drop</a></li>
                 <li><a href="index.html">STORY</a></li>
+                <li><a href="#" onclick="toggleCart()"><i class="fas fa-shopping-bag"></i></a></li>
             </ul>
         </div>
     </nav>
 
     <div class="promo-container">
-        <div class="shiny-advert">✨ PREMIUM .HANDCRAFTED .CUSTOMS.DENIM. ✨</div>
-        <div class="delivery-note">Handmade & Ready in 24 Hours</div>
+        <div class="shiny-advert">✨ PREMIUM HANDCRAFTED CUSTOM DENIM ✨</div>
+        <div class="delivery-note">Handmade In Nairobi$</div>
     </div>
 
     <header class="home-header">
@@ -121,9 +163,15 @@
             <button class="filter-btn" onclick="applyFilter('jacket', this)">JACKETS</button>
         </div>
 
+        <!-- Limited Drops Row Container -->
+        <section id="limitedDropsSection"></section>
+
         <h2 class="section-title" id="cat-label">GWAPAN-COLLECTION</h2>
         <div class="product-list" id="productGrid"></div>
     </main>
+
+    <!-- Unified Single Dynamic Product View Overlay Box -->
+    <div id="product-detail-view" class="inner-page-overlay"></div>
 
     <div id="cart-sidebar">
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 2px solid var(--light); padding-bottom: 10px;">
@@ -155,146 +203,276 @@
                     <p style="font-size: 13px; color: var(--primary); font-weight: 900;">ACC: 1033884</p>
                 </div>
             </div>
-
-            <div id="cart-footer"></div>
+            <div id="cart-footer" style="margin-top: 15px;"></div>
         </div>
     </div>
 
     <footer>
         <p>© 2026 GWAPAFFECTION-CLOTHING-LINE | NAIROBI, KENYA</p>
-        <p>Contact: <a href="tel:254737610804" style="color: var(--accent); text-decoration: none;">0737610804</a></p>
+        <p>Contact: <a href="tel:254737610804" style="color: var(--accent); text-decoration: none;">0797389370</a></p>
     </footer>
 
     <script>
-        const products = [
+    const productDescriptions = {
+        jacket: "Crafted from heavy-duty raw denim with reinforced stitching. Designed for a structured cultural aesthetic with premium street comfort.",
+        pants: "Relaxed baggy silhouette cut from high-quality cultural denim. Features drop-crotch roomy scaling tailored for clean footwear stack.",
+        shirt: "Premium weight denim weave structure. Versatile tailoring perfect for layering or core styling within the collection.",
+        tracksuit: "Heavyweight premium cotton-fleece blend structured track armor. Detailed with custom ribbed contour borders and ergonomic side-pouch pocket channels.",
+        vest: "Tactical cut utility armor built from reinforced custom canvas denim panels. Perfect for layering over the core collection drops."
+    };
 
-            { id: 34, name: "GWAPAN-GREY-SET", price: 3450, img: "https://i.ibb.co/gFhfL7Ch/Photoroom-20260407-004656.jpg", type: "jacket" },
-            { id: 35, name: "GREY BAGGY JEANS", price: 1850, img: "https://i.ibb.co/JRSNMz0v/Software-Project-Scoping.jpg", type: "pants" },
-            { id: 32, name: "XL CAMO JORT", price: 1750, img: "https://i.ibb.co/Jwz6LRTq/Photoroom-20260404-193612.jpg", type: "pants" },
-            { id: 33, name: "GREY-GWAPAN-PANTS", price: 1850, img: "https://i.ibb.co/qFyQcQYJ/Photoroom-20260404-231225.jpg", type: "pants" },
-            { id: 31, name: "GWAPAN FULL DENIM SET", price: 3450, img: "https://i.ibb.co/tGqXtGf/IMG-6172.jpg", type: "pants" },
-            { id: 26, name: "GWAPAN CAMO PANTS", price: 1850, img: "https://i.ibb.co/nsfmJFMb/Photoroom-20260325-212157.jpg", type: "pants" },
-            { id: 1, name: "GWAPAN CUSTOM PANTS", price: 1800, img: "https://i.ibb.co/NnmNRYDx/image0-1.jpg", type: "pants" },
-            { id: 4, name: "CUSTOM JACKET", price: 1750, img: "https://i.ibb.co/zhCCyz5Y/image1-2.jpg", type: "jacket" },
-            { id: 7, name: "GWAPAN BLACK PANTS", price: 1850, img: "https://i.ibb.co/VYQymxY1/IMG-2434-2.jpg", type: "pants" },
-            { id: 8, name: "CUSTOM DENIM VEST", price: 1300, img: "https://i.ibb.co/KcZw88gM/image1-3.jpg", type: "shirt" },
-            { id: 9, name: "BLUE DENIM VEST", price: 1300, img: "https://i.ibb.co/G3G2v4Rh/image2-2.jpg", type: "shirt" },
-            { id: 11, name: "CUSTOM BLACK PANTS", price: 1850, img: "https://i.ibb.co/MyWK2J4Z/image1-4.jpg", type: "pants" },
-            { id: 12, name: "CUSTOM MILITIA PANTS", price: 1950, img: "https://i.ibb.co/TxkXWTs2/image1-6.jpg", type: "pants" },
-            { id: 13, name: "GWAPAN MILITIA JORTS", price: 1700, img: "https://i.ibb.co/PGt7MN8y/image0-8.jpg", type: "pants" },
-            { id: 14, name: "CUSTOM JEANS", price: 1850, img: "https://i.ibb.co/Xk2Z5BNB/IMG-4967.jpg", type: "pants" },
-            { id: 15, name: "DOUBLE POCKET JEANS", price: 1850, img: "https://i.ibb.co/GQQHPPtk/IMG-4964.jpg", type: "pants" },
-            { id: 17, name: "LADIES DENIM KIT", price: 2850, img: "https://i.ibb.co/ympZ0SmP/IMG-4990.jpg", type: "pants" },
-            { id: 19, name: "HIGH WAIST DENIM", price: 1850, img: "https://i.ibb.co/0RCSHX3G/IMG-4977.jpg", type: "pants" },
-            { id: 20, name: "CUSTOM LADIES JEANS", price: 1850, img: "https://i.ibb.co/XQMN972/IMG-4983.jpg", type: "pants" },
-            { id: 21, name: "CUSTOM HIGH WAIST", price: 1950, img: "https://i.ibb.co/GvrKcRs5/IMG-4978.jpg", type: "pants" },
-            { id: 22, name: "CUSTOM FOLDED JEANS", price: 1950, img: "https://i.ibb.co/XBJhYKQ/IMG-4979.jpg", type: "pants" },
-            { id: 23, name: "DENIM TOP", price: 1550, img: "https://i.ibb.co/gZGhYSqZ/IMG-4971.jpg", type: "shirt" },
-            { id: 24, name: "GWAPAN JORTS", price: 1750, img: "https://i.ibb.co/Nb0W0D8/Photoroom-20260319-205050.jpg", type: "pants" }
-        ];
+    const products = [
+        { id: 101, name: "G.A VOID TRACKSUIT SET", color: "Void Black Fleece", price: 4500, img: "https://i.ibb.co/BVrzFrNG/Whats-App-Image-2026-06-09-at-00-44-00.jpg", type: "tracksuit", limited: true },
+        { id: 102, name: "G.A GHOST TRACKSUIT SET", color: "Ghost Grey Fleece", price: 4800, img: "https://i.ibb.co/kspC8CpP/Whats-App-Image-2026-06-09-at-00-45-55.jpg", type: "tracksuit", limited: true },
+        { id: 36, name: "G.A MILITIA VEST", color: "Desert Militia Khaki", price: 1750, img: "https://i.ibb.co/KcJGjLRj/Whats-App-Image-2026-06-09-at-01-08-28.jpg", type: "vest" },
+        { id: 37, name: "NEW WASHED BLUE DENIM SET", color: "Vintage Blue Wash", price: 3750, img: "https://i.ibb.co/Sw4dDyD6/Whats-App-Image-2026-06-09-at-01-07-16.jpg", type: "jacket" },
+        { id: 38, name: "BLACK DENIM SET", color: "Matte Charcoal Onyx", price: 3750, img: "https://i.ibb.co/DDSthC4H/Whats-App-Image-2026-06-09-at-01-09-21.jpg", type: "jacket" },
+        { id: 34, name: "GWAPAN-GREY-SET", color: "Distressed Ash Grey", price: 3650, img: "https://i.ibb.co/gFhfL7Ch/Photoroom-20260407-004656.jpg", type: "jacket" },
+        { id: 35, name: "GREY DENIM JEANS", color: "Raw Charcoal Grey", price: 1950, img: "https://i.ibb.co/JRSNMz0v/Software-Project-Scoping.jpg", type: "pants" },
+        { id: 32, name: "G.A CAMO JORT", color: "Woodland Green Camo", price: 1850, img: "https://i.ibb.co/Jwz6LRTq/Photoroom-20260404-193612.jpg", type: "pants" },
+        { id: 33, name: "GREY-GWAPAN-PANTS", color: "Slate Grey Blend", price: 2000, img: "https://i.ibb.co/qFyQcQYJ/Photoroom-20260404-231225.jpg", type: "pants" },
+        { id: 31, name: "GWAP DENIM SET", color: "Classic Indigo Wash", price: 3750, img: "https://i.ibb.co/tGqXtGf/IMG-6172.jpg", type: "pants" },
+        { id: 26, name: "G.A CAMO PANTS", color: "Woodland Green Camo", price: 1950, img: "https://i.ibb.co/nsfmJFMb/Photoroom-20260325-212157.jpg", type: "pants" },
+        { id: 1, name: "GWAPAN CUSTOM PANTS", color: "Acid Wash Denim", price: 1950, img: "https://i.ibb.co/NnmNRYDx/image0-1.jpg", type: "pants" },
+        { id: 4, name: "CUSTOM JACKET", color: "Vintage Deep Blue", price: 2500, img: "https://i.ibb.co/zhCCyz5Y/image1-2.jpg", type: "jacket" },
+        { id: 7, name: "GWAPAN BLACK PANTS", color: "Stealth Midnight Black", price: 1950, img: "https://i.ibb.co/VYQymxY1/IMG-2434-2.jpg", type: "pants" },
+        { id: 8, name: "G.A DENIM VEST", color: "Washed Faded Blue", price: 1750, img: "https://i.ibb.co/KcZw88gM/image1-3.jpg", type: "shirt" },
+        { id: 9, name: "BLUE DENIM VEST", color: "Classic Bleach Indigo", price: 1750, img: "https://i.ibb.co/G3G2v4Rh/image2-2.jpg", type: "shirt" },
+        { id: 11, name: "CUSTOM BLACK PANTS", color: "Matte Onyx Black", price: 2000, img: "https://i.ibb.co/MyWK2J4Z/image1-4.jpg", type: "pants" },
+        { id: 12, name: "CUSTOM MILITIA PANTS", color: "Desert Khaki Camo", price: 2350, img: "https://i.ibb.co/TxkXWTs2/image1-6.jpg", type: "pants" },
+        { id: 13, name: "G.A MILITIA JORTS", color: "Desert Khaki Camo", price: 1750, img: "https://i.ibb.co/PGt7MN8y/image0-8.jpg", type: "pants" },
+        { id: 14, name: "CUSTOM JEANS", color: "Classic Retro Blue", price: 1950, img: "https://i.ibb.co/Xk2Z5BNB/IMG-4967.jpg", type: "pants" },
+        { id: 15, name: "DENIM 2POCKET JEANS", color: "Deep Stonewash", price: 2050, img: "https://i.ibb.co/GQQHPPtk/IMG-4964.jpg", type: "pants" },
+        { id: 22, name: "DENIM FOLDED JEANS", color: "Distressed Vintage Blue", price: 1950, img: "https://i.ibb.co/XBJhYKQ/IMG-4979.jpg", type: "pants" },
+    ];
 
-        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let selectedSize = 'M';
 
-        function renderProducts(cat = 'all') {
-            const grid = document.getElementById('productGrid');
+    function renderProducts(cat = 'all') {
+        const limitedContainer = document.getElementById('limitedDropsSection');
+        if (limitedContainer) {
+            if (cat === 'all' || cat === 'tracksuit') {
+                limitedContainer.style.display = 'block';
+                const limitedProducts = products.filter(p => p.limited);
+                let html = `
+                    <div class="limited-section-header">LIMITED TRACK DROPS</div>
+                    <div class="limited-flex-grid">`;
+                limitedProducts.forEach(p => {
+                    html += `
+                        <div class="limited-card" onclick="openProductPage(${p.id})">
+                            <div class="limited-badge">EXTREMELY LIMITED</div>
+                            <img src="${p.img}" alt="${p.name}">
+                            <div class="limited-card-meta">
+                                <h3>${p.name}</h3>
+                                <p>SH ${p.price}</p>
+                            </div>
+                        </div>`;
+                });
+                html += `</div>`;
+                limitedContainer.innerHTML = html;
+            } else {
+                limitedContainer.style.display = 'none';
+            }
+        }
+
+        const grid = document.getElementById('productGrid');
+        if (grid) {
             grid.innerHTML = '';
-            const list = cat === 'all' ? products : products.filter(p => p.type === cat);
+            const list = products.filter(p => !p.limited && (cat === 'all' || p.type === cat));
             list.forEach(p => {
-                const isPants = p.type === 'pants';
                 grid.innerHTML += `
-                    <div class="product" data-type="${p.type}">
+                    <div class="product" onclick="openProductPage(${p.id})">
                         <div class="img-container">
                             <img src="${p.img}" alt="${p.name}">
-                            <div class="bespoke-panel">
-                                <p class="panel-title">Bespoke Options</p>
-                                <div class="panel-grid">
-                                    ${isPants ? `
-                                        <div><label>Waist</label><select class="waist-sel">${range(27,37)}</select></div>
-                                        <div><label>Length</label><select class="len-sel">${range(10,45)}</select></div>
-                                        <div><label>Leg</label><select class="leg-sel">${range(10,15)}</select></div>
-                                        <div><label>Thread</label><input type="text" class="thread-in" placeholder="Color"></div>
-                                    ` : `
-                                        <div class="full-row"><label>Size</label><select class="std-size"><option>S</option><option selected>M</option><option>L</option><option>XL</option></select></div>
-                                    `}
-                                    <div class="full-row"><label>Notes</label><textarea class="note-in" placeholder="Distressing, etc."></textarea></div>
-                                </div>
-                            </div>
                         </div>
                         <div class="product-info">
                             <h3 class="product-name">${p.name}</h3>
                             <p class="price-tag">SH ${p.price}</p>
-                            <button onclick="addToCart(this, '${p.name}', ${p.price})" class="add-to-cart">ADD TO BAG</button>
                         </div>
                     </div>`;
             });
         }
+    }
 
-        function range(s, e) { let r = ''; for(let i=s; i<=e; i++) r += `<option>${i}</option>`; return r; }
+    function applyFilter(cat, btn) {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById('cat-label').innerText = cat === 'all' ? 'GWAPAN-COLLECTION' : `${cat.toUpperCase()} COLLECTION`;
+        renderProducts(cat);
+    }
 
-        function applyFilter(cat, btn) {
-            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            document.getElementById('cat-label').innerText = cat === 'all' ? "DENIM COLLECTION" : cat.toUpperCase() + "S";
-            renderProducts(cat);
+    // ==========================================================================
+    // Dynamic Inner Product View Generation
+    // ==========================================================================
+    function openProductPage(productId) {
+        const product = products.find(p => p.id === productId);
+        if(!product) return;
+
+        selectedSize = 'M'; // Reset size choice to default layout
+        const desc = productDescriptions[product.type] || "Premium custom item crafted by hand down at our Nairobi workshop.";
+
+        let detailOverlay = document.getElementById('product-detail-view');
+        
+        detailOverlay.innerHTML = `
+            <div class="back-arrow" onclick="closeProductPage()"><i class="fas fa-arrow-left"></i> Back to Shop</div>
+            <div class="inner-layout">
+                <div class="inner-img-wrapper">
+                    <img src="${product.img}" alt="${product.name}">
+                </div>
+                <div class="inner-details-wrapper">
+                    <h1 class="inner-title">${product.name}</h1>
+                    <p class="inner-price">KSH ${product.price}</p>
+                    <p class="inner-desc">${desc}</p>
+                    
+                    <div class="product-specifications" style="margin-bottom: 20px; font-size:12px; color:#666;">
+                        <strong>Colorway:</strong> ${product.color}<br>
+                        <strong>Origin:</strong> Custom Tailored in Nairobi
+                    </div>
+
+                    <div class="size-section">
+                        <span class="size-label">SELECT SIZE</span>
+                        <div class="size-boxes-container">
+                            <div class="size-box" onclick="selectSize('S', this)">S</div>
+                            <div class="size-box active" onclick="selectSize('M', this)">M</div>
+                            <div class="size-box" onclick="selectSize('L', this)">L</div>
+                            <div class="size-box" onclick="selectSize('XL', this)">XL</div>
+                        </div>
+                    </div>
+
+                    <button class="inner-add-btn" onclick="addProductToCart(${product.id})">Add Selected to Bag</button>
+                </div>
+            </div>
+        `;
+        detailOverlay.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // Stop background scrolling
+    }
+
+    function closeProductPage() {
+        document.getElementById('product-detail-view').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    function selectSize(size, element) {
+        document.querySelectorAll('.size-box').forEach(box => box.classList.remove('active'));
+        element.classList.add('active');
+        selectedSize = size;
+    }
+
+    // ==========================================================================
+    // Core E-commerce Bag & Checkout Actions
+    // ==========================================================================
+    function addProductToCart(productId) {
+        const product = products.find(p => p.id === productId);
+        if(!product) return;
+
+        const cartItem = {
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            img: product.img,
+            size: selectedSize
+        };
+
+        cart.push(cartItem);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        closeProductPage();
+        updateCartUI();
+        toggleCart(true); // Open the side bag instantly to verify addition
+    }
+
+    function toggleCart(forceOpen = false) {
+        const sidebar = document.getElementById('cart-sidebar');
+        if (forceOpen) {
+            sidebar.style.right = '0';
+        } else {
+            sidebar.style.right = sidebar.style.right === '0px' ? '-450px' : '0';
+        }
+    }
+
+    function removeFromCart(index) {
+        cart.splice(index, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartUI();
+    }
+
+    function updateCartUI() {
+        const displayArea = document.getElementById('cart-display-area');
+        const checkoutSection = document.getElementById('checkout-section');
+        const footerArea = document.getElementById('cart-footer');
+
+        if(cart.length === 0) {
+            displayArea.innerHTML = `<p style="text-align:center; color:#888; margin-top:4px; font-size:14px;">Your bag is empty.</p>`;
+            checkoutSection.style.display = 'none';
+            return;
         }
 
-        function toggleCart() {
-            const sidebar = document.getElementById('cart-sidebar');
-            sidebar.style.right = (sidebar.style.right === '0px') ? '-450px' : '0px';
+        checkoutSection.style.display = 'block';
+        displayArea.innerHTML = '';
+        let total = 0;
+
+        cart.forEach((item, index) => {
+            total += item.price;
+            displayArea.innerHTML += `
+                <div style="display:flex; gap:12px; margin-bottom:15px; border-bottom:1px dashed #eee; padding-bottom:10px; align-items:center;">
+                    <img src="${item.img}" style="width:60px; height:60px; object-fit:cover; border-radius:4px;">
+                    <div style="flex:1;">
+                        <h4 style="font-size:12px; text-transform:uppercase; font-weight:bold;">${item.name}</h4>
+                        <p style="font-size:11px; color:#666;">Size: <strong>${item.size}</strong></p>
+                        <p style="font-size:12px; color:var(--primary); font-weight:bold;">SH ${item.price}</p>
+                    </div>
+                    <button onclick="removeFromCart(${index})" style="background:none; border:none; color:#999; cursor:pointer; font-size:16px;"><i class="fas fa-trash-alt"></i></button>
+                </div>
+            `;
+        });
+
+        footerArea.innerHTML = `
+            <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:15px; margin: 15px 0 10px;">
+                <span>TOTAL:</span>
+                <span style="color:var(--primary);">KSH ${total}</span>
+            </div>
+            <button class="whatsapp-btn" onclick="sendWhatsAppOrder(${total})">
+                <i class="fab fa-whatsapp"></i> SEND ORDER OVER WHATSAPP
+            </button>
+        `;
+    }
+
+    function sendWhatsAppOrder(total) {
+        const name = document.getElementById('customer-name').value.trim();
+        const location = document.getElementById('delivery-location').value.trim();
+
+        if(!name || !location) {
+            alert('Please supply your Delivery Name and Location before executing checkout.');
+            return;
         }
 
-        function addToCart(btn, name, price) {
-            const p = btn.closest('.product');
-            const img = p.querySelector('img').src;
-            const note = p.querySelector('.note-in').value || "None";
-            let details = "";
-            if(p.dataset.type === 'pants') {
-                details = `W:${p.querySelector('.waist-sel').value} L:${p.querySelector('.len-sel').value} Leg:${p.querySelector('.leg-sel').value}`;
-            } else {
-                details = `Size: ${p.querySelector('.std-size').value}`;
-            }
-            cart.push({ name, price, details: `${details} | Notes: ${note}`, image: img });
-            saveAndUpdate(); toggleCart(); renderCartItems();
-        }
+        let orderMessage = `*NEW ORDER - GWAPAFFECTION CUSTOMS*\n\n`;
+        orderMessage += `*Client Details:*\n`;
+        orderMessage += `👤 Name: ${name}\n`;
+        orderMessage += `📍 Location: ${location}\n\n`;
+        orderMessage += `*Items Selected:*\n`;
 
-        function saveAndUpdate() { localStorage.setItem('cart', JSON.stringify(cart)); }
+        cart.forEach((item, index) => {
+            orderMessage += `${index + 1}. ${item.name} (Size: ${item.size}) - KSH ${item.price}\n`;
+        });
 
-        function renderCartItems() {
-            const display = document.getElementById('cart-display-area');
-            const footer = document.getElementById('cart-footer');
-            const checkout = document.getElementById('checkout-section');
-            display.innerHTML = '';
-            let total = 0;
-            if(cart.length === 0) { display.innerHTML = '<p style="text-align:center; color:#999; margin-top:50px;">Empty Bag.</p>'; checkout.style.display = 'none'; return; }
-            checkout.style.display = 'block';
-            cart.forEach((item, index) => {
-                total += item.price;
-                display.innerHTML += `<div style="display:flex; align-items:center; margin-bottom:12px; font-size:11px; border-bottom:1px solid #eee; padding-bottom:10px;">
-                    <img src="${item.image}" style="width:45px; height:45px; border-radius:4px; margin-right:10px; object-fit:cover;">
-                    <div style="flex-grow:1;"><b>${item.name}</b><br><span style="color:#777;">${item.details}</span></div>
-                    <button onclick="remove(${index})" style="border:none; background:none; color:red; font-size:18px; cursor:pointer;">&times;</button>
-                </div>`;
-            });
-            footer.innerHTML = `<div style="display:flex; justify-content:space-between; font-weight:bold; margin:15px 0; border-top: 1px solid #eee; padding-top: 10px;"><span>TOTAL:</span> <span>SH ${total}</span></div>
-                <button onclick="checkoutOnWhatsApp(${total})" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> COMPLETE ORDER ON WHATSAPP</button>`;
-        }
+        orderMessage += `\n💰 *Total Amount:* KSH ${total}\n`;
+        orderMessage += `⚡ _Ready within 3days . P
+        aybill Number-- 400200.
+        ACC-- 1033884. Order will be VERIFIED by our team upon 
+        completion of payment ,THANKYOU FOR SHOPPING WITH US ._`;
 
-        function remove(i) { cart.splice(i, 1); saveAndUpdate(); renderCartItems(); }
+        const encodedText = encodeURIComponent(orderMessage);
+        const whatsappUrl = `https://wa.me/254797389370?text=${encodedText}`;
+        
+        window.open(whatsappUrl, '_blank');
+    }
 
-        function checkoutOnWhatsApp(total) {
-            const name = document.getElementById('customer-name').value;
-            const location = document.getElementById('delivery-location').value;
-            if (!name || !location) { alert("Please enter your name and delivery address."); return; }
-            let msg = `🛍️ *NEW GWAPAFFECTION ORDER*\n👤 *CUSTOMER:* ${name.toUpperCase()}\n📍 *LOCATION:* ${location.toUpperCase()}\n💰 *TOTAL:* SH ${total}\n\n*ITEMS:* \n`;
-            cart.forEach((item, i) => { msg += `${i+1}. ${item.name}\n   └ ${item.details}\n\n`; });
-            msg += `💳 *PAYBILL:* 400200\n*ACC:* 1033884\n_Please send confirmation message._`;
-            window.open(`https://wa.me/254797389370?text=${encodeURIComponent(msg)}`, '_blank');
-            cart = []; saveAndUpdate(); renderCartItems(); toggleCart();
-        }
-
-        window.onload = () => { renderProducts(); saveAndUpdate(); renderCartItems(); };
+    // Initialize regular page setup configuration
+    window.onload = function() {
+        renderProducts('all');
+        updateCartUI();
+    };
     </script>
-
-    <P>Powered by Gaia</P>
 </body>
 </html>
