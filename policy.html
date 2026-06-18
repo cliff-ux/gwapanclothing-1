@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GWAP AFFECTION | Store Policies</title>
+    <!-- FontAwesome Links for Bag & Social Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #800000;
+            --dark: #000;
+            --light: #f4f4f4;
+            --white: #ffffff;
+            --accent: #d4af37;
+            --text-muted: #555555;
+            --border-color: #dddddd;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Times New Roman', Times, serif; background-color: var(--light); line-height: 1.6; color: #111; }
+        
+        /* ==========================================================================
+           Navigation Framework
+           ========================================================================== */
+        .navbar { background-color: var(--dark); padding: 15px 0; position: fixed; top: 0; width: 100%; z-index: 1000; border-bottom: 2px solid var(--primary); }
+        .navbar .container { width: 90%; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 24px; font-weight: bold; color: var(--primary); text-decoration: none; letter-spacing: 2px; text-transform: uppercase; }
+        
+        .nav-links { list-style: none; display: flex; gap: 20px; align-items: center; }
+        .nav-links li a { color: var(--light); text-decoration: none; font-weight: bold; font-size: 14px; text-transform: uppercase; padding: 10px 15px; display: block; transition: 0.3s; }
+        .nav-links li a:hover { color: var(--accent); }
+        
+        .new-drop-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #000000;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 4px;
+            transition: background 0.3s ease;
+            border: 1px solid var(--accent);
+        }
+        .new-drop-btn:hover { background-color: #333333; }
+
+        /* ==========================================================================
+           Policy Main Content Layout
+           ========================================================================== */
+        .policy-container {
+            width: 90%;
+            max-width: 800px;
+            margin: 160px auto 80px;
+            background: var(--white);
+            padding: 40px;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid #eee;
+        }
+
+        .policy-header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 20px;
+        }
+
+        .policy-header h1 {
+            font-size: 2.2rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .policy-header p {
+            font-size: 13px;
+            font-style: italic;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+        }
+
+        .policy-section {
+            margin-bottom: 35px;
+        }
+
+        .policy-section h2 {
+            font-size: 1.1rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .policy-section p {
+            font-size: 14px;
+            color: #222;
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+
+        .policy-section ul {
+            list-style-type: none;
+            padding-left: 5px;
+            margin-bottom: 12px;
+        }
+
+        .policy-section ul li {
+            font-size: 14px;
+            color: #222;
+            padding: 4px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .policy-section ul li::before {
+            content: "▪";
+            color: var(--primary);
+            font-size: 14px;
+        }
+
+        /* Paybill Highlight Frame inside policies */
+        .policy-payment-box {
+            background: #fff5f5;
+            border: 1px dashed var(--primary);
+            padding: 20px;
+            border-radius: 4px;
+            margin-top: 15px;
+        }
+
+        .policy-payment-box p {
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .back-to-shop-footer {
+            text-align: center;
+            margin-top: 5px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .shop-link-btn {
+            display: inline-block;
+            background: var(--dark);
+            color: var(--white);
+            text-decoration: none;
+            padding: 12px 30px;
+            font-size: 13px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .shop-link-btn:hover {
+            background: var(--primary);
+        }
+
+        footer { background-color: var(--dark); color: var(--white); padding: 40px 20px; text-align: center; font-size: 12px; border-top: 3px solid var(--primary); }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">GWAP AFFECTION</a>
+            <ul class="nav-links">
+                <li><a href="shop.html">SHOP</a></li>
+                <li><a href="kichele.html" class="new-drop-btn">LATEST</a></li>
+                <li><a href="index.html">STORY</a></li>
+                <li><a href="policy.html" style="color: var(--accent);">POLICIES</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="policy-container">
+        <div class="policy-header">
+            <h1> POLICY</h1>
+            <p>In Gwap We Believe — Handcrafted Standards & Client Guidelines</p>
+        </div>
+
+        <!-- Section 1: Production and Crafting -->
+        <section class="policy-section">
+            <h2><i class="fas fa-hammer"></i> 1. Handcrafted Production Timeline</h2>
+            <p>Every garment under the Gwapaffection label is custom-tailored and constructed by hand at our workshop in Nairobi, Kenya. Because we prioritize exceptional weight denim, premium panel stitching, and structured leather drapes over fast-fashion assembly lines:</p>
+            <ul>
+                <li>Standard structural construction requires up to <strong>3 business days</strong> from the moment payment confirmation is logged.</li>
+                <li>Highly detailed denim customizations, bespoke tailoring adjustments, or special collection sets may experience extended fulfillment tracks, which will be communicated during your WhatsApp order onboarding.</li>
+            </ul>
+        </section>
+
+        <!-- Section 2: Payment and Verification -->
+        <section class="policy-section">
+            <h2><i class="fas fa-receipt"></i> 2. Secure M-PESA Payment Protocol</h2>
+            <p>To eliminate checkout friction and securely manage local processing, checkout handles final parameter assembly directly via a verified manual WhatsApp business ledger framework.</p>
+            <ul>
+                <li>Orders are officially initialized only after official confirmation parameters match our M-PESA transactional ledger profiles.</li>
+                <li>For items tagged as **Limited Drops** (e.g., Void and Ghost tracksuits), inventory holds are not guaranteed upon checkout compilation. Stock availability locks permanently <strong>only upon validation of payment</strong>.</li>
+            </ul>
+            
+            <div class="policy-payment-box">
+                <p style="color: var(--primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px;">Official Business Credentials:</p>
+                <p style="margin: 0; font-size: 14px;"><strong>M-PESA Paybill:</strong> 400200</p>
+                <p style="margin: 0; font-size: 14px;"><strong>Account Number:</strong> 1033884</p>
+                <p style="margin-top: 10px; font-size: 11px; font-weight: normal; color: #555; font-style: italic;">*Always copy your exact transaction receipt text directly to our WhatsApp support agent to expedite your order routing loop.</p>
+            </div>
+        </section>
+
+        <!-- Section 3: Delivery and Fulfillment -->
+        <section class="policy-section">
+            <h2><i class="fas fa-truck"></i> 3. Delivery & Fulfillment Logistics</h2>
+            <p>Once crafting and structural quality audits finish within the 3-day production buffer, dispatch routes deploy across Nairobi and regional East African networks:</p>
+            <ul>
+                <li><strong>Nairobi Central & Local Estates:</strong> Dispatched via reliable local courier networks or custom rider services directly to your specified drop zone.</li>
+                <li><strong>Max Fee (350) For deliveries Around Nairobi </strong></li>
+                <li><strong>Outside Nairobi / Regional Locations:</strong> Arranged securely via recognized regional parcel couriers or vehicle booking operators.</li>
+                <li>All transport fees are handled transparently and verified alongside full client data parameters inside the checkout validation process.</li>
+            </ul>
+        </section>
+
+        <!-- Section 4: Exchanges and Adjustments -->
+        <section class="policy-section">
+            <h2><i class="fas fa-cut"></i> 4. Exchange & Sizing Adjustments</h2>
+            <p>As a premium handcrafted studio streetwear line, we work tirelessly to ensure your fit matches exactly. Because pieces are made to order, please adhere to our alignment guidelines:</p>
+            <ul>
+                <li>We strongly advise reviewing size configurations (S, M, L, XL) and checking the model lookbook references inside our product gallery screens before finalizing checkouts.</li>
+                <li>Exchanges for physical size adjustments are evaluated on an item-by-item basis. Items submitted for adjustment must remain unworn, unwashed, and in pristine structural condition with original packaging intact.</li>
+            </ul>
+        </section>
+
+        <div class="back-to-shop-footer">
+            <a href="shop.html" class="shop-link-btn">Return to Storefront</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2026 GWAPAFFECTION-CLOTHING-LINE | NAIROBI, KENYA</p>
+        <p>Contact: <a href="tel:254797389370" style="color: var(--accent); text-decoration: none;">0797389370</a></p>
+    </footer>
+</body>
+</html>

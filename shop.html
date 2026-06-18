@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>SHOP | GWAPAFFECTION PREMIUM DENIM CUSTOMS</title>
+    <title>GWAP AFFECTION | Shop</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #800000;
@@ -121,7 +121,7 @@
            Cart Sidebar
            ========================================================================== */
         #cart-sidebar { position: fixed; right: -450px; top: 0; width: 100%; max-width: 400px; height: 100%; background: var(--white); transition: 0.4s ease; z-index: 2000; padding: 25px; box-shadow: -10px 0 30px rgba(0,0,0,0.15); overflow-y: auto; }
-        .whatsapp-btn { background: var(--whatsapp); color: white; width: 100%; padding: 15px; border: none; border-radius: 6px; font-weight: bold; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; margin-top: 10px; }
+        .whatsapp-btn { background: var(--whatsapp); color: white; width: 100%; padding: 15px; border: none; border-radius: 6px; font-weight: bold; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; margin-top: 10px; border: none; line-height: 1.6; text-transform: uppercase; text-decoration: none; }
         .whatsapp-btn:hover { background: #128C7E; transform: translateY(-2px); }
 
         footer { background-color: var(--dark); color: var(--white); padding: 40px 20px; text-align: center; margin-top: 60px; font-size: 12px; border-top: 3px solid var(--primary); }
@@ -139,20 +139,39 @@
                 <li><a href="shop.html" style="color: var(--accent);">SHOP</a></li>
                 <li><a href="kichele.html" class="new-drop-btn">LATEST</a></li>
                 <li><a href="index.html">STORY</a></li>
-                <li><a href="#" onclick="toggleCart()"><i class="fas fa-shopping-bag"></i></a></li>
+                <li><a href="#" onclick="event.preventDefault(); toggleCart();"><i class="fas fa-shopping-bag"></i></a></li>
             </ul>
         </div>
     </nav>
 
     <div class="promo-container">
         <div class="shiny-advert">✨ PREMIUM //HANDCRAFTED// CUSTOM //DENIM ✨</div>
-        <div class="delivery-note">Handmade In Nairobi$</div>
+        <div class="delivery-note">Handmade In Nairobi</div>
     </div>
-
-    <header class="home-header">
+<header class="home-header">
         <h1>GWAP AFFECTION</h1>
-        <h2>HANDMADE  IN NAIROBI</h2>
-        <p>IN GWAP WIH BELEIVE</p>
+        <h2>HANDMADE IN NAIROBI</h2>
+        <p style="margin-bottom: 20px;">IN GWAP WE BELIEVE</p>
+        
+        <!-- Flashy Fit Guide Button -->
+        <button onclick="openGlobalSizeGuide()" style="
+            background: linear-gradient(45deg, #000000, var(--primary), #000000);
+            background-size: 200% auto;
+            color: #ffffff;
+            border: 1px solid var(--accent);
+            padding: 12px 30px;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(128, 0, 0, 0.4);
+            animation: moveShine 4s linear infinite;
+            transition: transform 0.2s ease;
+        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            <i class="fas fa-ruler-combined" style="margin-right: 8px; color: var(--accent);"></i> VIEW FIT GUIDE
+        </button>
     </header>
 
     <main>
@@ -163,14 +182,12 @@
             <button class="filter-btn" onclick="applyFilter('jacket', this)">GWAP JACKETS</button>
         </div>
 
-        <!-- Limited Drops Row Container -->
         <section id="limitedDropsSection"></section>
 
         <h2 class="section-title" id="cat-label">GWAPAN-COLLECTION</h2>
         <div class="product-list" id="productGrid"></div>
     </main>
 
-    <!-- Unified Single Dynamic Product View Overlay Box -->
     <div id="product-detail-view" class="inner-page-overlay"></div>
 
     <div id="cart-sidebar">
@@ -209,8 +226,9 @@
 
     <footer>
         <p>© 2026 GWAPAFFECTION-CLOTHING-LINE | NAIROBI, KENYA</p>
-        <p>Contact: <a href="tel:254737610804" style="color: var(--accent); text-decoration: none;">0797389370</a></p>
+        <p>Contact: <a href="tel:254797389370" style="color: var(--accent); text-decoration: none;">0797389370</a></p>
     </footer>
+
 <script>
 const productDescriptions = {
     jacket: "Crafted from heavy-duty raw denim with reinforced stitching. Designed for a structured cultural aesthetic with premium street comfort.",
@@ -218,12 +236,10 @@ const productDescriptions = {
     shirt: "Premium weight denim weave structure. Versatile tailoring perfect for layering or core styling within the collection.",
     tracksuit: "Heavyweight premium cotton-fleece blend structured track armor. Detailed with custom ribbed contour borders and ergonomic side-pouch pocket channels.",
     vest: "Tactical cut utility armor built from reinforced custom canvas denim panels. Perfect for layering over the core collection drops.",
-    // Added specific collection category descriptions
     leather_set: "Premium structural tailoring built from exceptional weight brown leather panels. Engineered for bold silhouette framing, clean street movement, and an immaculate heavy-cut drape."
 };
 
 const products = [
-    // New Product Added: G.A Brown leather Set with comprehensive front, back, and lookbook asset parameters
     { 
         id: 103, 
         name: "G.A Brown leather Set", 
@@ -248,7 +264,7 @@ const products = [
     { id: 35, name: "GREY DENIM JEANS", color: "Raw Charcoal Grey", price: 1950, img: "https://i.ibb.co/JRSNMz0v/Software-Project-Scoping.jpg", type: "pants" },
     { id: 32, name: "G.A CAMO JORT", color: "Woodland Green Camo", price: 1950, img: "https://i.ibb.co/Jwz6LRTq/Photoroom-20260404-193612.jpg", type: "pants" },
     { id: 33, name: "GREY-GWAPAN-PANTS", color: "Slate Grey Blend", price: 2000, img: "https://i.ibb.co/qFyQcQYJ/Photoroom-20260404-231225.jpg", type: "pants" },
-    { id: 31, name: "G.A BLACK  DENIM SET", color: "Classic Indigo Wash", price: 3750, img: "https://i.ibb.co/tGqXtGf/IMG-6172.jpg", type: "pants" },
+    { id: 31, name: "G.A BLACK DENIM SET", color: "Classic Indigo Wash", price: 3750, img: "https://i.ibb.co/tGqXtGf/IMG-6172.jpg", type: "pants" },
     { id: 26, name: "G.A CAMO PANTS", color: "Woodland Green Camo", price: 2250, img: "https://i.ibb.co/nsfmJFMb/Photoroom-20260325-212157.jpg", type: "pants" },
     { id: 1, name: "G.A CUSTOM PANTS", color: "Acid Wash Denim", price: 1950, img: "https://i.ibb.co/NnmNRYDx/image0-1.jpg", type: "pants" },
     { id: 4, name: "G.A CUSTOM JACKET", color: "Vintage Deep Blue", price: 2500, img: "https://i.ibb.co/zhCCyz5Y/image1-2.jpg", type: "jacket" },
@@ -296,7 +312,7 @@ function renderProducts(cat = 'all') {
     const grid = document.getElementById('productGrid');
     if (grid) {
         grid.innerHTML = '';
-        const list = products.filter(p => !p.limited && (cat === 'all' || p.type === cat));
+        const list = products.filter(p => !p.limited && (cat === 'all' || p.type === cat || (cat === 'leather_set' && p.type === 'leather_set')));
         list.forEach(p => {
             grid.innerHTML += `
                 <div class="product" onclick="openProductPage(${p.id})">
@@ -319,7 +335,6 @@ function applyFilter(cat, btn) {
     renderProducts(cat);
 }
 
-// Helper function to switch primary visual viewing angle
 function switchProductView(imgUrl, emitterBtn) {
     const frame = document.getElementById('primary-view-frame');
     if(frame) frame.src = imgUrl;
@@ -328,19 +343,15 @@ function switchProductView(imgUrl, emitterBtn) {
     if(emitterBtn) emitterBtn.style.background = '#fff';
 }
 
-// ==========================================================================
-// Dynamic Inner Product View Generation
-// ==========================================================================
 function openProductPage(productId) {
     const product = products.find(p => p.id === productId);
     if(!product) return;
 
-    selectedSize = 'M'; // Reset size choice to default layout
+    selectedSize = 'M'; 
     const desc = productDescriptions[product.type] || "Premium custom item crafted by hand down at our Nairobi workshop.";
 
     let detailOverlay = document.getElementById('product-detail-view');
     
-    // Check if the product has multiple perspective angles defined
     let imageViewerHtml = `<img id="primary-view-frame" src="${product.img}" alt="${product.name}">`;
     if(product.imgBack) {
         imageViewerHtml = `
@@ -354,7 +365,6 @@ function openProductPage(productId) {
         `;
     }
 
-    // Build sub-section structural array for sizing layout specifications and sizing model lookbooks
     let modelGalleryHtml = "";
     if(product.gallery && product.gallery.length > 0) {
         modelGalleryHtml = `
@@ -408,7 +418,7 @@ function openProductPage(productId) {
         </div>
     `;
     detailOverlay.style.display = 'block';
-    document.body.style.overflow = 'hidden'; // Stop background scrolling
+    document.body.style.overflow = 'hidden'; 
 }
 
 function closeProductPage() {
@@ -496,7 +506,7 @@ function updateCartUI() {
             <span style="color:var(--primary);">KSH ${total}</span>
         </div>
         <button class="whatsapp-btn" onclick="sendWhatsAppOrder(${total})">
-            <i class="fab fa-whatsapp"></i> SEND ORDER OVER WHATSAPP
+            <i class="fab fa-whatsapp"></i> SEND ORDER VIA WHATSAPP
         </button>
     `;
 }
@@ -521,7 +531,8 @@ function sendWhatsAppOrder(total) {
     });
 
     orderMessage += `\n💰 *Total Amount:* KSH ${total}\n`;
-    orderMessage += `⚡ _Ready within 3days . \nPaybill Number-- 400200.\nAccount Number-- 1033884. \nPLease send confirmation message,\n,THANKYOU FOR SHOPPING WITH US ._`;
+    orderMessage += ` \nPaybill Number-- 400200.\nAccount Number-- 1033884. \nPLease send confirmation message,\n, ._`;
+    orderMessage += `\n\n*Usually Ready within 3days*`;
 
     const encodedText = encodeURIComponent(orderMessage);
     const whatsappUrl = `https://wa.me/254797389370?text=${encodedText}`;
@@ -533,6 +544,119 @@ window.onload = function() {
     renderProducts('all');
     updateCartUI();
 };
+function openGlobalSizeGuide() {
+    document.getElementById('global-size-guide-modal').style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+function closeGlobalSizeGuide() {
+    document.getElementById('global-size-guide-modal').style.display = 'none';
+    document.body.style.overflow = 'auto';
+}
+
+function switchModalTab(tabId, element) {
+    document.querySelectorAll('.modal-table-wrapper').forEach(w => w.classList.remove('active'));
+    document.querySelectorAll('.m-tab-btn').forEach(b => b.classList.remove('active-m-tab'));
+    
+    document.getElementById(tabId).classList.add('active');
+    element.classList.add('active-m-tab');
+}
 </script>
 </body>
+<!-- Global Size Guide Modal Pop-up -->
+    <div id="global-size-guide-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box;">
+        <div style="background: #ffffff; width: 100%; max-width: 750px; max-height: 90vh; overflow-y: auto; border-radius: 8px; padding: 30px; position: relative; border-top: 4px solid var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+            
+            <!-- Close Button -->
+            <button onclick="closeGlobalSizeGuide()" style="position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 28px; cursor: pointer; color: #333;">&times;</button>
+            
+            <div style="text-align: center; margin-bottom: 25px;">
+                <h3 style="font-size: 1.5rem; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); margin-bottom: 5px;">CUT & MEASUREMENT SPECIFICATIONS</h3>
+                <p style="font-style: italic; font-size: 12px; color: #666;">Handcrafted silhouettes engineered locally in Nairobi.</p>
+            </div>
+
+            <!-- Modal Tab Filter Handles -->
+            <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 25px; flex-wrap: wrap;">
+                <button class="m-tab-btn active-m-tab" onclick="switchModalTab('m-pants', this)" style="padding: 10px 16px; border: 1px solid #ddd; background: #fafafa; cursor: pointer; font-weight: bold; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;">Pants & Jorts</button>
+                <button class="m-tab-btn" onclick="switchModalTab('m-outerwear', this)" style="padding: 10px 16px; border: 1px solid #ddd; background: #fafafa; cursor: pointer; font-weight: bold; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;">Jackets & Leather</button>
+                <button class="m-tab-btn" onclick="switchModalTab('m-shirts', this)" style="padding: 10px 16px; border: 1px solid #ddd; background: #fafafa; cursor: pointer; font-weight: bold; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;">Boxed Shirts</button>
+                <button class="m-tab-btn" onclick="switchModalTab('m-tracksuits', this)" style="padding: 10px 16px; border: 1px solid #ddd; background: #fafafa; cursor: pointer; font-weight: bold; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;">Tracksuits</button>
+            </div>
+
+            <!-- Embedded Tables Layout Styling overrides inside modal context -->
+            <style>
+                .m-tab-btn.active-m-tab { background: #000000 !important; color: #ffffff !important; border-color: #000000 !important; }
+                .modal-table-wrapper { display: none; overflow-x: auto; margin-bottom: 15px; border: 1px solid #eee; }
+                .modal-table-wrapper.active { display: block; }
+                .m-size-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; }
+                .m-size-table th, .m-size-table td { padding: 10px 12px; border-bottom: 1px solid #eee; }
+                .m-size-table th { background: #f5f5f5; font-weight: bold; text-transform: uppercase; font-size: 10px; color: #444; }
+                .m-size-table td:first-child { font-weight: bold; color: var(--primary); }
+                .m-fit-notes { background: #fffcfc; border-left: 3px solid var(--primary); padding: 12px; margin-top: 15px; font-size: 12px; color: #555; }
+            </style>
+
+            <!-- PANTS -->
+            <div id="m-pants" class="modal-table-wrapper active">
+                <table class="m-size-table">
+                    <thead><tr><th>Size</th><th>Waist</th><th>Total Length</th><th>Thigh Width</th><th>Height Profile</th></tr></thead>
+                    <tbody>
+                        <tr><td>S</td><td>28" - 30"</td><td>40"</td><td>24"</td><td>5'4" – 5'7"</td></tr>
+                        <tr><td>M</td><td>31" - 33"</td><td>41"</td><td>25"</td><td>5'8" – 5'11"</td></tr>
+                        <tr><td>L</td><td>34" - 36"</td><td>42"</td><td>26"</td><td>6'0" – 6'2"</td></tr>
+                        <tr><td>XL</td><td>37" - 40"</td><td>43"</td><td>27"</td><td>6'3" +</td></tr>
+                    </tbody>
+                </table>
+                <div class="m-fit-notes"><strong>Pants Fit:</strong> Cut long to puddle and stack cleanly over high-profile streetwear boots or chunky sneakers.</div>
+            </div>
+
+            <!-- OUTERWEAR -->
+            <div id="m-outerwear" class="modal-table-wrapper">
+                <table class="m-size-table">
+                    <thead><tr><th>Size</th><th>Chest Width</th><th>Jacket Length</th><th>Sleeve Length</th><th>Profile</th></tr></thead>
+                    <tbody>
+                        <tr><td>S</td><td>36" - 38"</td><td>26"</td><td>24"</td><td>Cropped Boxy</td></tr>
+                        <tr><td>M</td><td>39" - 41"</td><td>27"</td><td>25"</td><td>True Boxy</td></tr>
+                        <tr><td>L</td><td>42" - 44"</td><td>28"</td><td>26"</td><td>Relaxed Wide</td></tr>
+                        <tr><td>XL</td><td>45" - 48"</td><td>29"</td><td>27"</td><td>Extreme Drop</td></tr>
+                    </tbody>
+                </table>
+                <div class="m-fit-notes"><strong>Outerwear Fit:</strong> Features dropped shoulder architectures tailored for heavy layering configurations.</div>
+            </div>
+
+            <!-- SHIRTS -->
+            <div id="m-shirts" class="modal-table-wrapper">
+                <table class="m-size-table">
+                    <thead><tr><th>Size</th><th>Chest Fit</th><th>Front Length</th><th>Shoulder Span</th></tr></thead>
+                    <tbody>
+                        <tr><td>S</td><td>34" - 36"</td><td>27"</td><td>18.5"</td></tr>
+                        <tr><td>M</td><td>37" - 39"</td><td>28"</td><td>19.5"</td></tr>
+                        <tr><td>L</td><td>40" - 42"</td><td>29"</td><td>20.5"</td></tr>
+                        <tr><td>XL</td><td>43" - 46"</td><td>30"</td><td>21.5"</td></tr>
+                    </tbody>
+                </table>
+                <div class="m-fit-notes"><strong>Shirts Fit:</strong> Box profile panels designed with stiff tailored hems that fall evenly over raw denims.</div>
+            </div>
+
+            <!-- TRACKSUITS -->
+            <div id="m-tracksuits" class="modal-table-wrapper">
+                <table class="m-size-table">
+                    <thead><tr><th>Size</th><th>Chest Frame</th><th>Pant Waist</th><th>Track Inseam</th></tr></thead>
+                    <tbody>
+                        <tr><td>S</td><td>36" - 38"</td><td>28" - 30"</td><td>30"</td></tr>
+                        <tr><td>M</td><td>39" - 41"</td><td>31" - 33"</td><td>31"</td></tr>
+                        <tr><td>L</td><td>42" - 44"</td><td>34" - 36"</td><td>32"</td></tr>
+                        <tr><td>XL</td><td>45" - 48"</td><td>37" - 40"</td><td>33"</td></tr>
+                    </tbody>
+                </table>
+                <div class="m-fit-notes"><strong>Fleece Fit:</strong> High-density heavy cotton-fleece track layers engineered to retain shape boundaries.</div>
+            </div>
+
+            <div style="margin-top: 20px; padding-top: 15px; border-top: 1px dashed #eee; font-size: 11px; text-align: center; color: #888;">
+                <i class="fab fa-whatsapp" style="color: #25D366;"></i> Need exact adjustments? Let us know your specific measurements when ordering via WhatsApp!
+            </div>
+        </div>
+    </div>
+<footer>
+All content and designs © 2026 GWAPAFFECTION-CLOTHING-LINE. Crafted with care in Nairobi, Kenya. For inquiries, contact us at <a href="tel:254797389370" style="color: var(--accent); text-decoration: none;">0797389370</a>.
+</footer>
 </html>
