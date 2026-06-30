@@ -142,6 +142,55 @@
             .archive-item { height: 400px; }
             .heritage-item img, .editorial-item img { height: 450px; }
             .spec-label { position: relative; left: 0; top: 0; display: inline-block; margin-bottom: 10px; }
+/* Container must be relative for absolute positioning to pin to the image */
+.product-img-container {
+    position: relative;
+    overflow: hidden;
+}
+
+/* If item is sold out, slightly dim the product image */
+.product-card.sold-out img {
+    filter: grayscale(30%) opacity(75%);
+}
+
+/* The Banner Design */
+.stock-banner {
+    position: absolute;
+    top: 12px;
+    left: 0;
+    width: auto;
+    padding: 6px 14px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    z-index: 10;
+}
+
+/* Dark, sleek aesthetic for Sold Out */
+.sold-out-banner {
+    background-color: #000000;
+    color: #ffffff;
+    border-right: 2px solid #ffffff; /* Adds a clean edge detail */
+}
+
+/* Optional styling for limited tags */
+.limited-banner {
+    background-color: #ffffff;
+    color: #000000;
+    top: 12px;
+    right: 0;
+    left: auto; /* Aligns to top-right instead */
+}
+
+/* Style for disabled buttons */
+.buy-btn:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+    border: none;
+}
+
         }
     </style>
 </head>
