@@ -6,7 +6,9 @@
     <title>GWAP AFFECTION | Store Policy</title>
     <!-- FontAwesome Links for Bag & Social Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <ul>
+        <li><a href="policy.html">POLICIES</a></li>
+    </ul>
     <style>
         :root {
             --primary: #800000;
@@ -28,22 +30,22 @@
         .navbar .container { width: 90%; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 24px; font-weight: bold; color: var(--primary); text-decoration: none; letter-spacing: 2px; text-transform: uppercase; }
         
-        .nav-links { list-style: none; display: flex; gap: 20px; align-items: center; }
-        .nav-links li a { color: var(--light); text-decoration: none; font-weight: bold; font-size: 14px; text-transform: uppercase; padding: 10px 15px; display: block; transition: 0.3s; }
+        .nav-links { list-style: none; display: flex; gap: 15px; align-items: center; }
+        .nav-links li a { color: var(--light); text-decoration: none; font-weight: bold; font-size: 13px; text-transform: uppercase; padding: 8px 12px; display: block; transition: 0.3s; }
         .nav-links li a:hover { color: var(--accent); }
         
         .new-drop-btn {
             display: inline-block;
-            padding: 12px 24px;
+            padding: 8px 16px !important;
             background-color: #000000;
-            color: #ffffff;
+            color: #ffffff !important;
             text-decoration: none;
             font-weight: bold;
             border-radius: 4px;
             transition: background 0.3s ease;
             border: 1px solid var(--accent);
         }
-        .new-drop-btn:hover { background-color: #333333; }
+        .new-drop-btn:hover { background-color: #333333; color: var(--accent) !important; }
 
         /* ==========================================================================
            Policy Main Content Layout
@@ -157,7 +159,7 @@
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: var(--transition);
+            transition: 0.3s;
         }
 
         .shop-link-btn:hover {
@@ -165,10 +167,16 @@
         }
 
         footer { background-color: var(--dark); color: var(--white); padding: 40px 20px; text-align: center; font-size: 12px; border-top: 3px solid var(--primary); }
+        
+        @media (max-width: 768px) {
+            .navbar .container { flex-direction: column; gap: 15px; text-align: center; }
+            .policy-container { margin-top: 220px; padding: 20px; }
+        }
     </style>
 </head>
 
 <body>
+    <!-- Top Navigation Control Bar -->
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="logo">GWAP AFFECTION</a>
@@ -181,9 +189,10 @@
         </div>
     </nav>
 
+    <!-- Main Content Policy Blocks -->
     <main class="policy-container">
         <div class="policy-header">
-            <h1> POLICY</h1>
+            <h1>POLICY</h1>
             <p>In Gwap We Believe — Handcrafted Standards & Client Guidelines</p>
         </div>
 
@@ -241,6 +250,7 @@
         </div>
     </main>
 
+    <!-- Footer Segment -->
     <footer>
         <p>© 2026 GWAPAFFECTION-CLOTHING-LINE | NAIROBI, KENYA</p>
         <p>Contact: <a href="tel:254797389370" style="color: var(--accent); text-decoration: none;">0797389370</a></p>

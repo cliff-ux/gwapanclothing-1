@@ -152,7 +152,20 @@
         footer { background-color: var(--dark); color: var(--white); padding: 40px 20px; text-align: center; margin-top: 60px; font-size: 12px; border-top: 3px solid var(--primary); }
 
         @media (max-width: 992px) { .product-list { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 600px) { .product-list { grid-template-columns: 1fr; } #cart-sidebar { max-width: 100%; } .logo { font-size: 18px; } }
+        
+        /* Mobile updates for 2 columns */
+        @media (max-width: 600px) { 
+            .product-list { 
+                grid-template-columns: repeat(2, 1fr); /* Swapped from 1fr to 2 columns */
+                gap: 12px; /* Made the gap tighter for small mobile screens */
+                padding: 10px;
+            } 
+            .img-container {
+                height: 180px; /* Reduced box height so items don't look overly stretched vertically */
+            }
+            #cart-sidebar { max-width: 100%; } 
+            .logo { font-size: 18px; } 
+        }
     </style>
 </head>
 
