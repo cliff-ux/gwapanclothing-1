@@ -622,7 +622,7 @@ function updateCartUI() {
                 <span style="color:var(--primary);">KSH ${total}</span>
             </div>
             <button class="whatsapp-btn" onclick="executeCheckoutSequence(${total})" style="width:100%; display:flex; justify-content:center; align-items:center; gap:10px;">
-                <i class="fas fa-bolt"></i> INITIALIZE INSTANT STK CHECKOUT
+                <i class="fas fa-bolt"></i> COMPLETE ORDER ON WHATSAPP
             </button>
         `;
     }
@@ -637,46 +637,7 @@ async function executeCheckoutSequence(total) {
     const location = locEl ? locEl.value.trim() : "";
     const rawPhone = phoneEl ? phoneEl.value.trim() : "";
 
-    if(!name || !location || !rawPhone) {
-        alert('Please supply your Delivery Name, Location, and M-PESA Phone Number.');
-        return;
-    }
-
-    let formattedPhone = rawPhone.replace(/\D/g, ''); 
-    if (formattedPhone.startsWith('0')) {
-        formattedPhone = '254' + formattedPhone.substring(1);
-    } else if (formattedPhone.startsWith('7') || formattedPhone.startsWith('1')) {
-        formattedPhone = '254' + formattedPhone;
-    }
-
-    if (formattedPhone.length !== 12 || !formattedPhone.startsWith('254')) {
-        alert('Please provide a valid M-PESA phone number configuration.');
-        return;
-    }
-
-    console.log("Triggering Daraja API Push sequence for total: " + total);
-    
-    try {
-        const response = await fetch('http://127.0.0.1:5000/api/stkpush', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                phone: formattedPhone,
-                amount: total
-            })
-        });
-
-        const mpesaResult = await response.json();
-        
-        if(mpesaResult.ResponseCode === "0") {
-            alert("🚀 STK PIN Prompt deployed successfully! Check your phone to complete your payment, then finish sending your receipt to WhatsApp.");
-        } else {
-            console.error("Daraja Response Defect:", mpesaResult);
-            alert("⚠️ STK Push could not initiate directly. Proceeding to WhatsApp to process order parameters manually.");
-        }
-    } catch (err) {
-        console.error("Critical communications backend pipeline down:", err);
-    }
+  
 
     sendWhatsAppOrder(total, name, location);
 }
@@ -694,11 +655,11 @@ function sendWhatsAppOrder(total, name, location) {
 
     orderMessage += `\n💰 *Total Amount:* KSH ${total}\n`;
     orderMessage += `---------------------------------\n`;
-    orderMessage += `⚡ *Payment Status:* STK Push Initialized to Till Number.\n`;
-    orderMessage += `If your PIN prompt did not arrive, please pay manually via:\n`;
-    orderMessage += `• Buy Goods Till Number\n`;
-    orderMessage += `• Always review confirmation on match ledger.\n\n`;
+    orderMessage += `• Paybill  Number:${400200}\n`;
+    orderMessage += `• Account Number: ${1033884}\n`;
     orderMessage += `*Usually Ready within 3 days*`;
+    orderMessage +='---------------------------------\n';
+    orderMessage += `kindly share payment confirmation messge thankyou!`;   
 
     const encodedText = encodeURIComponent(orderMessage);
     const whatsappUrl = `https://wa.me/254797389370?text=${encodedText}`;
