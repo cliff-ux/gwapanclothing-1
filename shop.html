@@ -177,6 +177,7 @@
                 <li><a href="shop.html" style="color: var(--accent);">SHOP</a></li>
                 <li><a href="kichele.html" class="new-drop-btn">LATEST</a></li>
                 <li><a href="index.html">STORY</a></li>
+                <li><a href="policy.html">POLICIES</a></li>
                 <li><a href="#" onclick="event.preventDefault(); toggleCart();"><i class="fas fa-shopping-bag"></i></a></li>
             </ul>
         </div>
@@ -258,6 +259,24 @@
             <div id="cart-footer" style="margin-top: 15px;"></div>
         </div>
     </div>
+
+
+<div id="global-size-guide-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; font-family: inherit;">
+    <div style="background: #ffffff; width: 100%; max-width: 750px; max-height: 90vh; overflow-y: auto; border-radius: 8px; padding: 30px; position: relative; border-top: 4px solid var(--primary, #000); box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+        
+        <button onclick="closeGlobalSizeGuide()" style="position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 28px; cursor: pointer; color: #333;">&times;</button>
+        
+        <div style="text-align: center; margin-bottom: 25px;">
+            <h3 style="font-size: 1.5rem; letter-spacing: 2px; text-transform: uppercase; color: var(--primary, #000); margin-bottom: 5px;">CUT & MEASUREMENT SPECIFICATIONS</h3>
+            <p style="font-style: italic; font-size: 12px; color: #666;">Handcrafted silhouettes engineered locally in Nairobi.</p>
+        </div>
+
+        <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 25px; flex-wrap: wrap;">
+            <button class="m-tab-btn active-m-tab" onclick="switchModalTab('m-pants', this)" style="padding: 10px 16px; border: 1px solid #ddd; background: #fafafa; cursor: pointer; font-weight: bold; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;">Pants & Jorts</button>
+            <button class="m-tab-btn" onclick="switchModalTab('m-outerwear', this)" style="padding: 10px 16px; border: 1px solid #ddd; background: #fafafa; cursor: pointer; font-weight: bold; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;">Jackets & Leather</button>
+            <button class="m-tab-btn" onclick="switchModalTab('m-shirts', this)" style="padding: 10px 16px; border: 1px solid #ddd; background: #fafafa; cursor: pointer; font-weight: bold; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;">Boxed Shirts</button>
+            <button class="m-tab-btn" onclick="switchModalTab('m-tracksuits', this)" style="padding: 10px 16px; border: 1px solid #ddd; background: #fafafa; cursor: pointer; font-weight: bold; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;">Tracksuits</button>
+        </div>
 <script>
 const productDescriptions = {
     jacket: "Crafted from heavy-duty raw denim with reinforced stitching. Designed for a structured cultural aesthetic with premium street comfort.",
@@ -265,7 +284,8 @@ const productDescriptions = {
     shirt: "Premium weight denim weave structure. Versatile tailoring perfect for layering or core styling within the collection.",
     tracksuit: "Heavyweight premium cotton-fleece blend structured track armor. Detailed with custom ribbed contour borders and ergonomic side-pouch pocket channels.",
     vest: "Tactical cut utility armor built from reinforced custom canvas denim panels. Perfect for layering over the core collection drops.",
-    leather_set: "Premium structural tailoring built from exceptional weight brown leather panels. Engineered for bold silhouette framing, clean street movement, and an immaculate heavy-cut drape."
+    leather_set: "Premium structural tailoring built from exceptional weight brown leather panels. Engineered for bold silhouette framing, clean street movement, and an immaculate heavy-cut drape.",
+    skirt: "Premium custom tailored structural cut skirt. Engineered for distinct silhouette framing, clean lines, and heavy-drape street aesthetic."
 };
 
 const products = [
@@ -325,6 +345,16 @@ const products = [
         limited: false 
     },
     { id: 101, name: "G.A VOID TRACKSUIT SET", color: "Void Black Fleece", price: 4500, img: "https://i.ibb.co/BVrzFrNG/Whats-App-Image-2026-06-09-at-00-44-00.jpg", type: "tracksuit", limited: true },
+    { 
+        id: 108, 
+        name: "G.A Militia skirt {xs}", 
+        color: "Militia Premium Custom", 
+        price: 1800, 
+        img: "https://i.ibb.co/Z1S4dHN1/IMG-5206.jpg", 
+        imgBack: "https://i.ibb.co/SXDFQjtB/Photoroom-20260721-221841.jpg", 
+        type: "skirt", 
+        limited: false 
+    },
     { id: 36, name: "G.A MILITIA VEST", color: "Desert Militia Khaki", price: 1750, img: "https://i.ibb.co/KcJGjLRj/Whats-App-Image-2026-06-09-at-01-08-28.jpg", type: "vest" },
     { id: 37, name: "G.A WASHED BLUE DENIM SET", color: "Vintage Blue Wash", price: 3750, img: "https://i.ibb.co/Sw4dDyD6/Whats-App-Image-2026-06-09-at-01-07-16.jpg", type: "jacket" },
     { id: 38, name: "BLACK DENIM SET", color: "Matte Charcoal Onyx", price: 3750, img: "https://i.ibb.co/DDSthC4H/Whats-App-Image-2026-06-09-at-01-09-21.jpg", type: "jacket" },
@@ -382,7 +412,6 @@ function renderProducts(cat = 'all') {
         const list = products.filter(p => !p.limited && (cat === 'all' || p.type === cat || (cat === 'leather_set' && p.type === 'leather_set')));
         
         list.forEach(p => {
-            const backImgSrc = p.imgBack ? p.imgBack : p.img;
             grid.innerHTML += `
                 <div class="product ${p.outOfStock ? 'sold-out' : ''}">
                     <div class="img-container" style="position:relative; overflow:hidden;">
@@ -553,7 +582,6 @@ function updateCartUI() {
     const footerArea = document.getElementById('cart-footer');
 
     if(!displayArea) return;
-
     if(cart.length === 0) {
         displayArea.innerHTML = `<p style="text-align:center; color:#888; margin-top:4px; font-size:14px;">Your bag is empty.</p>`;
         if(checkoutSection) checkoutSection.style.display = 'none';
@@ -581,30 +609,80 @@ function updateCartUI() {
 
     if(footerArea) {
         footerArea.innerHTML = `
-            <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:15px; margin: 15px 0 10px;">
+            <div style="margin-top: 15px; border-top: 1px solid #ddd; padding-top: 15px;">
+                <label for="mpesa-phone" style="display:block; font-size:12px; font-weight:bold; text-transform:uppercase; margin-bottom:5px; color:#111;">
+                    <i class="fas fa-phone-alt"></i> M-PESA Phone Number (For STK Push)
+                </label>
+                <input type="tel" id="mpesa-phone" placeholder="e.g., 0712345678 or 254..." 
+                    style="width:100%; padding:10px; font-family:inherit; border:1px solid #ccc; font-size:14px; margin-bottom:15px; border-radius:4px;">
+            </div>
+
+            <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:15px; margin: 5px 0 15px;">
                 <span>TOTAL:</span>
                 <span style="color:var(--primary);">KSH ${total}</span>
             </div>
-            <button class="whatsapp-btn" onclick="sendWhatsAppOrder(${total})">
-                <i class="fab fa-whatsapp"></i> SEND ORDER VIA WHATSAPP
+            <button class="whatsapp-btn" onclick="executeCheckoutSequence(${total})" style="width:100%; display:flex; justify-content:center; align-items:center; gap:10px;">
+                <i class="fas fa-bolt"></i> INITIALIZE INSTANT STK CHECKOUT
             </button>
         `;
     }
 }
 
-function sendWhatsAppOrder(total) {
+async function executeCheckoutSequence(total) {
     const nameEl = document.getElementById('customer-name');
     const locEl = document.getElementById('delivery-location');
+    const phoneEl = document.getElementById('mpesa-phone');
     
     const name = nameEl ? nameEl.value.trim() : "";
     const location = locEl ? locEl.value.trim() : "";
+    const rawPhone = phoneEl ? phoneEl.value.trim() : "";
 
-    if(!name || !location) {
-        alert('Please supply your Delivery Name and Location before executing checkout.');
+    if(!name || !location || !rawPhone) {
+        alert('Please supply your Delivery Name, Location, and M-PESA Phone Number.');
         return;
     }
 
-    let orderMessage = `*NEW ORDER - GWAPAFFECTION CUSTOMS*\n\n`;
+    let formattedPhone = rawPhone.replace(/\D/g, ''); 
+    if (formattedPhone.startsWith('0')) {
+        formattedPhone = '254' + formattedPhone.substring(1);
+    } else if (formattedPhone.startsWith('7') || formattedPhone.startsWith('1')) {
+        formattedPhone = '254' + formattedPhone;
+    }
+
+    if (formattedPhone.length !== 12 || !formattedPhone.startsWith('254')) {
+        alert('Please provide a valid M-PESA phone number configuration.');
+        return;
+    }
+
+    console.log("Triggering Daraja API Push sequence for total: " + total);
+    
+    try {
+        const response = await fetch('http://127.0.0.1:5000/api/stkpush', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                phone: formattedPhone,
+                amount: total
+            })
+        });
+
+        const mpesaResult = await response.json();
+        
+        if(mpesaResult.ResponseCode === "0") {
+            alert("🚀 STK PIN Prompt deployed successfully! Check your phone to complete your payment, then finish sending your receipt to WhatsApp.");
+        } else {
+            console.error("Daraja Response Defect:", mpesaResult);
+            alert("⚠️ STK Push could not initiate directly. Proceeding to WhatsApp to process order parameters manually.");
+        }
+    } catch (err) {
+        console.error("Critical communications backend pipeline down:", err);
+    }
+
+    sendWhatsAppOrder(total, name, location);
+}
+
+function sendWhatsAppOrder(total, name, location) {
+    let orderMessage = `*NEW AUTOMATED ORDER - GWAPAFFECTION CUSTOMS*\n\n`;
     orderMessage += `*Client Details:*\n`;
     orderMessage += `👤 Name: ${name}\n`;
     orderMessage += `📍 Location: ${location}\n\n`;
@@ -615,8 +693,12 @@ function sendWhatsAppOrder(total) {
     });
 
     orderMessage += `\n💰 *Total Amount:* KSH ${total}\n`;
-    orderMessage += `\nPaybill Number-- 400200.\nAccount Number-- 1033884. \nPlease send confirmation message.`;
-    orderMessage += `\n\n*Usually Ready within 3days*`;
+    orderMessage += `---------------------------------\n`;
+    orderMessage += `⚡ *Payment Status:* STK Push Initialized to Till Number.\n`;
+    orderMessage += `If your PIN prompt did not arrive, please pay manually via:\n`;
+    orderMessage += `• Buy Goods Till Number\n`;
+    orderMessage += `• Always review confirmation on match ledger.\n\n`;
+    orderMessage += `*Usually Ready within 3 days*`;
 
     const encodedText = encodeURIComponent(orderMessage);
     const whatsappUrl = `https://wa.me/254797389370?text=${encodedText}`;
@@ -632,7 +714,6 @@ function openGlobalSizeGuide() {
     }
 }
 
-// Fixed minor bug where close button wouldn't clear background parameters
 function closeGlobalSizeGuide() {
     const modal = document.getElementById('global-size-guide-modal');
     if(modal) {
@@ -655,24 +736,6 @@ window.onload = function() {
     updateCartUI();
 };
 </script>
-
-<div id="global-size-guide-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; font-family: inherit;">
-    <div style="background: #ffffff; width: 100%; max-width: 750px; max-height: 90vh; overflow-y: auto; border-radius: 8px; padding: 30px; position: relative; border-top: 4px solid var(--primary, #000); box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-        
-        <button onclick="closeGlobalSizeGuide()" style="position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 28px; cursor: pointer; color: #333;">&times;</button>
-        
-        <div style="text-align: center; margin-bottom: 25px;">
-            <h3 style="font-size: 1.5rem; letter-spacing: 2px; text-transform: uppercase; color: var(--primary, #000); margin-bottom: 5px;">CUT & MEASUREMENT SPECIFICATIONS</h3>
-            <p style="font-style: italic; font-size: 12px; color: #666;">Handcrafted silhouettes engineered locally in Nairobi.</p>
-        </div>
-
-        <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 25px; flex-wrap: wrap;">
-            <button class="m-tab-btn active-m-tab" onclick="switchModalTab('m-pants', this)" style="padding: 10px 16px; border: 1px solid #ddd; background: #fafafa; cursor: pointer; font-weight: bold; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;">Pants & Jorts</button>
-            <button class="m-tab-btn" onclick="switchModalTab('m-outerwear', this)" style="padding: 10px 16px; border: 1px solid #ddd; background: #fafafa; cursor: pointer; font-weight: bold; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;">Jackets & Leather</button>
-            <button class="m-tab-btn" onclick="switchModalTab('m-shirts', this)" style="padding: 10px 16px; border: 1px solid #ddd; background: #fafafa; cursor: pointer; font-weight: bold; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;">Boxed Shirts</button>
-            <button class="m-tab-btn" onclick="switchModalTab('m-tracksuits', this)" style="padding: 10px 16px; border: 1px solid #ddd; background: #fafafa; cursor: pointer; font-weight: bold; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;">Tracksuits</button>
-        </div>
-
         <style>
             .m-tab-btn.active-m-tab { background: #000000 !important; color: #ffffff !important; border-color: #000000 !important; }
             .modal-table-wrapper { display: none; overflow-x: auto; margin-bottom: 15px; border: 1px solid #eee; }
