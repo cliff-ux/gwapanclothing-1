@@ -284,11 +284,54 @@ const productDescriptions = {
     shirt: "Premium weight denim weave structure. Versatile tailoring perfect for layering or core styling within the collection.",
     tracksuit: "Heavyweight premium cotton-fleece blend structured track armor. Detailed with custom ribbed contour borders and ergonomic side-pouch pocket channels.",
     vest: "Tactical cut utility armor built from reinforced custom canvas denim panels. Perfect for layering over the core collection drops.",
-    leather_set: "Premium structural tailoring built from exceptional weight brown leather panels. Engineered for bold silhouette framing, clean street movement, and an immaculate heavy-cut drape.",
+    leather_set: "Premium structural tailoring built from exceptional weight leather panels. Engineered for bold silhouette framing, clean street movement, and an immaculate heavy-cut drape.",
     skirt: "Premium custom tailored structural cut skirt. Engineered for distinct silhouette framing, clean lines, and heavy-drape street aesthetic."
 };
 
 const products = [
+    { 
+        id: 101, 
+        name: "G.A VOID TRACKSUIT SET", 
+        color: "Void Black Fleece", 
+        price: 4500, 
+        img:"https://i.ibb.co/jvbyDN83/IMG-5985-JPG.jpg", 
+        type: "tracksuit", 
+        limited: true,
+        gallery: [
+            "https://i.ibb.co/jvbyDN83/IMG-5985-JPG.jpg",
+            "https://i.ibb.co/DPjDJx0M/IMG-5969-JPG.jpg",
+            "https://i.ibb.co/HfzfvXHw/IMG-5967-JPG.jpg"
+        ]
+    },
+    { 
+        id: 109, 
+        name: "G.A SCALED LEATHER SET", 
+        color: "Black",
+        colors: ["Black", "Brown", "Oxblood"],
+        price: 5500, 
+        img: "https://i.ibb.co/WNg7kBsJ/IMG-5936-JPG.jpg", 
+        type: "leather_set", 
+        limited: false,
+        gallery: [
+            "https://i.ibb.co/D38R3nC/IMG-5934-JPG.jpg",
+            "https://i.ibb.co/WvknVfnK/IMG-5940-JPG.jpg",
+            "https://i.ibb.co/cKcQF7xS/IMG-5937-JPG.jpg"
+        ]
+    },
+    { 
+        id: 110, 
+        name: "G.A SCALED LEATHER SET (MEN)", 
+        color: "Black",
+        colors: ["Black", "Brown", "Oxblood"],
+        price: 5000, 
+        img: "https://i.ibb.co/j9dPP6qn/IMG-5994-JPG.jpg", 
+        type: "leather_set", 
+        limited: false,
+        gallery: [
+            "https://i.ibb.co/pjS7xK7D/IMG-5995-JPG.jpg",
+            "https://i.ibb.co/fdJzV0b8/IMG-5991-JPG.jpg"
+        ]
+    },
     { 
         id: 103, 
         name: "G.A Brown leather Set", 
@@ -344,7 +387,6 @@ const products = [
         type: "jacket", 
         limited: false 
     },
-    { id: 101, name: "G.A VOID TRACKSUIT SET", color: "Void Black Fleece", price: 4500, img: "https://i.ibb.co/BVrzFrNG/Whats-App-Image-2026-06-09-at-00-44-00.jpg", type: "tracksuit", limited: true },
     { 
         id: 108, 
         name: "G.A Militia skirt {xs}", 
@@ -378,6 +420,7 @@ const products = [
 
 let cart = JSON.parse(localStorage.getItem('cart')) || [];
 let selectedSize = 'M';
+let selectedColor = 'Black';
 
 function renderProducts(cat = 'all') {
     const limitedContainer = document.getElementById('limitedDropsSection');
@@ -454,6 +497,8 @@ function openProductPage(productId) {
     if(!product) return;
 
     selectedSize = 'M'; 
+    selectedColor = product.colors ? product.colors[0] : product.color;
+
     const desc = productDescriptions[product.type] || "Premium custom item crafted by hand down at our Nairobi workshop.";
 
     let detailOverlay = document.getElementById('product-detail-view');
@@ -476,18 +521,30 @@ function openProductPage(productId) {
     if(product.gallery && product.gallery.length > 0) {
         modelGalleryHtml = `
             <div class="product-gallery-divider" style="margin-top:40px; padding-top:25px; border-top:1px solid #eee; width:100%;">
-                <h3 style="font-size:14px; font-weight:bold; text-transform:uppercase; letter-spacing:1px; margin-bottom:15px; color:#111;">SIZE GUIDE & MODEL DETAILS</h3>
-                <p style="font-size:12px; color:#555; margin-bottom:20px; line-height:1.6;">Review detailed structural cuts, standard size measurements, and lookbook layout representations of this tailored set on the model below:</p>
+                <h3 style="font-size:14px; font-weight:bold; text-transform:uppercase; letter-spacing:1px; margin-bottom:15px; color:#111;">ADDITIONAL VIEWS & DETAILS</h3>
+                <p style="font-size:12px; color:#555; margin-bottom:20px; line-height:1.6;">Review detailed structural cuts, standard size measurements, and lookbook layout representations of this tailored set below:</p>
                 <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:12px; width:100%;">
         `;
         product.gallery.forEach(imgUrl => {
             modelGalleryHtml += `
-                <div style="aspect-ratio:3/4; overflow:hidden; border:1px solid #eaeaea; border-radius:2px; background:#f9f9f9;">
+                <div style="aspect-ratio:3/4; overflow:hidden; border:1px solid #eaeaea; border-radius:2px; background:#f9f9f9; cursor:pointer;" onclick="switchProductView('${imgUrl}', null)">
                     <img src="${imgUrl}" style="width:100%; height:100%; object-fit:cover; display:block;" alt="Lookbook specification detail profile">
                 </div>`;
         });
         modelGalleryHtml += `
                 </div>
+            </div>
+        `;
+    }
+
+    let colorSelectorHtml = "";
+    if(product.colors && product.colors.length > 0) {
+        colorSelectorHtml = `
+            <div style="margin-bottom:15px;">
+                <label for="color-select" style="display:block; font-size:11px; font-weight:bold; text-transform:uppercase; letter-spacing:1px; margin-bottom:5px;">SELECT COLOR</label>
+                <select id="color-select" onchange="selectedColor = this.value" style="width:100%; padding:10px; border:1px solid #000; font-family:inherit; font-size:12px; font-weight:bold; text-transform:uppercase; background:#fff; cursor:pointer;">
+                    ${product.colors.map(c => `<option value="${c}">${c.toUpperCase()}</option>`).join('')}
+                </select>
             </div>
         `;
     }
@@ -507,9 +564,10 @@ function openProductPage(productId) {
                 <p class="inner-desc">${desc}</p>
                 
                 <div class="product-specifications" style="margin-bottom: 20px; font-size:12px; color:#666;">
-                    <strong>Colorway:</strong> ${product.color}<br>
                     <strong>Origin:</strong> Custom Tailored in Nairobi
                 </div>
+
+                ${colorSelectorHtml}
 
                 <div class="size-section" style="${product.outOfStock ? 'opacity:0.5; pointer-events:none;' : ''}">
                     <span class="size-label">SELECT SIZE</span>
@@ -550,7 +608,8 @@ function addProductToCart(productId) {
         name: product.name,
         price: product.price,
         img: product.img,
-        size: selectedSize
+        size: selectedSize,
+        color: selectedColor || product.color
     };
 
     cart.push(cartItem);
@@ -599,7 +658,7 @@ function updateCartUI() {
                 <img src="${item.img}" style="width:60px; height:60px; object-fit:cover; border-radius:4px;">
                 <div style="flex:1;">
                     <h4 style="font-size:12px; text-transform:uppercase; font-weight:bold;">${item.name}</h4>
-                    <p style="font-size:11px; color:#666;">Size: <strong>${item.size}</strong></p>
+                    <p style="font-size:11px; color:#666;">Color: <strong>${item.color}</strong> | Size: <strong>${item.size}</strong></p>
                     <p style="font-size:12px; color:var(--primary); font-weight:bold;">SH ${item.price}</p>
                 </div>
                 <button onclick="removeFromCart(${index})" style="background:none; border:none; color:#999; cursor:pointer; font-size:16px;"><i class="fas fa-trash-alt"></i></button>
@@ -637,8 +696,6 @@ async function executeCheckoutSequence(total) {
     const location = locEl ? locEl.value.trim() : "";
     const rawPhone = phoneEl ? phoneEl.value.trim() : "";
 
-  
-
     sendWhatsAppOrder(total, name, location);
 }
 
@@ -650,14 +707,14 @@ function sendWhatsAppOrder(total, name, location) {
     orderMessage += `*Items Selected:*\n`;
 
     cart.forEach((item, index) => {
-        orderMessage += `${index + 1}. ${item.name} (Size: ${item.size}) - KSH ${item.price}\n`;
+        orderMessage += `${index + 1}. ${item.name} (Color: ${item.color}, Size: ${item.size}) - KSH ${item.price}\n`;
     });
 
     orderMessage += `\n💰 *Total Amount:* KSH ${total}\n`;
     orderMessage += `---------------------------------\n`;
     orderMessage += `• Paybill  Number:${400200}\n`;
     orderMessage += `• Account Number: ${1033884}\n`;
-    orderMessage += `*Usually Ready within 3 days*`;
+    orderMessage += `*Usually Ready within 3 days*\n`;
     orderMessage +='---------------------------------\n';
     orderMessage += `kindly share payment confirmation messge thankyou!`;   
 
