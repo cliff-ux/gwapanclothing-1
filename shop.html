@@ -176,8 +176,8 @@
             <ul class="nav-links">
                 <li><a href="shop.html" style="color: var(--accent);">SHOP</a></li>
                 <li><a href="kichele.html" class="new-drop-btn">LATEST</a></li>
-                <li><a href="index.html">STORY</a></li>
                 <li><a href="policy.html">POLICIES</a></li>
+                <li><a href="index.html">STORY</a></li>
                 <li><a href="#" onclick="event.preventDefault(); toggleCart();"><i class="fas fa-shopping-bag"></i></a></li>
             </ul>
         </div>
@@ -277,7 +277,7 @@
             <button class="m-tab-btn" onclick="switchModalTab('m-shirts', this)" style="padding: 10px 16px; border: 1px solid #ddd; background: #fafafa; cursor: pointer; font-weight: bold; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;">Boxed Shirts</button>
             <button class="m-tab-btn" onclick="switchModalTab('m-tracksuits', this)" style="padding: 10px 16px; border: 1px solid #ddd; background: #fafafa; cursor: pointer; font-weight: bold; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;">Tracksuits</button>
         </div>
-<script>
+        <script>
 const productDescriptions = {
     jacket: "Crafted from heavy-duty raw denim with reinforced stitching. Designed for a structured cultural aesthetic with premium street comfort.",
     pants: "Relaxed baggy silhouette cut from high-quality cultural denim. Features drop-crotch roomy scaling tailored for clean footwear stack.",
@@ -294,7 +294,7 @@ const products = [
         name: "G.A VOID TRACKSUIT SET", 
         color: "Void Black Fleece", 
         price: 4500, 
-        img:"https://i.ibb.co/jvbyDN83/IMG-5985-JPG.jpg", 
+        img: "https://i.ibb.co/BVrzFrNG/Whats-App-Image-2026-06-09-at-00-44-00.jpg", 
         type: "tracksuit", 
         limited: true,
         gallery: [
@@ -504,11 +504,11 @@ function openProductPage(productId) {
     let detailOverlay = document.getElementById('product-detail-view');
     if(!detailOverlay) return;
     
-    let imageViewerHtml = `<img id="primary-view-frame" src="${product.img}" alt="${product.name}" style="width:100%; height:100%; object-fit:cover;">`;
+    let imageViewerHtml = `<img id="primary-view-frame" src="${product.img}" alt="${product.name}" onclick="expandImage('${product.img}')" style="width:100%; height:100%; object-fit:cover; cursor:pointer;">`;
     if(product.imgBack) {
         imageViewerHtml = `
             <div style="position:relative; width:100%; height:100%;">
-                <img id="primary-view-frame" src="${product.img}" alt="${product.name}" style="width:100%; height:100%; object-fit:cover;">
+                <img id="primary-view-frame" src="${product.img}" alt="${product.name}" onclick="expandImage(this.src)" style="width:100%; height:100%; object-fit:cover; cursor:pointer;">
                 <div style="position:absolute; bottom:15px; left:50%; transform:translateX(-50%); display:flex; gap:10px; z-index:10;">
                     <button class="view-toggle-tab" onclick="switchProductView('${product.img}', this)" style="background:#fff; border:1px solid #000; padding:6px 14px; font-size:11px; font-weight:bold; cursor:pointer; font-family:inherit; text-transform:uppercase; letter-spacing:1px; box-shadow:0 2px 5px rgba(0,0,0,0.15);">FRONT VIEW</button>
                     <button class="view-toggle-tab" onclick="switchProductView('${product.imgBack}', this)" style="background:rgba(255,255,255,0.7); border:1px solid #000; padding:6px 14px; font-size:11px; font-weight:bold; cursor:pointer; font-family:inherit; text-transform:uppercase; letter-spacing:1px; box-shadow:0 2px 5px rgba(0,0,0,0.15);">BACK VIEW</button>
@@ -521,14 +521,14 @@ function openProductPage(productId) {
     if(product.gallery && product.gallery.length > 0) {
         modelGalleryHtml = `
             <div class="product-gallery-divider" style="margin-top:40px; padding-top:25px; border-top:1px solid #eee; width:100%;">
-                <h3 style="font-size:14px; font-weight:bold; text-transform:uppercase; letter-spacing:1px; margin-bottom:15px; color:#111;">ADDITIONAL VIEWS & DETAILS</h3>
-                <p style="font-size:12px; color:#555; margin-bottom:20px; line-height:1.6;">Review detailed structural cuts, standard size measurements, and lookbook layout representations of this tailored set below:</p>
+                <h3 style="font-size:14px; font-weight:bold; text-transform:uppercase; letter-spacing:1px; margin-bottom:15px; color:#111;">ADDITIONAL VIEWS & DETAILS (TAP TO ENLARGE)</h3>
+                <p style="font-size:12px; color:#555; margin-bottom:20px; line-height:1.6;">Tap any image below to zoom into high-resolution view:</p>
                 <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:12px; width:100%;">
         `;
         product.gallery.forEach(imgUrl => {
             modelGalleryHtml += `
-                <div style="aspect-ratio:3/4; overflow:hidden; border:1px solid #eaeaea; border-radius:2px; background:#f9f9f9; cursor:pointer;" onclick="switchProductView('${imgUrl}', null)">
-                    <img src="${imgUrl}" style="width:100%; height:100%; object-fit:cover; display:block;" alt="Lookbook specification detail profile">
+                <div style="aspect-ratio:3/4; overflow:hidden; border:1px solid #eaeaea; border-radius:2px; background:#f9f9f9; cursor:pointer;" onclick="expandImage('${imgUrl}')">
+                    <img src="${imgUrl}" style="width:100%; height:100%; object-fit:cover; display:block; transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" alt="Enlarge detail view">
                 </div>`;
         });
         modelGalleryHtml += `
@@ -591,6 +591,29 @@ function openProductPage(productId) {
 function closeProductPage() {
     document.getElementById('product-detail-view').style.display = 'none';
     document.body.style.overflow = 'auto';
+}
+
+/* Dynamic Image Expansion Lightbox */
+function expandImage(srcUrl) {
+    let lightbox = document.getElementById('image-lightbox');
+    if(!lightbox) {
+        lightbox = document.createElement('div');
+        lightbox.id = 'image-lightbox';
+        lightbox.style.cssText = 'position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.92); display:flex; justify-content:center; align-items:center; z-index:99999; cursor:pointer; padding:20px;';
+        lightbox.onclick = closeLightbox;
+        lightbox.innerHTML = `
+            <span style="position:absolute; top:20px; right:25px; color:#fff; font-size:30px; font-weight:bold; cursor:pointer;">&times;</span>
+            <img id="lightbox-img" src="" style="max-width:95vw; max-height:92vh; object-fit:contain; border-radius:4px; box-shadow:0 0 20px rgba(0,0,0,0.8);">
+        `;
+        document.body.appendChild(lightbox);
+    }
+    document.getElementById('lightbox-img').src = srcUrl;
+    lightbox.style.display = 'flex';
+}
+
+function closeLightbox() {
+    const lightbox = document.getElementById('image-lightbox');
+    if(lightbox) lightbox.style.display = 'none';
 }
 
 function selectSize(size, element) {
@@ -714,7 +737,7 @@ function sendWhatsAppOrder(total, name, location) {
     orderMessage += `---------------------------------\n`;
     orderMessage += `• Paybill  Number:${400200}\n`;
     orderMessage += `• Account Number: ${1033884}\n`;
-    orderMessage += `*Usually Ready within 3 days*\n`;
+    orderMessage += `*Usually Ready within 3-4 days*\n`;
     orderMessage +='---------------------------------\n';
     orderMessage += `kindly share payment confirmation messge thankyou!`;   
 
