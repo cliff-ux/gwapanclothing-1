@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -15,22 +16,92 @@
             --accent: #d4af37;
             --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+
+            /* Theme Variables */
+            --bg-body: var(--light);
+            --text-color: #222222;
+            --card-bg: var(--white);
+            --border-color: #eee;
+            --nav-bg: var(--dark);
+        }
+
+        /* Dark Mode Theme Variables */
+        body.dark-theme {
+            --bg-body: #0d0d0d;
+            --text-color: #f4f4f4;
+            --card-bg: #1a1a1a;
+            --border-color: #2a2a2a;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Times New Roman', Times, serif; background-color: var(--light); line-height: 1.6; overflow-x: hidden; }
+        body { 
+            font-family: 'Times New Roman', Times, serif; 
+            background-color: var(--bg-body); 
+            color: var(--text-color);
+            line-height: 1.6; 
+            overflow-x: hidden; 
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
         
         /* ==========================================================================
            Navigation & Header
            ========================================================================== */
-        .navbar { background-color: var(--dark); padding: 15px 0; position: fixed; top: 0; width: 100%; z-index: 1000; border-bottom: 2px solid var(--primary); }
+        .navbar { background-color: var(--nav-bg); padding: 15px 0; position: fixed; top: 0; width: 100%; z-index: 1000; border-bottom: 2px solid var(--primary); }
         .navbar .container { width: 90%; max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .logo { font-size: 24px; font-weight: bold; color: var(--primary); text-decoration: none; letter-spacing: 2px; text-transform: uppercase; }
         
         .nav-links { list-style: none; display: flex; gap: 20px; align-items: center; }
+        .nav-links li { position: relative; }
         .nav-links li a { color: var(--light); text-decoration: none; font-weight: bold; font-size: 14px; text-transform: uppercase; padding: 10px 15px; display: block; transition: 0.3s; }
         .nav-links li a:hover { color: var(--accent); }
         
+        /* Dropdown Styling */
+        .dropdown { position: relative; }
+        .dropdown-toggle { cursor: pointer; display: flex; align-items: center; gap: 6px; }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: var(--dark);
+            min-width: 160px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+            border: 1px solid var(--primary);
+            border-radius: 4px;
+            list-style: none;
+            padding: 8px 0;
+            z-index: 1001;
+        }
+        .dropdown-menu li a {
+            padding: 10px 16px;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+        .dropdown-menu li a:hover {
+            background-color: #1a1a1a;
+            color: var(--accent);
+        }
+        .dropdown:hover .dropdown-menu { display: block; }
+
+        /* Theme Toggle Button */
+        .theme-toggle-btn {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--light);
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .theme-toggle-btn:hover {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
         .new-drop-btn {
             display: inline-block;
             padding: 12px 24px;
@@ -50,8 +121,7 @@
         @keyframes moveShine { 0% { background-position: 0% center; } 100% { background-position: 200% center; } }
         @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 5px rgba(128,0,0,0.1); transform: scale(1); } 50% { box-shadow: 0 0 15px rgba(128,0,0,0.3); transform: scale(1.02); } }
 
-        /* Updated Background Image to WhatsApp-Image-2026-06-30-at-03-13-01 */
-/* Luxury Campaign Header Layout */
+        /* Luxury Campaign Header Layout */
         .home-header { 
             background: #0b0b0b; 
             padding: 60px 20px; 
@@ -83,41 +153,42 @@
            Product Catalog Grid
            ========================================================================== */
         .filter-container { width: 90%; max-width: 1200px; margin: 20px auto; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
-        .filter-btn { padding: 10px 20px; border: 1px solid #ddd; background: white; color: #333; cursor: pointer; font-weight: bold; border-radius: 5px; transition: var(--transition); font-size: 12px; text-transform: uppercase; }
+        .filter-btn { padding: 10px 20px; border: 1px solid var(--border-color); background: var(--card-bg); color: var(--text-color); cursor: pointer; font-weight: bold; border-radius: 5px; transition: var(--transition); font-size: 12px; text-transform: uppercase; }
         .filter-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
 
         .section-title { text-align: center; color: var(--primary); margin: 30px 0 10px; font-size: 1.8rem; letter-spacing: 4px; text-transform: uppercase; }
         .product-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; padding: 20px 0; max-width: 1200px; margin: 0 auto; width: 95%; }
         
-        .product { background: var(--white); border-radius: 8px; box-shadow: var(--shadow); position: relative; overflow: hidden; display: flex; flex-direction: column; padding: 12px; border: 1px solid #eee; cursor: pointer; }
+        .product { background: var(--card-bg); border-radius: 8px; box-shadow: var(--shadow); position: relative; overflow: hidden; display: flex; flex-direction: column; padding: 12px; border: 1px solid var(--border-color); cursor: pointer; }
         .img-container { width: 100%; height: 320px; background: #fff; overflow: hidden; display: flex; align-items: center; justify-content: center; position: relative; }
         .img-container img { max-width: 100%; max-height: 100%; object-fit: contain; transition: transform 0.5s; }
         .product:hover img { transform: scale(1.05); }
         
         .product-info { padding: 12px 0 0; text-align: center; }
-        .product-name { font-size: 0.85rem; font-weight: bold; text-transform: uppercase; color: #222; height: 35px; overflow: hidden; }
+        .product-name { font-size: 0.85rem; font-weight: bold; text-transform: uppercase; color: var(--text-color); height: 35px; overflow: hidden; }
         .price-tag { color: var(--primary); font-weight: bold; font-size: 1.1rem; margin: 5px 0; }
+
         /* ==========================================================================
            Featured Limited Drops Row
            ========================================================================== */
         #limitedDropsSection { margin: 40px auto; max-width: 1200px; padding: 0 15px; }
-        .limited-section-header { font-size: 14px; font-weight: 800; letter-spacing: 3px; color: #111; margin-bottom: 20px; text-transform: uppercase; border-left: 4px solid #1a2a3a; padding-left: 10px; }
+        .limited-section-header { font-size: 14px; font-weight: 800; letter-spacing: 3px; color: var(--text-color); margin-bottom: 20px; text-transform: uppercase; border-left: 4px solid #1a2a3a; padding-left: 10px; }
         .limited-flex-grid { display: flex; flex-direction: column; gap: 20px; }
         @media (min-width: 600px) { .limited-flex-grid { flex-direction: row; } }
         
-        .limited-card { flex: 1; position: relative; background: #ffffff; cursor: pointer; overflow: hidden; border: 1px solid #f0f0f0; transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+        .limited-card { flex: 1; position: relative; background: var(--card-bg); cursor: pointer; overflow: hidden; border: 1px solid var(--border-color); transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
         .limited-card:hover { transform: translateY(-4px); }
         .limited-card img { width: 100%; height: 420px; object-fit: cover; display: block; }
         .limited-badge { position: absolute; top: 15px; left: 15px; background: #bf2626; color: #fff; font-size: 10px; font-weight: 800; padding: 5px 10px; letter-spacing: 1px; text-transform: uppercase; z-index: 10; }
-        .limited-card-meta { padding: 15px; background: #fff; display: flex; justify-content: space-between; align-items: center; }
-        .limited-card-meta h3 { margin: 0; font-size: 14px; font-weight: 700; color: #111; letter-spacing: 0.5px; }
+        .limited-card-meta { padding: 15px; background: var(--card-bg); display: flex; justify-content: space-between; align-items: center; }
+        .limited-card-meta h3 { margin: 0; font-size: 14px; font-weight: 700; color: var(--text-color); letter-spacing: 0.5px; }
         .limited-card-meta p { margin: 0; font-size: 14px; font-weight: 600; color: #3b5998; }
 
         /* ==========================================================================
            Product Detail Overlay System
            ========================================================================== */
-        .inner-page-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #ffffff; z-index: 1500; overflow-y: auto; padding: 24px; box-sizing: border-box; }
-        .back-arrow { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; cursor: pointer; margin-bottom: 25px; color: #111111; text-transform: uppercase; transition: opacity 0.2s ease; margin-top: 80px; }
+        .inner-page-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--bg-body); z-index: 1500; overflow-y: auto; padding: 24px; box-sizing: border-box; }
+        .back-arrow { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 1.5px; cursor: pointer; margin-bottom: 25px; color: var(--text-color); text-transform: uppercase; transition: opacity 0.2s ease; margin-top: 80px; }
         .back-arrow:hover { opacity: 0.7; }
         
         .inner-layout { display: flex; flex-direction: column; gap: 32px; max-width: 960px; margin: 0 auto; }
@@ -127,14 +198,14 @@
             .inner-details-wrapper { flex: 0.9; position: sticky; top: 20px; padding-left: 15px; }
         }
         .inner-img-wrapper img { width: 100%; height: auto; max-height: 550px; object-fit: cover; border-radius: 4px; display: block; }
-        .inner-title { font-size: 26px; font-weight: 800; letter-spacing: 0.5px; margin: 0 0 8px 0; color: #111111; text-transform: uppercase; }
+        .inner-title { font-size: 26px; font-weight: 800; letter-spacing: 0.5px; margin: 0 0 8px 0; color: var(--text-color); text-transform: uppercase; }
         .inner-price { font-size: 20px; font-weight: 600; color: #3b5998; margin: 0 0 20px 0; }
-        .inner-desc { font-size: 14px; color: #555555; line-height: 1.6; margin-bottom: 28px; }
+        .inner-desc { font-size: 14px; color: var(--text-color); line-height: 1.6; margin-bottom: 28px; opacity: 0.85; }
         
         .size-section { margin-bottom: 32px; }
         .size-label { display: block; font-size: 11px; font-weight: 700; color: #888888; margin-bottom: 12px; letter-spacing: 1.2px; }
         .size-boxes-container { display: flex; gap: 12px; margin-bottom: 14px; }
-        .size-box { width: 50px; height: 50px; border: 1px solid #dddddd; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; cursor: pointer; background: #ffffff; border-radius: 2px; transition: all 0.15s linear; color: #222222; }
+        .size-box { width: 50px; height: 50px; border: 1px solid var(--border-color); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; cursor: pointer; background: var(--card-bg); border-radius: 2px; transition: all 0.15s linear; color: var(--text-color); }
         .size-box:hover { border-color: #3b5998; }
         .size-box.active { background: #1a2a3a; color: #ffffff; border-color: #1a2a3a; }
         .see-guide-link { font-size: 12px; font-weight: 600; color: #3b5998; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; display: inline-block; }
@@ -145,26 +216,28 @@
         /* ==========================================================================
            Cart Sidebar
            ========================================================================== */
-        #cart-sidebar { position: fixed; right: -450px; top: 0; width: 100%; max-width: 400px; height: 100%; background: var(--white); transition: 0.4s ease; z-index: 2000; padding: 25px; box-shadow: -10px 0 30px rgba(0,0,0,0.15); overflow-y: auto; }
-        .whatsapp-btn { background: var(--whatsapp); color: white; width: 100%; padding: 15px; border: none; border-radius: 6px; font-weight: bold; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; margin-top: 10px; border: none; line-height: 1.6; text-transform: uppercase; text-decoration: none; }
+        #cart-sidebar { position: fixed; right: -450px; top: 0; width: 100%; max-width: 400px; height: 100%; background: var(--card-bg); color: var(--text-color); transition: 0.4s ease; z-index: 2000; padding: 25px; box-shadow: -10px 0 30px rgba(0,0,0,0.15); overflow-y: auto; }
+        .whatsapp-btn { background: var(--whatsapp); color: white; width: 100%; padding: 15px; border: none; border-radius: 6px; font-weight: bold; font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.3s; margin-top: 10px; line-height: 1.6; text-transform: uppercase; text-decoration: none; }
         .whatsapp-btn:hover { background: #128C7E; transform: translateY(-2px); }
 
         footer { background-color: var(--dark); color: var(--white); padding: 40px 20px; text-align: center; margin-top: 60px; font-size: 12px; border-top: 3px solid var(--primary); }
 
         @media (max-width: 992px) { .product-list { grid-template-columns: repeat(2, 1fr); } }
         
-        /* Mobile updates for 2 columns */
+        /* Mobile updates */
         @media (max-width: 600px) { 
             .product-list { 
-                grid-template-columns: repeat(2, 1fr); /* Swapped from 1fr to 2 columns */
-                gap: 12px; /* Made the gap tighter for small mobile screens */
+                grid-template-columns: repeat(2, 1fr); 
+                gap: 12px; 
                 padding: 10px;
             } 
             .img-container {
-                height: 180px; /* Reduced box height so items don't look overly stretched vertically */
+                height: 180px; 
             }
             #cart-sidebar { max-width: 100%; } 
             .logo { font-size: 18px; } 
+            .nav-links { gap: 10px; }
+            .nav-links li a { padding: 8px 10px; font-size: 12px; }
         }
     </style>
 </head>
@@ -174,10 +247,26 @@
         <div class="container">
             <a href="index.html" class="logo">GWAP AFFECTION</a>
             <ul class="nav-links">
-                <li><a href="shop.html" style="color: var(--accent);">SHOP</a></li>
-                <li><a href="kichele.html" class="new-drop-btn">LATEST</a></li>
-                <li><a href="policy.html">POLICY</a></li>
-                <li><a href="index.html">STORY</a></li>
+                <!-- Dropdown Menu for Navigation Links -->
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle">
+                        EXPLORE <i class="fas fa-chevron-down" style="font-size: 10px;"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="shop.html" style="color: var(--accent);">SHOP</a></li>
+                        <li><a href="kichele.html">LATEST</a></li>
+                        <li><a href="policy.html">POLICY</a></li>
+                        <li><a href="index.html">STORY</a></li>
+                    </ul>
+                </li>
+                
+                <!-- Dark / Light Mode Toggle Button -->
+                <li>
+                    <button id="themeToggle" class="theme-toggle-btn" aria-label="Toggle dark mode">
+                        <i class="fas fa-moon" id="themeIcon"></i>
+                    </button>
+                </li>
+
                 <li><a href="#" onclick="event.preventDefault(); toggleCart();"><i class="fas fa-shopping-bag"></i></a></li>
             </ul>
         </div>
@@ -187,9 +276,8 @@
         <div class="shiny-advert">✨ PREMIUM //HANDCRAFTED// CUSTOM //DENIM ✨</div>
         <div class="delivery-note">Handmade In Nairobi</div>
     </div>
-<header class="home-header">
-        
-        <!-- Flashy Fit Guide Button -->
+
+    <header class="home-header">
         <button onclick="openGlobalSizeGuide()" style="
             background: linear-gradient(45deg, #000000, var(--primary), #000000);
             background-size: 2cap auto;
@@ -229,13 +317,13 @@
     <div id="cart-sidebar">
         <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 2px solid var(--light); padding-bottom: 10px;">
             <h2 style="font-size: 18px; letter-spacing: 2px;">YOUR SELECTION</h2>
-            <button onclick="toggleCart()" style="background:none; border:none; font-size:28px; cursor:pointer;">&times;</button>
+            <button onclick="toggleCart()" style="background:none; border:none; font-size:28px; cursor:pointer; color:var(--text-color);">&times;</button>
         </div>
         
         <div id="cart-display-area" style="margin-top:20px;"></div>
         
         <div id="checkout-section" style="display:none;">
-            <div style="background: #f9f9f9; padding: 15px; border-radius: 8px; border: 1px solid #eee; margin-top: 20px;">
+            <div style="background: rgba(0,0,0,0.05); padding: 15px; border-radius: 8px; border: 1px solid var(--border-color); margin-top: 20px;">
                 <p style="font-size: 11px; font-weight: bold; color: var(--primary); margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px;">
                     <i class="fas fa-truck"></i> Delivery & Payment Details
                 </p>
@@ -250,8 +338,8 @@
                     <input type="text" id="delivery-location" placeholder="e.g. Nairobi CBD, Estate" style="width:100%; padding:10px; margin-top:4px; border:1px solid #ddd; border-radius:4px; font-size: 13px;">
                 </div>
 
-                <div style="background: #fff; padding: 12px; border: 1px dashed var(--primary); border-radius: 4px; margin-top: 5px;">
-                    <p style="font-size: 10px; font-weight: bold; color: #333; margin-bottom: 5px;">M-PESA / PAYBILL INFO:</p>
+                <div style="background: var(--card-bg); padding: 12px; border: 1px dashed var(--primary); border-radius: 4px; margin-top: 5px;">
+                    <p style="font-size: 10px; font-weight: bold; color: var(--text-color); margin-bottom: 5px;">M-PESA / PAYBILL INFO:</p>
                     <p style="font-size: 13px; color: var(--primary); font-weight: 900; margin: 2px 0;">PAYBILL: 400200</p>
                     <p style="font-size: 13px; color: var(--primary); font-weight: 900;">ACC: 1033884</p>
                 </div>
@@ -260,24 +348,51 @@
         </div>
     </div>
 
-
-<div id="global-size-guide-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; font-family: inherit;">
-    <div style="background: #ffffff; width: 100%; max-width: 750px; max-height: 90vh; overflow-y: auto; border-radius: 8px; padding: 30px; position: relative; border-top: 4px solid var(--primary, #000); box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-        
-        <button onclick="closeGlobalSizeGuide()" style="position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 28px; cursor: pointer; color: #333;">&times;</button>
-        
-        <div style="text-align: center; margin-bottom: 25px;">
-            <h3 style="font-size: 1.5rem; letter-spacing: 2px; text-transform: uppercase; color: var(--primary, #000); margin-bottom: 5px;">CUT & MEASUREMENT SPECIFICATIONS</h3>
-            <p style="font-style: italic; font-size: 12px; color: #666;">Handcrafted silhouettes engineered locally in Nairobi.</p>
+    <div id="global-size-guide-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 3000; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; font-family: inherit;">
+        <div style="background: var(--card-bg); color: var(--text-color); width: 100%; max-width: 750px; max-height: 90vh; overflow-y: auto; border-radius: 8px; padding: 30px; position: relative; border-top: 4px solid var(--primary); box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
+            <button onclick="closeGlobalSizeGuide()" style="position: absolute; top: 15px; right: 20px; background: none; border: none; font-size: 28px; cursor: pointer; color: var(--text-color);">&times;</button>
+            <div style="text-align: center; margin-bottom: 25px;">
+                <h3 style="font-size: 1.5rem; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); margin-bottom: 5px;">CUT & MEASUREMENT SPECIFICATIONS</h3>
+                <p style="font-style: italic; font-size: 12px; color: #666;">Handcrafted silhouettes engineered locally in Nairobi.</p>
+            </div>
+            <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 25px; flex-wrap: wrap;">
+                <button class="m-tab-btn active-m-tab" onclick="switchModalTab('m-pants', this)" style="padding: 10px 16px; border: 1px solid #ddd; background: #fafafa; cursor: pointer; font-weight: bold; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;">Pants & Jorts</button>
+                <button class="m-tab-btn" onclick="switchModalTab('m-outerwear', this)" style="padding: 10px 16px; border: 1px solid #ddd; background: #fafafa; cursor: pointer; font-weight: bold; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;">Jackets & Leather</button>
+                <button class="m-tab-btn" onclick="switchModalTab('m-shirts', this)" style="padding: 10px 16px; border: 1px solid #ddd; background: #fafafa; cursor: pointer; font-weight: bold; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;">Boxed Shirts</button>
+                <button class="m-tab-btn" onclick="switchModalTab('m-tracksuits', this)" style="padding: 10px 16px; border: 1px solid #ddd; background: #fafafa; cursor: pointer; font-weight: bold; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;">Tracksuits</button>
+            </div>
         </div>
+    </div>
 
-        <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 25px; flex-wrap: wrap;">
-            <button class="m-tab-btn active-m-tab" onclick="switchModalTab('m-pants', this)" style="padding: 10px 16px; border: 1px solid #ddd; background: #fafafa; cursor: pointer; font-weight: bold; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;">Pants & Jorts</button>
-            <button class="m-tab-btn" onclick="switchModalTab('m-outerwear', this)" style="padding: 10px 16px; border: 1px solid #ddd; background: #fafafa; cursor: pointer; font-weight: bold; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;">Jackets & Leather</button>
-            <button class="m-tab-btn" onclick="switchModalTab('m-shirts', this)" style="padding: 10px 16px; border: 1px solid #ddd; background: #fafafa; cursor: pointer; font-weight: bold; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;">Boxed Shirts</button>
-            <button class="m-tab-btn" onclick="switchModalTab('m-tracksuits', this)" style="padding: 10px 16px; border: 1px solid #ddd; background: #fafafa; cursor: pointer; font-weight: bold; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px;">Tracksuits</button>
-        </div>
-        <script>
+    <!-- JavaScript for Theme Switching -->
+    <script>
+        const themeToggleBtn = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+
+        // Check stored theme preference on load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-theme');
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        }
+
+        // Toggle theme handler
+        themeToggleBtn.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            const isDark = document.body.classList.contains('dark-theme');
+            
+            if (isDark) {
+                themeIcon.classList.replace('fa-moon', 'fa-sun');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                themeIcon.classList.replace('fa-sun', 'fa-moon');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    </script>
+</body>
+</html>
+    <script>
 const productDescriptions = {
     jacket: "Crafted from heavy-duty raw denim with reinforced stitching. Designed for a structured cultural aesthetic with premium street comfort.",
     pants: "Relaxed baggy silhouette cut from high-quality cultural denim. Features drop-crotch roomy scaling tailored for clean footwear stack.",
@@ -289,6 +404,26 @@ const productDescriptions = {
 };
 
 const products = [
+    { 
+        id: 111, 
+        name: "G.A Maroon leather jacket", 
+        color: "Maroon", 
+        price: 2800, 
+        img: "https://i.ibb.co/pj19JqwM/Whats-App-Image-2026-08-18-at-10-46-57.jpg", 
+        imgBack: "https://i.ibb.co/pBYG8mBP/Whats-App-Image-2026-08-18-at-10-46-57.jpg", 
+        type: "jacket", 
+        limited: false 
+    },
+    { 
+        id: 112, 
+        name: "G.A Track set", 
+        color: "Reflective Print", 
+        price: 3850, 
+        img: "https://i.ibb.co/fGZFVTbm/Gemini-Generated-Image-accgdkaccgdkaccg.jpg", 
+        imgBack: "https://i.ibb.co/20GV1VPB/Gemini-Generated-Image-umi26bumi26bumi2.jpg", 
+        type: "tracksuit", 
+        limited: false 
+    },
     { 
         id: 101, 
         name: "G.A VOID TRACKSUIT SET", 
@@ -357,21 +492,12 @@ const products = [
         type: "jacket", 
         limited: false 
     },
-    { 
-        id: 105, 
-        name: "Gwap Oxblood Jort", 
-        color: "Deep Kichele Oxblood", 
-        price: 1950, 
-        img: "https://i.ibb.co/qM7TXG7D/image0-1.png", 
-        imgBack: "https://i.ibb.co/qM7TXG7D/image0-1.png", 
-        type: "pants", 
-        limited: false 
-    },
+ 
     { 
         id: 106, 
-        name: "Gwap Boxed Shirt", 
+        name: "G.A Leather Shirt", 
         color: "Premium Structured Leather", 
-        price: 2000, 
+        price: 1800, 
         img: "https://i.ibb.co/q3rQFCC9/image0-10.jpg", 
         imgBack: "https://i.ibb.co/TM1MP5tb/image1-8.jpg", 
         type: "shirt", 
@@ -396,8 +522,6 @@ const products = [
         imgBack: "https://i.ibb.co/SXDFQjtB/Photoroom-20260721-221841.jpg", 
         type: "skirt", 
         limited: false 
-
-
     },
     { id: 36, name: "G.A MILITIA VEST", color: "Desert Militia Khaki", price: 1750, img: "https://i.ibb.co/KcJGjLRj/Whats-App-Image-2026-06-09-at-01-08-28.jpg", type: "vest" },
     { id: 37, name: "G.A WASHED BLUE DENIM SET", color: "Vintage Blue Wash", price: 3850, img: "https://i.ibb.co/Sw4dDyD6/Whats-App-Image-2026-06-09-at-01-07-16.jpg", type: "jacket" },
