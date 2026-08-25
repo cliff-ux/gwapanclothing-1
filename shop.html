@@ -308,7 +308,7 @@
 
         <section id="limitedDropsSection"></section>
 
-        <h2 class="section-title" id="cat-label">GWAPAN-COLLECTION</h2>
+        <h2 class="section-title" id="cat-label">GWAP-VOL-1</h2>
         <div class="product-list" id="productGrid"></div>
     </main>
 
@@ -418,7 +418,7 @@ const products = [
         id: 112, 
         name: "G.A Track set", 
         color: "Reflective Print", 
-        price: 3850, 
+        price: 3950, 
         img: "https://i.ibb.co/fGZFVTbm/Gemini-Generated-Image-accgdkaccgdkaccg.jpg", 
         imgBack: "https://i.ibb.co/20GV1VPB/Gemini-Generated-Image-umi26bumi26bumi2.jpg", 
         type: "tracksuit", 
@@ -443,7 +443,7 @@ const products = [
         name: "G.A SCALED LEATHER SET", 
         color: "Black",
         colors: ["GREY", "Black", "Brown", "Oxblood"],
-        price: 5500, 
+        price: 5350, 
         img: "https://i.ibb.co/WNg7kBsJ/IMG-5936-JPG.jpg", 
         type: "leather_set", 
         limited: false,
@@ -488,7 +488,6 @@ const products = [
         color: "Textured Fish Scale Black", 
         price: 2750, 
         img: "https://i.ibb.co/Cp5NJrB0/Whats-App-Image-2026-06-15-at-13-34-06.jpg", 
-        imgBack: "https://i.ibb.co/Gvwh9Jn1/Whats-App-Image-2026-06-16-at-13-26-53.jpg", 
         type: "jacket", 
         limited: false 
     },
@@ -525,10 +524,10 @@ const products = [
     },
     { id: 36, name: "G.A MILITIA VEST", color: "Desert Militia Khaki", price: 1750, img: "https://i.ibb.co/KcJGjLRj/Whats-App-Image-2026-06-09-at-01-08-28.jpg", type: "vest" },
     { id: 37, name: "G.A WASHED BLUE DENIM SET", color: "Vintage Blue Wash", price: 3850, img: "https://i.ibb.co/Sw4dDyD6/Whats-App-Image-2026-06-09-at-01-07-16.jpg", type: "jacket" },
-    { id: 38, name: "BLACK DENIM SET", color: "Matte Charcoal Onyx", price: 3850, img: "https://i.ibb.co/DDSthC4H/Whats-App-Image-2026-06-09-at-01-09-21.jpg", type: "jacket" },
+    { id: 38, name: "BLACK DENIM SET", color: "Matte Charcoal Onyx", price: 3950, img: "https://i.ibb.co/DDSthC4H/Whats-App-Image-2026-06-09-at-01-09-21.jpg", type: "jacket" },
     { id: 34, name: "G.A-GREY-SET", color: "Distressed Ash Grey", price: 3850, img: "https://i.ibb.co/gFhfL7Ch/Photoroom-20260407-004656.jpg", type: "jacket" },
     { id: 35, name: "GREY DENIM JEANS", color: "Raw Charcoal Grey", price: 1950, img: "https://i.ibb.co/JRSNMz0v/Software-Project-Scoping.jpg", type: "pants" },
-    { id: 32, name: "G.A CAMO JORT", color: "Woodland Green Camo", price: 1950, img: "https://i.ibb.co/Jwz6LRTq/Photoroom-20260404-193612.jpg", type: "pants", outOfStock: true },
+    { id: 32, name: "G.A CAMO JORT", color: "Woodland Green Camo", price: 1950, img: "https://i.ibb.co/Jwz6LRTq/Photoroom-20260404-193612.jpg", type: "pants", outOfStock: False },
     { id: 33, name: "GREY-GWAPAN-PANTS", color: "Slate Grey Blend", price: 2000, img: "https://i.ibb.co/qFyQcQYJ/Photoroom-20260404-231225.jpg", type: "pants" },
     { id: 31, name: "G.A BLACK DENIM SET", color: "Classic Indigo Wash", price: 3850, img: "https://i.ibb.co/tGqXtGf/IMG-6172.jpg", type: "pants" },
     { id: 1, name: "G.A CUSTOM PANTS", color: "Acid Wash Denim", price: 1950, img: "https://i.ibb.co/NnmNRYDx/image0-1.jpg", type: "pants" },
@@ -560,7 +559,7 @@ function renderProducts(cat = 'all') {
             limitedProducts.forEach(p => {
                 html += `
                     <div class="limited-card" onclick="openProductPage(${p.id})">
-                        <div class="limited-badge">${p.outOfStock ? 'SOLD OUT' : 'EXTREMELY LIMITED'}</div>
+                        <div class="limited-badge">${p.outOfStock ? 'SOLD OUT' : ' LIMITED DROP'}</div>
                         <img src="${p.img}" alt="${p.name}" style="${p.outOfStock ? 'filter: grayscale(40%);' : ''}">
                         <div class="limited-card-meta">
                             <h3>${p.name}</h3>
@@ -903,74 +902,7 @@ window.onload = function() {
     updateCartUI();
 };
 </script>
-        <style>
-            .m-tab-btn.active-m-tab { background: #000000 !important; color: #ffffff !important; border-color: #000000 !important; }
-            .modal-table-wrapper { display: none; overflow-x: auto; margin-bottom: 15px; border: 1px solid #eee; }
-            .modal-table-wrapper.active { display: block; }
-            .m-size-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; }
-            .m-size-table th, .m-size-table td { padding: 10px 12px; border-bottom: 1px solid #eee; }
-            .m-size-table th { background: #f5f5f5; font-weight: bold; text-transform: uppercase; font-size: 10px; color: #444; }
-            .m-size-table td:first-child { font-weight: bold; color: var(--primary, #000); }
-            .m-fit-notes { background: #fffcfc; border-left: 3px solid var(--primary, #000); padding: 12px; margin-top: 15px; font-size: 12px; color: #555; }
-        </style>
-
-        <div id="m-pants" class="modal-table-wrapper active">
-            <table class="m-size-table">
-                <thead><tr><th>Size</th><th>Waist</th><th>Total Length</th><th>Thigh Width</th><th>Height Profile</th></tr></thead>
-                <tbody>
-                    <tr><td>S</td><td>28" - 30"</td><td>40"</td><td>24"</td><td>5'4" – 5'7"</td></tr>
-                    <tr><td>M</td><td>31" - 33"</td><td>41"</td><td>25"</td><td>5'8" – 5'11"</td></tr>
-                    <tr><td>L</td><td>34" - 36"</td><td>42"</td><td>26"</td><td>6'0" – 6'2"</td></tr>
-                    <tr><td>XL</td><td>37" - 40"</td><td>43"</td><td>27"</td><td>6'3" +</td></tr>
-                </tbody>
-            </table>
-            <div class="m-fit-notes"><strong>Pants Fit:</strong> Cut long to puddle and stack cleanly over high-profile streetwear boots or chunky sneakers.</div>
-        </div>
-
-        <div id="m-outerwear" class="modal-table-wrapper">
-            <table class="m-size-table">
-                <thead><tr><th>Size</th><th>Chest Width</th><th>Jacket Length</th><th>Sleeve Length</th><th>Profile</th></tr></thead>
-                <tbody>
-                    <tr><td>S</td><td>36" - 38"</td><td>26"</td><td>24"</td><td>Cropped Boxy</td></tr>
-                    <tr><td>M</td><td>39" - 41"</td><td>27"</td><td>25"</td><td>True Boxy</td></tr>
-                    <tr><td>L</td><td>42" - 44"</td><td>28"</td><td>26"</td><td>Relaxed Wide</td></tr>
-                    <tr><td>XL</td><td>45" - 48"</td><td>29"</td><td>27"</td><td>Extreme Drop</td></tr>
-                </tbody>
-            </table>
-            <div class="m-fit-notes"><strong>Outerwear Fit:</strong> Features dropped shoulder architectures tailored for heavy layering configurations.</div>
-        </div>
-
-        <div id="m-shirts" class="modal-table-wrapper">
-            <table class="m-size-table">
-                <thead><tr><th>Size</th><th>Chest Fit</th><th>Front Length</th><th>Shoulder Span</th></tr></thead>
-                <tbody>
-                    <tr><td>S</td><td>34" - 36"</td><td>27"</td><td>18.5"</td></tr>
-                    <tr><td>M</td><td>37" - 39"</td><td>28"</td><td>19.5"</td></tr>
-                    <tr><td>L</td><td>40" - 42"</td><td>29"</td><td>20.5"</td></tr>
-                    <tr><td>XL</td><td>43" - 46"</td><td>30"</td><td>21.5"</td></tr>
-                </tbody>
-            </table>
-            <div class="m-fit-notes"><strong>Shirts Fit:</strong> Box profile panels designed with stiff tailored hems that fall evenly over raw denims.</div>
-        </div>
-
-        <div id="m-tracksuits" class="modal-table-wrapper">
-            <table class="m-size-table">
-                <thead><tr><th>Size</th><th>Chest Frame</th><th>Pant Waist</th><th>Track Inseam</th></tr></thead>
-                <tbody>
-                    <tr><td>S</td><td>36" - 38"</td><td>28" - 30"</td><td>30"</td></tr>
-                    <tr><td>M</td><td>39" - 41"</td><td>31" - 33"</td><td>31"</td></tr>
-                    <tr><td>L</td><td>42" - 44"</td><td>34" - 36"</td><td>32"</td></tr>
-                    <tr><td>XL</td><td>45" - 48"</td><td>37" - 40"</td><td>33"</td></tr>
-                </tbody>
-            </table>
-            <div class="m-fit-notes"><strong>Fleece Fit:</strong> High-density heavy cotton-fleece track layers engineered to retain shape boundaries.</div>
-        </div>
-
-        <div style="margin-top: 20px; padding-top: 15px; border-top: 1px dashed #eee; font-size: 11px; text-align: center; color: #888;">
-            <i class="fab fa-whatsapp" style="color: #25D366;"></i> Need exact adjustments? Let us know your specific measurements when ordering via WhatsApp!
-        </div>
-    </div>
-</div>
+       
 
 <footer style="padding: 20px; text-align: center; font-size: 12px; color: #666; border-top: 1px solid #eee;">
     <p>© 2026 GWAPAFFECTION-CLOTHING-LINE | NAIROBI, KENYA</p>
