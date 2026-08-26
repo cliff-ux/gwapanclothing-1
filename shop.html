@@ -392,8 +392,8 @@
     </script>
 </body>
 </html>
-    <script>
-const productDescriptions = {
+   <script>
+    const productDescriptions = {
     jacket: "Crafted from heavy-duty raw denim with reinforced stitching. Designed for a structured cultural aesthetic with premium street comfort.",
     pants: "Relaxed baggy silhouette cut from high-quality cultural denim. Features drop-crotch roomy scaling tailored for clean footwear stack.",
     shirt: "Premium weight denim weave structure. Versatile tailoring perfect for layering or core styling within the collection.",
@@ -491,7 +491,6 @@ const products = [
         type: "jacket", 
         limited: false 
     },
- 
     { 
         id: 106, 
         name: "G.A Leather Shirt", 
@@ -527,7 +526,7 @@ const products = [
     { id: 38, name: "BLACK DENIM SET", color: "Matte Charcoal Onyx", price: 3950, img: "https://i.ibb.co/DDSthC4H/Whats-App-Image-2026-06-09-at-01-09-21.jpg", type: "jacket" },
     { id: 34, name: "G.A-GREY-SET", color: "Distressed Ash Grey", price: 3850, img: "https://i.ibb.co/gFhfL7Ch/Photoroom-20260407-004656.jpg", type: "jacket" },
     { id: 35, name: "GREY DENIM JEANS", color: "Raw Charcoal Grey", price: 1950, img: "https://i.ibb.co/JRSNMz0v/Software-Project-Scoping.jpg", type: "pants" },
-    { id: 32, name: "G.A CAMO JORT", color: "Woodland Green Camo", price: 1950, img: "https://i.ibb.co/Jwz6LRTq/Photoroom-20260404-193612.jpg", type: "pants", outOfStock: False },
+    { id: 32, name: "G.A CAMO JORT", color: "Woodland Green Camo", price: 1950, img: "https://i.ibb.co/Jwz6LRTq/Photoroom-20260404-193612.jpg", type: "pants", outOfStock: false },
     { id: 33, name: "GREY-GWAPAN-PANTS", color: "Slate Grey Blend", price: 2000, img: "https://i.ibb.co/qFyQcQYJ/Photoroom-20260404-231225.jpg", type: "pants" },
     { id: 31, name: "G.A BLACK DENIM SET", color: "Classic Indigo Wash", price: 3850, img: "https://i.ibb.co/tGqXtGf/IMG-6172.jpg", type: "pants" },
     { id: 1, name: "G.A CUSTOM PANTS", color: "Acid Wash Denim", price: 1950, img: "https://i.ibb.co/NnmNRYDx/image0-1.jpg", type: "pants" },
@@ -559,7 +558,7 @@ function renderProducts(cat = 'all') {
             limitedProducts.forEach(p => {
                 html += `
                     <div class="limited-card" onclick="openProductPage(${p.id})">
-                        <div class="limited-badge">${p.outOfStock ? 'SOLD OUT' : ' LIMITED DROP'}</div>
+                        <div class="limited-badge">${p.outOfStock ? 'SOLD OUT' : 'LIMITED DROP'}</div>
                         <img src="${p.img}" alt="${p.name}" style="${p.outOfStock ? 'filter: grayscale(40%);' : ''}">
                         <div class="limited-card-meta">
                             <h3>${p.name}</h3>
@@ -577,7 +576,7 @@ function renderProducts(cat = 'all') {
     const grid = document.getElementById('productGrid');
     if (grid) {
         grid.innerHTML = '';
-        const list = products.filter(p => !p.limited && (cat === 'all' || p.type === cat || (cat === 'leather_set' && p.type === 'leather_set')));
+        const list = products.filter(p => !p.limited && (cat === 'all' || p.type === cat));
         
         list.forEach(p => {
             grid.innerHTML += `
@@ -605,7 +604,7 @@ function applyFilter(cat, btn) {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     if(btn) btn.classList.add('active');
     const label = document.getElementById('cat-label');
-    if(label) label.innerText = cat === 'all' ? 'GWAPAN-COLLECTION' : `${cat.toUpperCase()} COLLECTION`;
+    if(label) label.innerText = cat === 'all' ? 'GWAPAN-COLLECTION' : `${cat.toUpperCase().replace('_', ' ')} COLLECTION`;
     renderProducts(cat);
 }
 
@@ -646,7 +645,7 @@ function openProductPage(productId) {
     if(product.gallery && product.gallery.length > 0) {
         modelGalleryHtml = `
             <div class="product-gallery-divider" style="margin-top:40px; padding-top:25px; border-top:1px solid #eee; width:100%;">
-                <h3 style="font-size:14px; font-weight:bold; text-transform:uppercase; letter-spacing:1px; margin-bottom:15px; color:#111;">ADDITIONAL VIEWS & DETAILS (TAP TO ENLARGE)</h3>
+                <h3 style="font-size:14px; font-weight:bold; text-transform:uppercase; letter-spacing:1px; margin-bottom:15px; color:#111;">ADDITIONAL VIEWS & DETAILS</h3>
                 <p style="font-size:12px; color:#555; margin-bottom:20px; line-height:1.6;">Tap any image below to zoom into high-resolution view:</p>
                 <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:12px; width:100%;">
         `;
@@ -696,7 +695,7 @@ function openProductPage(productId) {
 
                 <div class="size-section" style="${product.outOfStock ? 'opacity:0.5; pointer-events:none;' : ''}">
                     <span class="size-label">SELECT SIZE</span>
-                    <div class="size-boxes-container">
+                    <div class="size-boxes-container" style="display:flex; gap:10px; margin-top:5px;">
                         <div class="size-box" onclick="selectSize('S', this)">S</div>
                         <div class="size-box active" onclick="selectSize('M', this)">M</div>
                         <div class="size-box" onclick="selectSize('L', this)">L</div>
@@ -704,7 +703,7 @@ function openProductPage(productId) {
                     </div>
                 </div>
 
-                <button class="inner-add-btn" onclick="addProductToCart(${product.id})" ${buttonStateAttr}>${buttonTextLabel}</button>
+                <button class="inner-add-btn" onclick="addProductToCart(${product.id})" ${buttonStateAttr} style="width:100%; margin-top:20px; padding:12px; font-weight:bold; text-transform:uppercase;">${buttonTextLabel}</button>
             </div>
             ${modelGalleryHtml}
         </div>
@@ -714,11 +713,11 @@ function openProductPage(productId) {
 }
 
 function closeProductPage() {
-    document.getElementById('product-detail-view').style.display = 'none';
+    const detailOverlay = document.getElementById('product-detail-view');
+    if (detailOverlay) detailOverlay.style.display = 'none';
     document.body.style.overflow = 'auto';
 }
 
-/* Dynamic Image Expansion Lightbox */
 function expandImage(srcUrl) {
     let lightbox = document.getElementById('image-lightbox');
     if(!lightbox) {
@@ -783,15 +782,25 @@ function removeFromCart(index) {
     updateCartUI();
 }
 
+function updateCartCount() {
+    const countBadges = document.querySelectorAll('.cart-count-badge');
+    countBadges.forEach(badge => {
+        badge.innerText = cart.length;
+    });
+}
+
 function updateCartUI() {
     const displayArea = document.getElementById('cart-display-area');
     const checkoutSection = document.getElementById('checkout-section');
     const footerArea = document.getElementById('cart-footer');
 
+    updateCartCount();
+
     if(!displayArea) return;
     if(cart.length === 0) {
-        displayArea.innerHTML = `<p style="text-align:center; color:#888; margin-top:4px; font-size:14px;">Your bag is empty.</p>`;
+        displayArea.innerHTML = `<p style="text-align:center; color:#888; margin-top:20px; font-size:14px;">Your bag is empty.</p>`;
         if(checkoutSection) checkoutSection.style.display = 'none';
+        if(footerArea) footerArea.innerHTML = '';
         return;
     }
 
@@ -807,7 +816,7 @@ function updateCartUI() {
                 <div style="flex:1;">
                     <h4 style="font-size:12px; text-transform:uppercase; font-weight:bold;">${item.name}</h4>
                     <p style="font-size:11px; color:#666;">Color: <strong>${item.color}</strong> | Size: <strong>${item.size}</strong></p>
-                    <p style="font-size:12px; color:var(--primary); font-weight:bold;">SH ${item.price}</p>
+                    <p style="font-size:12px; color:var(--primary, #000); font-weight:bold;">SH ${item.price}</p>
                 </div>
                 <button onclick="removeFromCart(${index})" style="background:none; border:none; color:#999; cursor:pointer; font-size:16px;"><i class="fas fa-trash-alt"></i></button>
             </div>
@@ -818,18 +827,18 @@ function updateCartUI() {
         footerArea.innerHTML = `
             <div style="margin-top: 15px; border-top: 1px solid #ddd; padding-top: 15px;">
                 <label for="mpesa-phone" style="display:block; font-size:12px; font-weight:bold; text-transform:uppercase; margin-bottom:5px; color:#111;">
-                    <i class="fas fa-phone-alt"></i> M-PESA Phone Number (For STK Push)
+                    <i class="fas fa-phone-alt"></i> M-PESA Phone Number
                 </label>
-                <input type="tel" id="mpesa-phone" placeholder="e.g., 0712345678 or 254..." 
+                <input type="tel" id="mpesa-phone" placeholder="e.g., 0712345678" 
                     style="width:100%; padding:10px; font-family:inherit; border:1px solid #ccc; font-size:14px; margin-bottom:15px; border-radius:4px;">
             </div>
 
             <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:15px; margin: 5px 0 15px;">
                 <span>TOTAL:</span>
-                <span style="color:var(--primary);">KSH ${total}</span>
+                <span style="color:var(--primary, #000);">KSH ${total}</span>
             </div>
-            <button class="whatsapp-btn" onclick="executeCheckoutSequence(${total})" style="width:100%; display:flex; justify-content:center; align-items:center; gap:10px;">
-                <i class="fas fa-bolt"></i> COMPLETE ORDER ON WHATSAPP
+            <button class="whatsapp-btn" onclick="executeCheckoutSequence(${total})" style="width:100%; padding:12px; background:#25D366; color:#fff; border:none; border-radius:4px; font-weight:bold; cursor:pointer; display:flex; justify-content:center; align-items:center; gap:10px;">
+                <i class="fab fa-whatsapp"></i> COMPLETE ORDER ON WHATSAPP
             </button>
         `;
     }
@@ -840,19 +849,20 @@ async function executeCheckoutSequence(total) {
     const locEl = document.getElementById('delivery-location');
     const phoneEl = document.getElementById('mpesa-phone');
     
-    const name = nameEl ? nameEl.value.trim() : "";
-    const location = locEl ? locEl.value.trim() : "";
-    const rawPhone = phoneEl ? phoneEl.value.trim() : "";
+    const name = nameEl ? nameEl.value.trim() : "Valued Client";
+    const location = locEl ? locEl.value.trim() : "Nairobi CBD";
+    const phone = phoneEl ? phoneEl.value.trim() : "N/A";
 
-    sendWhatsAppOrder(total, name, location);
+    sendWhatsAppOrder(total, name, location, phone);
 }
 
-function sendWhatsAppOrder(total, name, location) {
+function sendWhatsAppOrder(total, name, location, phone) {
     let orderMessage = `*NEW AUTOMATED ORDER - GWAPAFFECTION CUSTOMS*\n\n`;
     orderMessage += `*Client Details:*\n`;
     orderMessage += `👤 Name: ${name}\n`;
-    orderMessage += `📍 Location: ${location}\n\n`;
-    orderMessage += `*Items Selected:*\n`;
+    orderMessage += `📍 Location: ${location}\n`;
+    orderMessage += `📞 Phone: ${phone}\n\n`;
+    orderMessage += `*Items Selected (${cart.length}):*\n`;
 
     cart.forEach((item, index) => {
         orderMessage += `${index + 1}. ${item.name} (Color: ${item.color}, Size: ${item.size}) - KSH ${item.price}\n`;
@@ -860,11 +870,11 @@ function sendWhatsAppOrder(total, name, location) {
 
     orderMessage += `\n💰 *Total Amount:* KSH ${total}\n`;
     orderMessage += `---------------------------------\n`;
-    orderMessage += `• Paybill  Number:${400200}\n`;
-    orderMessage += `• Account Number: ${1033884}\n`;
-    orderMessage += `*Usually Ready within 3-4 days*\n`;
-    orderMessage +='---------------------------------\n';
-    orderMessage += `kindly share payment confirmation messge thankyou!`;   
+    orderMessage += `• Paybill Number: 400200\n`;
+    orderMessage += `• Account Number: 1033884\n`;
+    orderMessage += `*Usually ready within 3-4 days*\n`;
+    orderMessage += `---------------------------------\n`;
+    orderMessage += `Kindly share payment confirmation message. Thank you!`;   
 
     const encodedText = encodeURIComponent(orderMessage);
     const whatsappUrl = `https://wa.me/254797389370?text=${encodedText}`;
@@ -901,7 +911,7 @@ window.onload = function() {
     renderProducts('all');
     updateCartUI();
 };
-</script>
+   </script>
        
 
 <footer style="padding: 20px; text-align: center; font-size: 12px; color: #666; border-top: 1px solid #eee;">
