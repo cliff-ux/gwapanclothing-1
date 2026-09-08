@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GWAP AFFECTION | Shop</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-   <head>
     <style>
         :root {
             --primary: #800000;
@@ -72,11 +71,40 @@
             justify-content: space-between; 
             align-items: center; 
         }
+
+        /* Logo and Spinning Badge Container */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        /* Spinning Logo Icon Keyframe Animation */
+        @keyframes spinLogo {
+            from {
+                transform: rotate(10deg);
+            }
+            to {
+                transform: rotate(90deg);
+            }
+        }
+
+        .spinning-logo {
+            width: 38px;
+            height: 38px;
+            object-fit: contain;
+            border-radius: 50%;
+            animation: spinLogo 10s linear infinite;
+            transform-origin: center center;
+            will-change: transform;
+            border: 1px solid rgba(17, 163, 54, 0.4);
+        }
+
         .logo { 
             font-size: 24px; 
             font-weight: bold; 
             color: var(--primary); 
-            text-decoration: none; 
             letter-spacing: 2px; 
             text-transform: uppercase; 
         }
@@ -128,7 +156,7 @@
             white-space: nowrap;
         }
         .dropdown-menu li a:hover {
-            background-color: #1a1a1a;
+            background-color: #e01b1b;
             color: var(--accent);
         }
         .dropdown:hover .dropdown-menu { display: block; }
@@ -163,7 +191,7 @@
             transition: background 0.3s ease;
             border: 1px solid var(--accent);
         }
-        .new-drop-btn:hover { background-color: #333333; }
+        .new-drop-btn:hover { background-color: #df1616; }
         
         .promo-container { 
             width: 100%; 
@@ -203,9 +231,9 @@
             50% { box-shadow: 0 0 15px rgba(128,0,0,0.3); transform: scale(1.02); } 
         }
 
-        /* Luxury Campaign Header Layout */
+/* Luxury Campaign Header Layout */
         .home-header { 
-            background: #0b0b0b; 
+            background: #0e0d0d; 
             padding: 60px 20px; 
             text-align: center;
             display: flex;
@@ -213,22 +241,75 @@
             align-items: center;
             justify-content: center;
             color: var(--white);
+            position: relative; /* Container reference for top-right absolute positioning */
+            min-height: 80px;
+        }
+
+        /* Top-Right Fixed Logo Badge */
+        .home-header::before {
+            content: "";
+            position: centered;
+            top: 25px;
+            right: 25px;
+            width: 600px;
+            height: 200px;
+            
+            /* Logo background image setting */
+            background-image: url('https://i.ibb.co/Q7SzVCKn/Whats-App-Image-2026-09-09-at-01-14-29.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            /* Premium styling & shape */
+            border-radius: 50%;
+            border: 3px solid var(--primary);
+            box-shadow: 0 8px 20px rgba(248, 247, 247, 0.5), 0 0 15px rgba(37, 211, 102, 0.3);
+            z-index: 10;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .home-header::before:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 25px rgba(243, 241, 241, 0.7), 0 0 22px rgba(37, 211, 102, 0.5);
+        }
+
+        /* Mobile adjustment for smaller screens */
+        @media (max-width: 600px) {
+            .home-header::before {
+                width: 70px;
+                height: 70px;
+                top: 15px;
+                right: 15px;
+                border-width: 2px;
+            }
+        }
+
+        /* Luxury Campaign Header Layout
+        .home-header { 
+            background: #851010; 
+            padding: 100px 50px; 
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: top-left;
+            justify-content: top-left;  
+            color: var(--white);
         }
 
         .home-header::before {
             content: "";
             display: block;
-            width: 100%;
-            max-width: 520px; 
-            height: 380px;    
-            margin: 0 auto 20px;
-            background: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3)), url('https://i.ibb.co/MyYF7KG1/Whats-App-Image-2026-06-30-at-03-13-01.jpg');
-            background-size: cover;
-            background-position: center;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.7);
-            border-radius: 4px;
-        }
+            width: 600%;
+            max-width: 480px; 
+            height: 300px;    
+            margin: 20 auto 40px;
+            background: linear-gradient(rgba(223, 85, 6, 0.1), rgba(207, 108, 16, 0.274)), url('https://i.ibb.co/Q7SzVCKn/Whats-App-Image-2026-09-09-at-01-14-29.jpg');
+            background-size: max(100%, 100%);
+            background-position:center ;
+            border: 8px solid rgba(224, 186, 16, 0.12);
+            box-shadow: 0 15px 35px rgba(92, 65, 6, 0.685);
+            border-radius: 10px;
+        } */
 
         .guide-btn {
             background: linear-gradient(45deg, #000000, var(--primary), #000000);
@@ -524,7 +605,7 @@
 
         @media (max-width: 992px) { 
             .product-list { grid-template-columns: repeat(2, 1fr); } 
-        }
+        } 
         
         /* Mobile updates */
         @media (max-width: 600px) { 
@@ -535,7 +616,8 @@
             } 
             .img-container { height: 220px; }
             #cart-sidebar { max-width: 100%; } 
-            .logo { font-size: 18px; } 
+            .spinning-logo { width: 30px; height: 30px; }
+            .logo { font-size: 16px; } 
             .nav-links { gap: 10px; }
             .nav-links li a { padding: 8px 10px; font-size: 12px; }
         }
@@ -545,7 +627,12 @@
 <body>
     <nav class="navbar">
         <div class="container">
-            <a href="index.html" class="logo">GWAP AFFECTION</a>
+            <!-- Brand Logo with Spinning Emblem -->
+            <a href="index.html" class="logo-container">
+                <img src="https://i.ibb.co/QFDwq8Lg/Gwap-Afection-5.png" alt="GWAP AFFECTION Emblem" class="spinning-logo">
+                <span class="logo">GWAP AFFECTION</span>
+            </a>
+            
             <ul class="nav-links">
                 <!-- Dropdown Menu for Navigation Links -->
                 <li class="dropdown">
@@ -574,13 +661,11 @@
 
     <div class="promo-container">
         <div class="shiny-advert">✨ PREMIUM //HANDCRAFTED// CUSTOM //DENIM ✨</div>
-        <div class="delivery-note">Handmade In 
-            Nairobi</div>
     </div>
 
     <header class="home-header">
         <button class="guide-btn" onclick="openGlobalSizeGuide()">
-            <i class="fas fa-ruler-combined" style="margin-right: 12px; color: var(--accent);"></i> VIEW SIZE GUIDE
+            <i class="fas fa-ruler-combined" style="margin-right: 12px; color: var(--accent);"></i> MADE IN NAIROBI
         </button>
     </header>
 
@@ -649,7 +734,8 @@
             </div>
         </div>
     </div>
-<script>
+
+    <script>
         const themeToggleBtn = document.getElementById('themeToggle');
         const themeIcon = document.getElementById('themeIcon');
 
@@ -719,15 +805,15 @@
         //     type: "jacket",
         //     limited: false
         // },
-        {
-            id: 116,
-            name: "G.A CROPPED LEATHER JACKET {BLACK}",
-            color: "Black",
-            price: 2450,
-            img: "https://i.ibb.co/Q3x88yzj/Whats-App-Image-2026-09-02-at-12-27-46.jpg",
-            type: "jacket",
-            limited: false
-        },
+        // {
+        //     id: 116,
+        //     name: "G.A CROPPED LEATHER JACKET {BLACK}",
+        //     color: "Black",
+        //     price: 2450,
+        //     img: "https://i.ibb.co/Q3x88yzj/Whats-App-Image-2026-09-02-at-12-27-46.jpg",
+        //     type: "jacket",
+        //     limited: false
+        // },
         {
             id: 117,
             name: "G.A BLACK FLEECE",
@@ -775,7 +861,8 @@
             price: 2000,
             img: "https://i.ibb.co/QFDwq8Lg/Gwap-Afection-5.png",
             type: "jacket",
-            limited: false
+            limited: false,
+            outOfStock: true,
         },
         // {
         //     id: 122,
@@ -793,7 +880,7 @@
             name: "G.A Track set", 
             color: "Reflective Print", 
             price: 3950, 
-            img: "https://i.ibb.co/fGZFVTbm/Gemini-Generated-Image-accgdkaccgdkaccg.jpg", 
+            img: "https://i.ibb.co/20GV1VPB/Gemini-Generated-Image-umi26bumi26bumi2.jpg",
             imgBack: "https://i.ibb.co/20GV1VPB/Gemini-Generated-Image-umi26bumi26bumi2.jpg", 
             type: "tracksuit", 
             limited: false 
@@ -805,7 +892,7 @@
             price: 4500, 
             img: "https://i.ibb.co/BVrzFrNG/Whats-App-Image-2026-06-09-at-00-44-00.jpg", 
             type: "tracksuit", 
-            limited: true,
+            limited: false,
             gallery: [
                 "https://i.ibb.co/jvbyDN83/IMG-5985-JPG.jpg",
                 "https://i.ibb.co/DPjDJx0M/IMG-5969-JPG.jpg",
@@ -900,7 +987,6 @@
             type: "pants", 
             outOfStock: false,
             gallery: [
-                "https://i.ibb.co/KxvzKs2H/Whats-App-Image-2026-06-15-at-12-07-27.jpg"
             ]
         },
         { id: 33, name: "GREY-GWAPAN-PANTS", color: "Slate Grey Blend", price: 2000, img: "https://i.ibb.co/qFyQcQYJ/Photoroom-20260404-231225.jpg", type: "pants" },
@@ -919,8 +1005,6 @@
             img: "https://i.ibb.co/TxkXWTs2/image1-6.jpg", 
             type: "pants",
             gallery: [
-                "https://i.ibb.co/35hz5XY0/Whats-App-Image-2026-09-07-at-21-40-17.jpg",
-                "https://i.ibb.co/spHSYTBF/Whats-App-Image-2026-09-07-at-21-40-17.jpg"
             ]
         },
         { id: 13, name: "G.A MILITIA JORTS", color: "Desert Khaki Camo", price: 1750, img: "https://i.ibb.co/PGt7MN8y/image0-8.jpg", type: "pants" },
