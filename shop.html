@@ -251,8 +251,8 @@
             position: centered;
             top: 25px;
             right: 25px;
-            width: 600px;
-            height: 200px;
+            width: 2000px;
+            height: 1000px;
             
             /* Logo background image setting */
             background-image: url('https://i.ibb.co/Q7SzVCKn/Whats-App-Image-2026-09-09-at-01-14-29.jpg');
@@ -1012,8 +1012,7 @@
         { id: 15, name: "G.A DOUBLE POCKET JEANS", color: "Deep Stonewash", price: 2150, img: "https://i.ibb.co/GQQHPPtk/IMG-4964.jpg", type: "pants" },
         { id: 22, name: "G.A DENIM FOLDED JEANS", color: "Distressed Vintage Blue", price: 1950, img: "https://i.ibb.co/XBJhYKQ/IMG-4979.jpg", type: "pants" }
     ];
-
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+let cart = JSON.parse(localStorage.getItem('cart')) || [];
     let selectedSize = 'M';
     let selectedColor = 'Black';
 
@@ -1092,9 +1091,11 @@
         if(!product) return;
 
         selectedSize = 'M'; 
-        selectedColor = product.colors ? product.colors[0] : product.color;
+        selectedColor = product.colors ? product.colors[0] : (product.color || 'Default');
 
-        const desc = productDescriptions[product.type] || "Premium custom item crafted by hand down at our Nairobi workshop.";
+        const desc = typeof productDescriptions !== 'undefined' && productDescriptions[product.type] 
+            ? productDescriptions[product.type] 
+            : "Premium custom item crafted by hand down at our Nairobi workshop.";
 
         let detailOverlay = document.getElementById('product-detail-view');
         if(!detailOverlay) return;
@@ -1221,16 +1222,27 @@
         const product = products.find(p => p.id === productId);
         if(!product || product.outOfStock) return;
 
-        const cartItem = {
-            id: product.id,
-            name: product.name,
-            price: product.price,
-            img: product.img,
-            size: selectedSize,
-            color: selectedColor || product.color
-        };
+        const currentColor = selectedColor || product.color || 'Default';
+        
+        // Check if matching item is already in cart
+        const existingIndex = cart.findIndex(item => 
+            item.id === product.id && item.size === selectedSize && item.color === currentColor
+        );
 
-        cart.push(cartItem);
+        if (existingIndex > -1) {
+            cart[existingIndex].quantity = (cart[existingIndex].quantity || 1) + 1;
+        } else {
+            cart.push({
+                id: product.id,
+                name: product.name,
+                price: parseFloat(product.price),
+                img: product.img,
+                size: selectedSize,
+                color: currentColor,
+                quantity: 1
+            });
+        }
+
         localStorage.setItem('cart', JSON.stringify(cart));
         closeProductPage();
         updateCartUI();
@@ -1243,7 +1255,7 @@
         if (forceOpen) {
             sidebar.style.right = '0';
         } else {
-            sidebar.style.right = sidebar.style.right === '0px' ? '-450px' : '0';
+            sidebar.style.right = (sidebar.style.right === '0px' || sidebar.style.right === '0') ? '-450px' : '0';
         }
     }
 
@@ -1255,8 +1267,9 @@
 
     function updateCartCount() {
         const countBadges = document.querySelectorAll('.cart-count-badge');
+        const totalCount = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
         countBadges.forEach(badge => {
-            badge.innerText = cart.length;
+            badge.innerText = totalCount;
         });
     }
 
@@ -1268,6 +1281,7 @@
         updateCartCount();
 
         if(!displayArea) return;
+
         if(cart.length === 0) {
             displayArea.innerHTML = `<p style="text-align:center; color:#888; margin-top:20px; font-size:14px;">Your bag is empty.</p>`;
             if(checkoutSection) checkoutSection.style.display = 'none';
@@ -1280,19 +1294,87 @@
         let total = 0;
 
         cart.forEach((item, index) => {
-            total += item.price;
+            const itemQty = item.quantity || 1;
+            const itemPrice = parseFloat(item.price) || 0;
+            const itemSubtotal = itemPrice * itemQty;
+            total += itemSubtotal;
+
             displayArea.innerHTML += `
                 <div style="display:flex; gap:12px; margin-bottom:15px; border-bottom:1px dashed var(--border-color, #eee); padding-bottom:10px; align-items:center;">
                     <img src="${item.img}" style="width:60px; height:60px; object-fit:cover; border-radius:4px;" alt="${item.name}">
                     <div style="flex:1;">
                         <h4 style="font-size:12px; font-weight:bold; margin:0; text-transform:uppercase;">${item.name}</h4>
                         <p style="font-size:11px; color:#666; margin:3px 0 0;">SIZE: ${item.size} | COLOR: ${item.color}</p>
-                        <p style="font-size:11px; font-weight:bold; margin:3px 0 0;">KSH ${item.price}</p>
+                        <p style="font-size:11px; font-weight:bold; margin:3px 0 0;">
+                            ${itemQty} x KSH ${itemPrice.toLocaleString()} = KSH ${itemSubtotal.toLocaleString()}
+                        </p>
                     </div>
                     <button onclick="removeFromCart(${index})" style="background:none; border:none; color:#888; cursor:pointer; font-size:14px;"><i class="fas fa-trash"></i></button>
                 </div>`;
         });
+
+        // Update total display if an element with id cart-total-price exists
+        const totalDisplay = document.getElementById('cart-total-price');
+        if (totalDisplay) {
+            totalDisplay.innerText = `KSH ${total.toLocaleString()}`;
+        }
+
+        // Render checkout action footer
+        if (footerArea) {
+            footerArea.innerHTML = `
+                <div style="padding:15px 0; border-top:2px solid var(--border-color, #222); margin-top:15px;">
+                    <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:15px; margin-bottom:15px; text-transform:uppercase;">
+                        <span>TOTAL AMOUNT:</span>
+                        <span style="color:var(--primary, #25D366);">KSH ${total.toLocaleString()}</span>
+                    </div>
+                    <button onclick="checkoutToWhatsApp()" style="width:100%; background:#25D366; color:#fff; border:none; padding:14px; font-weight:bold; letter-spacing:1px; cursor:pointer; text-transform:uppercase; border-radius:4px; display:flex; align-items:center; justify-content:center; gap:8px;">
+                        <i class="fab fa-whatsapp" style="font-size:18px;"></i> COMPLETE ORDER VIA WHATSAPP
+                    </button>
+                </div>
+            `;
+        }
     }
+
+    function checkoutToWhatsApp() {
+        if (cart.length === 0) {
+            alert("Your cart is empty! Add items before checking out.");
+            return;
+        }
+
+        const phoneNumber = "254797389370"; // Replace with your target WhatsApp number (e.g. 2547XXXXXXXX)
+
+        let message = "🛍️ *NEW ORDER*\n";
+        message += "-----------------------------------\n\n";
+
+        let totalAmount = 0;
+
+        cart.forEach((item, index) => {
+            const itemPrice = parseFloat(item.price) || 0;
+            const itemQty = item.quantity || 1;
+            const itemSubtotal = itemPrice * itemQty;
+            totalAmount += itemSubtotal;
+
+            message += `*${index + 1}. ${item.name}*\n`;
+            message += `   • Size: ${item.size || 'Standard'}\n`;
+            message += `   • Color: ${item.color || 'Standard'}\n`;
+            message += `   • Qty: ${itemQty}\n`;
+            message += `   • Price: KSH ${itemPrice.toLocaleString()} each\n`;
+            message += `   • Subtotal: KSH ${itemSubtotal.toLocaleString()}\n\n`;
+        });
+
+        message += "-----------------------------------\n";
+        message += `💰 *GRAND TOTAL: KSH ${totalAmount.toLocaleString()}*\n`;
+        message += "-----------------------------------\n\n";
+        message += "Please confirm availability and order arrangement.";
+
+        const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+        window.open(whatsappURL, '_blank');
+    }
+
+    // Initialize cart state on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        updateCartUI();
+    });
 </script>
     <!-- JavaScript for Theme Switching -->
    
