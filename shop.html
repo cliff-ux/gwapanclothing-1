@@ -233,56 +233,57 @@
 
 /* Luxury Campaign Header Layout */
         .home-header { 
-            background: #0e0d0d; 
-            padding: 60px 20px; 
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            position: relative; /* Container reference for top-right absolute positioning */
-            min-height: 80px;
-        }
+    background: #0e0d0d; 
+    padding: 60px 20px; 
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    position: relative;
+    min-height: 240px;
+    overflow: hidden;
+}
 
-        /* Top-Right Fixed Logo Badge */
-        .home-header::before {
-            content: "";
-            position: centered;
-            top: 25px;
-            right: 25px;
-            width: 1500px;
-            height: 700px;
-            
-            /* Logo background image setting */
-            background-image: url('https://i.ibb.co/Q7SzVCKn/Whats-App-Image-2026-09-09-at-01-14-29.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: repeat;
-            
-            /* Premium styling & shape */
-            border-radius: 50%;
-            border: 3px solid var(--primary);
-            box-shadow: 0 8px 20px rgba(248, 247, 247, 0.5), 0 0 15px rgba(37, 211, 102, 0.3);
-            z-index: 10;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
+/* Dynamic Oval Logo Container */
+.home-header::before {
+    content: "";
+    display: block;
+    position: relative;
+    
+    /* Responsive sizing so it stretches wide on desktop AND mobile */
+    width: 92%;
+    max-width: 850px;
+    height: 180px;
+    margin: 0 auto 20px;
+    
+    /* Logo background image setting */
+    background-image: url('https://i.ibb.co/Q7SzVCKn/Whats-App-Image-2026-09-09-at-01-14-29.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    /* Extreme pill/oval radius prevents it from ever turning into a circle */
+    border-radius: 9999px;
+    border: 3px solid var(--primary, #25D366);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7), 0 0 20px rgba(37, 211, 102, 0.25);
+    z-index: 2;
+    transition: transform 0.3s ease;
+}
 
-        .home-header::before:hover {
-            transform: scale(1.05);
-            box-shadow: 0 12px 25px rgba(243, 241, 241, 0.7), 0 0 22px rgba(37, 211, 102, 0.5);
-        }
-
-        /* Mobile adjustment for smaller screens */
-        @media (max-width: 600px) {
-            .home-header::before {
-                width: 70px;
-                height: 70px;
-                top: 15px;
-                right: 15px;
-                border-width: 2px;
-            }
-        }
+/* Mobile Specific Scaling to lock the wide-oval aspect ratio */
+@media (max-width: 600px) {
+    .home-header {
+        padding: 30px 10px;
+        min-height: 180px;
+    }
+    .home-header::before {
+        width: 95%;        /* Takes up almost full screen width on mobile */
+        height: 110px;     /* Keeps height wide and slender like a pill/oval */
+        border-width: 2px;
+    }
+}
 
         /* Luxury Campaign Header Layout
         .home-header { 
