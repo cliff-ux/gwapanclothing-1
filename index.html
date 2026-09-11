@@ -55,6 +55,7 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            perspective: 1000px;
         }
         
         .hero-content { z-index: 2; text-align: center; color: white; padding: 0 20px; width: 100%; }
@@ -68,6 +69,43 @@
             line-height: 1.1;
         }
         .hero-content p { font-size: clamp(0.8rem, 2vw, 1.1rem); letter-spacing: 5px; color: var(--accent); text-transform: uppercase; font-weight: bold; margin-top: 15px; }
+
+        /* ==========================================================================
+           Intro Text 3D Shake & Upside-Down Spin Animation
+           ========================================================================== */
+        @keyframes shakeSpinFlip {
+            10% {
+                transform: scale(1) translate(0, 0) rotate(0deg) rotateX(0deg);
+            }
+            20% {
+                transform: translate(-8px, 4px) rotate(-5deg);
+            }
+            30% {
+                transform: translate(8px, -4px) rotate(5deg);
+            }
+            40% {
+                transform: translate(-8px, -3px) rotate(-4deg);
+            }
+            50% {
+                transform: translate(8px, 3px) rotate(4deg);
+            }
+            60% {
+                transform: translate(0, 0) rotateX(180deg) scale(1.1);
+            }
+            85% {
+                transform: translate(0, 0) rotateX(360deg) scale(1.05);
+            }
+            100% {
+                transform: translate(0, 0) rotateX(360deg) scale(1);
+            }
+        }
+
+        .intro-flip-text {
+            display: inline-block;
+            transform-style: preserve-3d;
+            animation: shakeSpinFlip 5.2s cubic-bezier(0.36, 0.07, 0.19, 0.97) 1 forwards;
+            will-change: transform;
+        }
 
         /* ==========================================================================
            Split Layout Framework
@@ -119,7 +157,7 @@
         /* ==========================================================================
            Metrics Bar
            ========================================================================== */
-        .facts-bar { background: var(--dark); color: var(--white); padding: 60px 20px; display: flex; justify-content: space-around; text-align: center; flex-wrap: wrap; gap: 30px; }
+        .facts-bar { background: var(--dark); color: var(--white); padding: 60px 20px; display: flex; justify-space-around: text-align: center; flex-wrap: wrap; gap: 30px; }
         .fact-item h3 { color: var(--neon); font-size: 2.5rem; margin-bottom: 10px; }
         .fact-item p { text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; }
 
@@ -239,8 +277,8 @@
     <!-- Hero Image Container -->
     <div class="hero-container">
         <div class="hero-content">
-            <h1>THIS IS</h1>
-            <h1>GWAPAFFECTION</h1>
+            <h1><span class="intro-flip-text">THIS IS</span></h1>
+            <h1><span class="intro-flip-text">GWAPAFFECTION</span></h1>
             <p>Architectural Denim • Nairobi Crafted • Handmade</p>
         </div>
     </div>
@@ -252,7 +290,7 @@
                 <h2 style="border: none; padding: 0;">STUDIO ARCHIVE</h2>
                 <p style="max-width: 700px; margin: 0 auto; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem;">A visual study of silhouette and texture.</p>
             </div>
-        </div>
+        
             
         <div class="marquee-wrapper">
             <div class="marquee-track">
