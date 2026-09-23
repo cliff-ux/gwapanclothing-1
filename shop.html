@@ -685,9 +685,9 @@
     <main>
         <div class="filter-container">
             <button class="filter-btn active" onclick="applyFilter('all', this)">ALL ITEMS</button>
-            <button class="filter-btn" onclick="applyFilter('pants', this)">GWAP PANTS & JORTS</button>
-            <button class="filter-btn" onclick="applyFilter('shirt', this)">GWAP SHIRTS & TOPS</button>
-            <button class="filter-btn" onclick="applyFilter('jacket', this)">GWAP JACKETS</button>
+            <button class="filter-btn" onclick="applyFilter('pants', this)"> PANTS & JORTS</button>
+            <button class="filter-btn" onclick="applyFilter('shirt', this)"> SHIRTS & TOPS</button>
+            <button class="filter-btn" onclick="applyFilter('jacket', this)"> JACKETS</button>
         </div>
 
         <section id="limitedDropsSection"></section>
@@ -995,7 +995,7 @@
             id: 29, 
             name: "G.A BLACK TANK TOP", 
             color: "Matte Charcoal Onyx", 
-            price: 1850, 
+            price: 1950, 
             img: "https://i.ibb.co/hxDnn2zq/Whats-App-Image-2026-09-01-at-22-30-30.jpg" ,
             type: "VEST", 
             outOfStock: false,
@@ -1007,7 +1007,7 @@
             id: 28, 
             name: "GA WHITE FLARED PANTS", 
             color: "WHITE", 
-            price: 1850, 
+            price: 1950, 
             img: "https://i.ibb.co/jkSHCQHL/Whats-App-Image-2026-09-08-at-23-46-57.jpg",
             type: "PANTS", 
             outOfStock: false,
@@ -1043,7 +1043,7 @@
             id: 32, 
             name: "G.A CAMO JORT", 
             color: "Woodland Green Camo", 
-            price: 1950, 
+            price: 2000, 
             img: "https://i.ibb.co/Jwz6LRTq/Photoroom-20260404-193612.jpg", 
             type: "pants", 
             outOfStock: false,
@@ -1067,7 +1067,7 @@
         { id: 31, name: "G.A NAVY-BLUE DENIM SET", color: "Classic Indigo Wash", price: 3850, img: "https://i.ibb.co/tGqXtGf/IMG-6172.jpg", type: "pants" ,gallery: ["https://i.ibb.co/F40RhhZp/Whats-App-Image-2026-09-11-at-11-09-36.jpg",
         ]
         },
-        { id: 1, name: "G.A CUSTOM PANTS", color: "Acid Wash Denim", price: 1950, img: "https://i.ibb.co/NnmNRYDx/image0-1.jpg", type: "pants" },
+        { id: 1, name: "G.A CUSTOM PANTS", color: "Acid Wash Denim", price: 2000, img: "https://i.ibb.co/NnmNRYDx/image0-1.jpg", type: "pants" },
         { id: 4, name: "G.A CUSTOM JACKET", color: "Vintage Deep Blue", price: 2500, img: "https://i.ibb.co/zhCCyz5Y/image1-2.jpg", type: "jacket" },
         { id: 7, name: "G.A BLACK PANTS", color: "Stealth Midnight Black", price: 1950, img: "https://i.ibb.co/VYQymxY1/IMG-2434-2.jpg", type: "pants" },
         { id: 8, name: "G.A DENIM VEST", color: "Washed Faded Blue", price: 1750, img: "https://i.ibb.co/KcZw88gM/image1-3.jpg", type: "shirt" },
@@ -1083,7 +1083,7 @@
             gallery: ["https://i.ibb.co/yc3NvrT2/Whats-App-Image-2026-09-07-at-21-40-17.jpg" ,
             ]
         },
-        { id: 13, name: "G.A MILITIA JORTS", color: "Desert Khaki Camo", price: 1750, img: "https://i.ibb.co/PGt7MN8y/image0-8.jpg", type: "pants" },
+        { id: 13, name: "G.A MILITIA JORTS", color: "Desert Khaki Camo", price: 1950, img: "https://i.ibb.co/PGt7MN8y/image0-8.jpg", type: "pants" },
         { id: 14, name: "CUSTOM JEANS", color: "Classic Retro Blue", price: 1950, img: "https://i.ibb.co/Xk2Z5BNB/IMG-4967.jpg", type: "pants" },
         { id: 15, name: "G.A DOUBLE POCKET JEANS", color: "Deep Stonewash", price: 2150, img: "https://i.ibb.co/GQQHPPtk/IMG-4964.jpg", type: "pants" },
         { id: 22, name: "G.A DENIM FOLDED JEANS", color: "Distressed Vintage Blue", price: 1950, img: "https://i.ibb.co/XBJhYKQ/IMG-4979.jpg", type: "pants" }
@@ -1125,7 +1125,7 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
             const list = products.filter(p => !p.limited && (cat === 'all' || p.type === cat));
             
             list.forEach(p => {
-                grid.innerHTML += `
+                grid.innerHTML += `s
                     <div class="product ${p.outOfStock ? 'sold-out' : ''}">
                         <div class="img-container" style="position:relative; overflow:hidden;">
                             <img src="${p.img}" alt="${p.name}" style="${p.outOfStock ? 'filter: grayscale(30%) opacity(75%);' : ''}">
