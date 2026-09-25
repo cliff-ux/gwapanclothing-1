@@ -917,7 +917,7 @@
             name: "G.A SCALED LEATHER SET", 
             color: "Black",
             colors: ["GREY", "Black", "Brown", "Oxblood"],
-            price: 5350, 
+            price: 5250, 
             img: "https://i.ibb.co/WNg7kBsJ/IMG-5936-JPG.jpg", 
             type: "leather_set", 
             limited: false,
@@ -970,7 +970,7 @@
             id: 107, 
             name: "G.A Leather Jacket (Set 1)", 
             color: "Espresso Leather Finish", 
-            price: 2350, 
+            price: 2200, 
             img: "https://i.ibb.co/3y2r9q2w/Whats-App-Image-2026-06-15-at-13-34-06.jpg", 
             imgBack: "https://i.ibb.co/3y2r9q2w/Whats-App-Image-2026-06-15-at-13-34-06.jpg", 
             type: "jacket", 
@@ -995,7 +995,7 @@
             id: 29, 
             name: "G.A BLACK TANK TOP", 
             color: "Matte Charcoal Onyx", 
-            price: 1950, 
+            price: 1850, 
             img: "https://i.ibb.co/hxDnn2zq/Whats-App-Image-2026-09-01-at-22-30-30.jpg" ,
             type: "VEST", 
             outOfStock: false,
@@ -1007,7 +1007,7 @@
             id: 28, 
             name: "GA WHITE FLARED PANTS", 
             color: "WHITE", 
-            price: 1950, 
+            price: 1850, 
             img: "https://i.ibb.co/jkSHCQHL/Whats-App-Image-2026-09-08-at-23-46-57.jpg",
             type: "PANTS", 
             outOfStock: false,
@@ -1067,7 +1067,7 @@
         { id: 31, name: "G.A NAVY-BLUE DENIM SET", color: "Classic Indigo Wash", price: 3850, img: "https://i.ibb.co/tGqXtGf/IMG-6172.jpg", type: "pants" ,gallery: ["https://i.ibb.co/F40RhhZp/Whats-App-Image-2026-09-11-at-11-09-36.jpg",
         ]
         },
-        { id: 1, name: "G.A CUSTOM PANTS", color: "Acid Wash Denim", price: 2000, img: "https://i.ibb.co/NnmNRYDx/image0-1.jpg", type: "pants" },
+        { id: 1, name: "G.A CUSTOM PANTS", color: "Acid Wash Denim", price: 1950, img: "https://i.ibb.co/NnmNRYDx/image0-1.jpg", type: "pants" },
         { id: 4, name: "G.A CUSTOM JACKET", color: "Vintage Deep Blue", price: 2500, img: "https://i.ibb.co/zhCCyz5Y/image1-2.jpg", type: "jacket" },
         { id: 7, name: "G.A BLACK PANTS", color: "Stealth Midnight Black", price: 1950, img: "https://i.ibb.co/VYQymxY1/IMG-2434-2.jpg", type: "pants" },
         { id: 8, name: "G.A DENIM VEST", color: "Washed Faded Blue", price: 1750, img: "https://i.ibb.co/KcZw88gM/image1-3.jpg", type: "shirt" },
@@ -1125,7 +1125,7 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
             const list = products.filter(p => !p.limited && (cat === 'all' || p.type === cat));
             
             list.forEach(p => {
-                grid.innerHTML += `s
+                grid.innerHTML += `
                     <div class="product ${p.outOfStock ? 'sold-out' : ''}">
                         <div class="img-container" style="position:relative; overflow:hidden;">
                             <img src="${p.img}" alt="${p.name}" style="${p.outOfStock ? 'filter: grayscale(30%) opacity(75%);' : ''}">
@@ -1150,7 +1150,7 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
         document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
         if(btn) btn.classList.add('active');
         const label = document.getElementById('cat-label');
-        if(label) label.innerText = cat === 'all' ? 'GWAPAN-COLLECTION' : `${cat.toUpperCase().replace('_', ' ')} COLLECTION`;
+        if(label) label.innerText = cat === 'all' ? 'GWAP-AFFECTION' : `${cat.toUpperCase().replace('_', ' ')} COLLECTION`;
         renderProducts(cat);
     }
 
@@ -1411,46 +1411,61 @@ let cart = JSON.parse(localStorage.getItem('cart')) || [];
         }
     }
 
-    function checkoutToWhatsApp() {
-        if (cart.length === 0) {
-            alert("Your cart is empty! Add items before checking out.");
-            return;
-        }
-
-        const phoneNumber = "254797389370"; // Replace with your target WhatsApp number (e.g. 2547XXXXXXXX)
-
-        let message = "🛍️ *NEW ORDER*\n";
-        message += "-----------------------------------\n\n";
-
-        let totalAmount = 0;
-
-        cart.forEach((item, index) => {
-            const itemPrice = parseFloat(item.price) || 0;
-            const itemQty = item.quantity || 1;
-            const itemSubtotal = itemPrice * itemQty;
-            totalAmount += itemSubtotal;
-
-            message += `*${index + 1}. ${item.name}*\n`;
-            message += `   • Size: ${item.size || 'Standard'}\n`;
-            message += `   • Color: ${item.color || 'Standard'}\n`;
-            message += `   • Qty: ${itemQty}\n`;
-            message += `   • Price: KSH ${itemPrice.toLocaleString()} each\n`;
-            message += `   • Subtotal: KSH ${itemSubtotal.toLocaleString()}\n\n`;
-        });
-
-        message += "-----------------------------------\n";
-        message += `💰 *GRAND TOTAL: KSH ${totalAmount.toLocaleString()}*\n`;
-        message += "-----------------------------------\n\n";
-        message += "Please confirm availability and order arrangement.";
-
-        const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-        window.open(whatsappURL, '_blank');
+   function checkoutToWhatsApp() {
+    if (cart.length === 0) {
+        alert("Your cart is empty! Add items before checking out.");
+        return;
     }
 
-    // Initialize cart state on page load
-    document.addEventListener('DOMContentLoaded', () => {
-        updateCartUI();
+    const phoneNumber = "254797389370"; // Target WhatsApp number
+
+    // Replace these with your actual Paybill details
+    const paybillNumber = "400200"; 
+    const accountNumber = "1033884"; 
+
+    let message = "🛍️ *NEW G.A ORDER *\n";
+    message += "-----------------------------------\n\n";
+
+    let totalAmount = 0;
+
+    cart.forEach((item, index) => {
+        const itemPrice = parseFloat(item.price) || 0;
+        const itemQty = item.quantity || 1;
+        const itemSubtotal = itemPrice * itemQty;
+        totalAmount += itemSubtotal;
+
+        message += `*${index + 1}. ${item.name}*\n`;
+        message += `   • Size Ordered: *${item.size || 'Standard'}*\n`;
+        message += `   • Color: ${item.color || 'Standard'}\n`;
+        message += `   • Qty: ${itemQty}\n`;
+        message += `   • Price: KSH ${itemPrice.toLocaleString()} each\n`;
+        message += `   • Subtotal: KSH ${itemSubtotal.toLocaleString()}\n`;
+        message += `   • Status: Check Product Availability\n\n`;
     });
+
+    message += "-----------------------------------\n";
+    message += `💰 *GRAND TOTAL: KSH ${totalAmount.toLocaleString()}*\n`;
+    message += "-----------------------------------\n\n";
+    
+    // Payment Details Section
+    message += "💳 *PAYMENT DETAILS (MPESA)*\n";
+    message += `   • Paybill: *${paybillNumber}*\n`;
+    message += `   • Account No: *${accountNumber}*\n\n`;
+
+    // Delivery Information
+    message += "🚚 *DELIVERY INFORMATION*\n";
+    message += "   • Estimated Duration: *3-4 Days*\n\n";
+    
+    message += "Please confirm product availability and finalize my order arrangement.\nThank you! 🙏";
+
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappURL, '_blank');
+}
+
+// Initialize cart state on page load
+document.addEventListener('DOMContentLoaded', () => {
+    updateCartUI();
+});
 </script>
     <!-- JavaScript for Theme Switching -->
    
